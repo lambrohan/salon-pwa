@@ -15,6 +15,10 @@ export default {
     link: [{ rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }],
   },
 
+  router: {
+    middleware: ['auth'],
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
@@ -23,6 +27,16 @@ export default {
     {
       src: '~/plugins/vee-validate.js',
       ssr: false,
+    },
+
+    {
+      src: '~/plugins/notifier.js',
+      ssr: false,
+    },
+
+    {
+      src: '~/plugins/firebase.js',
+      ssr: true,
     },
   ],
 
@@ -35,7 +49,12 @@ export default {
     '@nuxt/typescript-build',
     // https://go.nuxtjs.dev/tailwindcss
     '@nuxtjs/tailwindcss',
+
+    '@nuxtjs/style-resources',
   ],
+  styleResources: {
+    scss: ['~/assets/global.scss'],
+  },
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
@@ -52,6 +71,15 @@ export default {
   pwa: {
     manifest: {
       lang: 'en',
+    },
+
+    workbox: {
+      importScripts: [
+        // ...
+      ],
+      // by default the workbox module will not install the service worker in dev environment to avoid conflicts with HMR
+      // only set this true for testing and remember to always clear your browser cache in development
+      dev: false,
     },
   },
 

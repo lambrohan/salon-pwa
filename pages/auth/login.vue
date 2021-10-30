@@ -18,26 +18,76 @@
           tracking-widest
           text-2xl
         "
+        v-model="phoneNumber"
         placeholder="mobile"
       />
-      <UButton :loading="otpLoading" class="font-semibold tracking-widest h-14"
-        >Send OTP</UButton
-      >
+      <UButton
+        :loading="otpLoading"
+        class="font-semibold tracking-widest h-14"
+        @click.native="getOTP"
+        >Send OTP
+      </UButton>
+      <div id="placeholder"></div>
     </div>
   </div>
 </template>
-<script lang="ts">
-import Vue from 'vue'
-import UbuLogo from '~/components/UbuLogo.vue'
-import Button from '~/components/U/Button.vue'
-export default Vue.extend({
+<script>
+import { RecaptchaVerifier, signInWithPhoneNumber } from '@firebase/auth'
+import { auth } from '~/plugins/firebase'
+export default {
   layout: 'auth',
-  components: { UbuLogo, Button },
   data() {
     return {
       otpLoading: false,
+      phoneNumber: '',
+      confirmationResult: false,
+      otpModal: false,
     }
   },
-})
+  methods: {
+    async getOTP() {
+      this.otpLoading = true
+
+      try {
+        window.reCaptchaVerifier = new RecaptchaVerifier(
+          'placeholder',
+          {
+            size: 'invisible',
+            callback: (res) => {
+              console.log('done')
+              this.signInWithPhone()
+            },
+            'expired-callback': () => {
+              console.log('error')
+            },
+          },
+          auth
+        )
+        await window.reCaptchaVerifier.verify()
+      } catch (error) {
+        throw error
+      }
+    },
+
+    async signInWithPhone() {
+      try {
+        const confirmationResult = await signInWithPhoneNumber(
+          auth,
+          `+91${this.phoneNumber}`,
+          window.reCaptchaVerifier
+        )
+        this.confirmationResult = confirmationResult
+        this.otpLoading = false
+        window.reCaptchaVerifier.clear()
+        this.$Toast.success('OTP has been sent')
+        this.otpModal = true
+      } catch (error) {
+        this.$Toast.danger(error.message || 'Something went wrong')
+        this.otpLoading = false
+        window.reCaptchaVerifier.clear()
+      }
+    },
+  },
+}
 </script>
 <style scoped></style>

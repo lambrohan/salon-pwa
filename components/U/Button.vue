@@ -10,7 +10,7 @@
       rounded-3xl
       border border-black-50
       bg-black
-      text-white
+      text-gray-50
       flex
       items-center
       justify-center

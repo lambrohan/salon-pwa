@@ -1,6 +1,10 @@
 export const state = () => {}
 
-export const actions = {}
+export const actions = {
+  async nuxtServerInit() {
+    console.log('serverinit')
+  },
+}
 
 export const mutations = {}
 
