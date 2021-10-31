@@ -16,8 +16,10 @@ export default {
   },
 
   router: {
-    middleware: ['auth'],
+    // middleware: ['auth'],
   },
+
+  serverMiddleware: ['~/serverMiddleware/validateFirebaseToken'],
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
@@ -38,6 +40,10 @@ export default {
       src: '~/plugins/firebase.js',
       ssr: true,
     },
+    {
+      src: '~/plugins/auth-cookie.js',
+      ssr: false,
+    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -51,7 +57,9 @@ export default {
     '@nuxtjs/tailwindcss',
 
     '@nuxtjs/style-resources',
+    '@nuxtjs/svg',
   ],
+
   styleResources: {
     scss: ['~/assets/global.scss'],
   },
@@ -71,15 +79,7 @@ export default {
   pwa: {
     manifest: {
       lang: 'en',
-    },
-
-    workbox: {
-      importScripts: [
-        // ...
-      ],
-      // by default the workbox module will not install the service worker in dev environment to avoid conflicts with HMR
-      // only set this true for testing and remember to always clear your browser cache in development
-      dev: false,
+      theme_color: '#000000',
     },
   },
 

@@ -2,14 +2,11 @@
   <div
     id="u-button"
     class="
-      w-full
-      mt-8
       text-center
       shadow-lg
       h-12
       rounded-3xl
       border border-black-50
-      bg-black
       text-gray-50
       flex
       items-center
