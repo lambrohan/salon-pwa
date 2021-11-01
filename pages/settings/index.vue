@@ -1,5 +1,5 @@
 <template>
-  <div id="profile-page" class="pt-2 px-2">
+  <div id="profile-page" class="pt-2 px-2 pb-32">
     <div class="avatar-box flex flex-col items-center">
       <img src="/icon.png" class="w-24 h-24 border rounded-full mt-4" />
       <h4 class="text-xl font-medium mt-3">Elon Musk</h4>
@@ -221,14 +221,14 @@
 import { auth } from '~/plugins/firebase'
 import Button from '~/components/U/Button.vue'
 export default {
-  name: 'ProfilePage',
+  name: 'SettingsPage',
   data() {
     return {}
   },
   methods: {
     async logout() {
       await auth.signOut()
-      this.$router.push('/auth/login')
+      location.reload()
     },
   },
   computed: {

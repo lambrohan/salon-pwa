@@ -12,9 +12,14 @@ export const actions = {
   },
 
   async onAuthStateChangedAction(store, user) {
-    if (user && user.id) {
+    if (user && user.uid) {
       store.commit('SET_AUTH', user)
+      store.dispatch('getUser', user.uid)
     }
+  },
+
+  async getUser(store, uid) {
+    const user = await this.$axios.get(`/user/${uid}`)
   },
 }
 

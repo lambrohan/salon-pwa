@@ -8,6 +8,7 @@
 <script>
 import BottomNav from '~/components/U/BottomNav.vue'
 export default {
+  name: 'DefaultLayout',
   middleware: 'auth',
   components: { BottomNav },
 }

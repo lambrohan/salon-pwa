@@ -28,6 +28,7 @@
 import Vue from 'vue'
 import Spinner from './Spinner.vue'
 export default Vue.extend({
+  name: 'UButton',
   props: {
     loading: {
       type: Boolean,

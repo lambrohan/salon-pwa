@@ -6,6 +6,7 @@
 <script>
 export default {
   props: ['path', 'route'],
+  name: 'NavIcon',
 }
 </script>
 <style lang="scss" scoped>

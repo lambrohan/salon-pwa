@@ -44,10 +44,14 @@ export default {
       src: '~/plugins/auth-cookie.js',
       ssr: false,
     },
+    {
+      src: '~/plugins/axios.js',
+    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
+  loading: '~/components/LoadingGlobal.vue',
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -73,7 +77,9 @@ export default {
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    baseURL: process.env.BACKEND_URL,
+  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {

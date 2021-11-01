@@ -25,6 +25,7 @@
 <script>
 import NavIcon from './NavIcon.vue'
 export default {
+  name: 'BottomNav',
   components: { NavIcon },
   data() {
     return {
@@ -35,7 +36,6 @@ export default {
         },
         {
           icon: 'icons/u.svg',
-
           route: '/live',
         },
         {

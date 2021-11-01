@@ -68,6 +68,8 @@ export default {
       otp: '',
     }
   },
+
+  mounted() {},
   methods: {
     async getOTP() {
       this.otpLoading = true
@@ -135,10 +137,9 @@ export default {
       }
       this.confirmLoading = true
       try {
-        const result = await this.confirmationResult.confirm(this.otp)
-        this.$store.dispatch('SET_AUTH', result)
+        await this.confirmationResult.confirm(this.otp)
         this.$Toast.success('Login Successful')
-        this.$router.push('/')
+        location.reload()
       } catch (error) {
         this.clearAll()
         this.$Toast.danger(error.message)

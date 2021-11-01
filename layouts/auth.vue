@@ -8,6 +8,7 @@
 import Vue from 'vue'
 import UbuLogo from '~/components/UbuLogo.vue'
 export default Vue.extend({
+  name: 'AuthLayout',
   components: { UbuLogo },
   middleware({ store, redirect }) {
     if (store.state.authenticated) {
