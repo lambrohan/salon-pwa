@@ -44,9 +44,9 @@ export default {
       src: '~/plugins/auth-cookie.js',
       ssr: false,
     },
-    {
-      src: '~/plugins/axios.js',
-    },
+    // {
+    //   src: '~/plugins/axios.js',
+    // },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -90,5 +90,7 @@ export default {
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
-  build: {},
+  build: {
+    transpile: ['vee-validate/dist/rules'],
+  },
 }

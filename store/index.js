@@ -1,6 +1,7 @@
 export const state = () => ({
   authenticated: false,
   fireUser: false,
+  user: false,
 })
 
 export const actions = {
@@ -14,12 +15,12 @@ export const actions = {
   async onAuthStateChangedAction(store, user) {
     if (user && user.uid) {
       store.commit('SET_AUTH', user)
-      store.dispatch('getUser', user.uid)
     }
   },
 
   async getUser(store, uid) {
-    const user = await this.$axios.get(`/user/${uid}`)
+    const user = await this.$axios.$get(`/user/${uid}`)
+    store.commit('SET_USER', user)
   },
 }
 
@@ -32,11 +33,20 @@ export const mutations = {
   CLEAR_AUTH(state) {
     state.fireUser = false
     state.authenticated = false
+    state.user = false
+  },
+
+  SET_USER(state, user) {
+    state.user = user
   },
 }
 
 export const getters = {
   authUser(state) {
     return state.fireUser
+  },
+
+  getUser(state) {
+    return state.user
   },
 }

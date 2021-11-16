@@ -49,6 +49,7 @@
         </UButton>
       </div>
     </div>
+    <nuxt-link to="/onboard/salon">Salon Page</nuxt-link>
   </div>
 </template>
 <script>

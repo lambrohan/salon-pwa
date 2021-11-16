@@ -14,6 +14,8 @@ export default function (ctx) {
     if (user && user.uid) {
       const idToken = await user.getIdToken()
       ctx.$axios.setToken(idToken, 'bearer')
+      ctx.store.dispatch('getUser', user.uid)
+
       Cookie.set('Authorization', `${idToken}`, {
         expires: idToken ? 0.04166667 : 0,
       })

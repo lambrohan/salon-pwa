@@ -119,7 +119,7 @@ export default {
     color: var(--ubu-bg);
   }
 
-  .zi-toast.error,
+  .zi-toast.danger,
   .zi-toast.danger {
     background-color: var(--ubu-error);
     color: var(--ubu-bg);

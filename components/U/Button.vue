@@ -7,14 +7,17 @@
       h-12
       rounded-3xl
       border border-black-50
-      text-gray-50
       flex
       items-center
       justify-center
       flex-row
+      cursor-pointer
       duration-300
     "
-    :class="loading ? 'bg-gray-900' : ''"
+    :class="[
+      loading ? 'bg-gray-900' : '',
+      light ? 'text-black' : 'text-gray-50',
+    ]"
   >
     <transition name="up">
       <USpinner v-if="loading" class="absolute" />
@@ -31,6 +34,10 @@ export default Vue.extend({
   name: 'UButton',
   props: {
     loading: {
+      type: Boolean,
+      default: false,
+    },
+    light: {
       type: Boolean,
       default: false,
     },
