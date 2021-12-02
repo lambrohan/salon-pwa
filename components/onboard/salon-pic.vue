@@ -50,7 +50,7 @@
       </button>
     </validation-provider>
     <UButton
-      class="bg-black mt-8"
+      class="bg-accent mt-8"
       v-if="url"
       :loading="btnLoading"
       @click.native="$emit('next', file)"

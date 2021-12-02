@@ -2,15 +2,17 @@
   <div id="profile-page" class="pt-2 px-2 pb-32">
     <div class="avatar-box flex flex-col items-center">
       <img src="/icon.png" class="w-24 h-24 border rounded-full mt-4" />
-      <h4 class="text-xl font-medium mt-3">Elon Musk</h4>
-      <p class="mt-1">{{ authUser.phone_number }}</p>
-      <UButton class="bg-black w-5/12 mt-3"> Edit Profile </UButton>
+      <h4 class="text-xl font-medium mt-3">Personal Profile</h4>
+      <p class="mt-1">{{ user.phone_number }}</p>
+      <UButton class="bg-accent w-5/12 mt-3"> Edit Profile </UButton>
     </div>
 
     <div class="mt-6 p-4">
-      <p class="py-1 px-4 text-gray-500 bg-primary text-sm">Salon Management</p>
+      <p class="py-1 px-4 text-gray-500 bg-primary text-sm">My Salons</p>
       <nuxt-link
-        to="/settings/salon"
+        v-for="salon in salons"
+        :key="salon.id"
+        :to="`/settings/salon/${salon.id}`"
         class="bg-white flex-row flex py-3 px-4 items-center relative"
       >
         <svg
@@ -27,110 +29,15 @@
             d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"
           />
         </svg>
-        <p class="font-semibold text-lg">Profile & Listing</p>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6 absolute right-1"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
+        <p
+          class="font-semibold text-lg"
+          :class="salon.disabled ? 'text-gray-500' : ''"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M9 5l7 7-7 7"
-          />
-        </svg>
-      </nuxt-link>
-      <nuxt-link
-        to="/settings/salon"
-        class="bg-white flex-row flex py-3 px-4 items-center relative"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6 mr-2"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-          />
-        </svg>
-        <p class="font-semibold text-lg">Manage Chairs</p>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6 absolute right-1"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M9 5l7 7-7 7"
-          />
-        </svg>
-      </nuxt-link>
-      <nuxt-link
-        to="/settings/salon"
-        class="bg-white flex-row flex py-3 px-4 items-center relative"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6 mr-2"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
-          />
-        </svg>
-        <p class="font-semibold text-lg">Orders</p>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6 absolute right-1"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M9 5l7 7-7 7"
-          />
-        </svg>
-      </nuxt-link>
-
-      <nuxt-link
-        to="/settings/salon"
-        class="bg-white flex-row flex py-3 px-4 items-center relative"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          class="h-6 w-6 mr-2"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4"
-          />
-        </svg>
-        <p class="font-semibold text-lg">KYC & Verification</p>
+          {{ salon.profile.name }}
+        </p>
+        <p class="text-xs text-yellow-500 ml-3" v-if="!salon.kyc">
+          KYC incomplete
+        </p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6 absolute right-1"
@@ -147,9 +54,9 @@
         </svg>
       </nuxt-link>
       <p class="py-1 px-4 text-gray-500 bg-primary text-sm">Account</p>
-      <nuxt-link
-        to="/settings/salon"
+      <div
         class="bg-white flex-row flex py-3 px-4 items-center relative"
+        @click="$Tawk.popup"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -180,7 +87,7 @@
             d="M9 5l7 7-7 7"
           />
         </svg>
-      </nuxt-link>
+      </div>
       <div
         class="bg-white flex-row flex px-5 py-1 items-center relative"
         @click="logout"
@@ -223,17 +130,29 @@ import Button from '~/components/U/Button.vue'
 export default {
   name: 'SettingsPage',
   data() {
-    return {}
+    return {
+      salons: [],
+    }
+  },
+  mounted() {
+    this.fetchSalons()
   },
   methods: {
     async logout() {
       await auth.signOut()
       location.reload()
     },
+
+    async fetchSalons() {
+      this.salons = await this.$salonRepository.getOwned()
+    },
   },
   computed: {
     authUser() {
       return this.$store.getters.authUser
+    },
+    user() {
+      return this.$store.getters.getUser
     },
   },
   components: { Button },

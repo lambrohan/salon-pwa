@@ -119,6 +119,11 @@ export default {
     color: var(--ubu-bg);
   }
 
+  &.danger {
+    background-color: var(--ubu-danger);
+    color: var(--ubu-bg);
+  }
+
   .zi-toast.danger,
   .zi-toast.danger {
     background-color: var(--ubu-error);

@@ -9,7 +9,10 @@
           <SalonPic @next="uploadPic" ref="picTab" />
         </UTab>
         <UTab title="3">
-          <h2>Select Services</h2>
+          <AddServices @next="saveServices" ref="serviceTab" />
+        </UTab>
+        <UTab>
+          <SalonChair @next="$router.push('/settings')" />
         </UTab>
       </UTabs>
     </client-only>
@@ -20,13 +23,21 @@
 import SalonCreate from '~/components/onboard/salon-create.vue'
 import SelectAddress from '~/components/onboard/select-address.vue'
 import SalonPic from '~/components/onboard/salon-pic.vue'
+import AddServices from '~/components/onboard/add-services.vue'
+import SalonChair from '~/components/onboard/salon-chair.vue'
 export default {
   name: 'SalonOnboard',
   layout: 'onboard',
-  components: { SalonCreate, SelectAddress, SalonPic },
+  components: {
+    SalonCreate,
+    SelectAddress,
+    SalonPic,
+    AddServices,
+    SalonChair,
+  },
   data() {
     return {
-      activeTabIndex: 2,
+      activeTabIndex: 0,
       salon: false,
     }
   },
@@ -82,6 +93,25 @@ export default {
         console.log(error)
         this.$refs.picTab.btnLoading = false
         this.$Toast.danger('Something went wrong')
+      }
+    },
+
+    async saveServices(services) {
+      try {
+        this.$refs.serviceTab.$refs.priceTab.loading = true
+        await this.$axios.$post('salon-service', {
+          services,
+          salon: this.$route.params.salonId,
+        })
+
+        this.$Toast.success('Services Added')
+        this.activeTabIndex++
+      } catch (error) {
+        console.log(error)
+        this.$refs.serviceTab.$refs.priceTab.loading = false
+        if (error.response?.data) {
+          this.$Toast.danger(error.response.data.message)
+        }
       }
     },
   },

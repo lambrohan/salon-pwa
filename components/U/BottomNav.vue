@@ -31,15 +31,15 @@ export default {
     return {
       nav: [
         {
-          icon: 'icons/home.svg',
+          icon: '/icons/home.svg',
           route: '/home',
         },
         {
-          icon: 'icons/u.svg',
+          icon: '/icons/u.svg',
           route: '/live',
         },
         {
-          icon: 'icons/user.svg',
+          icon: '/icons/user.svg',
           route: '/settings',
         },
       ],

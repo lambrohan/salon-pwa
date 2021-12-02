@@ -1,5 +1,5 @@
 <template>
-  <div
+  <button
     id="u-button"
     class="
       text-center
@@ -13,24 +13,29 @@
       flex-row
       cursor-pointer
       duration-300
+      m-auto
     "
+    :disabled="loading"
     :class="[
       loading ? 'bg-gray-900' : '',
       light ? 'text-black' : 'text-gray-50',
     ]"
   >
     <transition name="up">
-      <USpinner v-if="loading" class="absolute" />
+      <img
+        src="/three-dots.svg"
+        alt="spinner"
+        v-if="loading"
+        class="absolute w-12"
+      />
       <div v-else class="data absolute">
         <slot></slot>
       </div>
     </transition>
-  </div>
+  </button>
 </template>
-<script lang="ts">
-import Vue from 'vue'
-import Spinner from './Spinner.vue'
-export default Vue.extend({
+<script>
+export default {
   name: 'UButton',
   props: {
     loading: {
@@ -42,10 +47,19 @@ export default Vue.extend({
       default: false,
     },
   },
-  components: { Spinner },
-})
+  data() {
+    return {
+      ripple: false,
+    }
+  },
+  components: {},
+  methods: {},
+}
 </script>
 <style lang="scss">
+button {
+  width: 100%;
+}
 #u-button {
   .up-enter-active,
   .up-leave-active {

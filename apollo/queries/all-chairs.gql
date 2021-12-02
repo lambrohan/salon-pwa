@@ -1,0 +1,20 @@
+subscription allchairs($salonId: uuid) {
+  chair(
+    where: { salonId: { _eq: $salonId } }
+    order_by: [{ created_at: asc }]
+  ) {
+    id
+    disabled
+    stylist {
+      id
+      display_name
+      display_picture: file_entity {
+        url
+        id
+      }
+      user {
+        id
+      }
+    }
+  }
+}

@@ -25,7 +25,7 @@
 
         <UButton
           :loading="otpLoading"
-          class="font-semibold tracking-widest h-14 bg-black mt-8"
+          class="font-semibold tracking-widest h-14 bg-accent mt-8 w-full"
           @click.native="getOTP"
           >Send OTP
         </UButton>
@@ -43,7 +43,15 @@
         />
         <UButton
           :loading="confirmLoading"
-          class="font-semibold tracking-widest h-14 bg-black f-full mt-8"
+          class="
+            font-semibold
+            tracking-widest
+            h-14
+            bg-accent
+            f-full
+            mt-8
+            w-full
+          "
           @click.native="confirmOtp"
           >Confirm
         </UButton>
@@ -138,7 +146,10 @@ export default {
       }
       this.confirmLoading = true
       try {
-        await this.confirmationResult.confirm(this.otp)
+        const { user } = await this.confirmationResult.confirm(this.otp)
+        const idToken = await user.getIdToken()
+        this.$axios.setToken(idToken, 'bearer')
+        await this.$userRepository.findOrCreate()
         this.$Toast.success('Login Successful')
         location.reload()
       } catch (error) {

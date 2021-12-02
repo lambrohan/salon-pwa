@@ -65,7 +65,7 @@
         <span class="text-sm text-red-500">{{ errors[0] }}</span>
       </validation-provider>
       <UButton
-        class="bg-black h-14 mt-8"
+        class="bg-accent h-14 mt-8"
         @click.native="onSubmit"
         :loading="loading"
         >Save &amp; Continue</UButton

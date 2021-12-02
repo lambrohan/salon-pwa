@@ -44,14 +44,29 @@ export default {
       src: '~/plugins/auth-cookie.js',
       ssr: false,
     },
-    // {
-    //   src: '~/plugins/axios.js',
-    // },
+    {
+      src: '~/plugins/repository.ts',
+    },
+
+    {
+      src: '~/plugins/tawk.js',
+      mode: 'client',
+    },
+
+    {
+      src: '~/plugins/dialog',
+      mode: 'client',
+    },
+
+    {
+      src: '~/plugins/apollo',
+      mode: 'client',
+    },
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
-  loading: '~/components/LoadingGlobal.vue',
+  // loading: '~/components/LoadingGlobal.vue',
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -61,7 +76,6 @@ export default {
     '@nuxtjs/tailwindcss',
 
     '@nuxtjs/style-resources',
-    '@nuxtjs/svg',
   ],
 
   styleResources: {
@@ -74,7 +88,15 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
+
+    '@nuxtjs/dayjs',
   ],
+
+  dayjs: {
+    defaultLocale: 'en',
+    defaultTimeZone: 'Asia/Calcutta',
+    plugins: ['timezone'],
+  },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
@@ -92,5 +114,12 @@ export default {
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
     transpile: ['vee-validate/dist/rules'],
+    extend(config) {
+      config.module.rules.push({
+        test: /\.(graphql|gql)$/,
+        exclude: /node_modules/,
+        loader: 'graphql-tag/loader',
+      })
+    },
   },
 }

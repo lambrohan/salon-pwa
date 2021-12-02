@@ -11,6 +11,7 @@ export default {
   name: 'DefaultLayout',
   middleware: 'auth',
   components: { BottomNav },
+  mounted() {},
 }
 </script>
 

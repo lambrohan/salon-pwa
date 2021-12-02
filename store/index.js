@@ -5,7 +5,7 @@ export const state = () => ({
 })
 
 export const actions = {
-  async nuxtServerInit(store, { req, beforeNuxtRender }) {
+  async nuxtServerInit(store, { req }) {
     console.log('serverinit')
     if (req.user) {
       store.commit('SET_AUTH', req.user)
@@ -14,6 +14,10 @@ export const actions = {
 
   async onAuthStateChangedAction(store, user) {
     if (user && user.uid) {
+      this.$Tawk.setAttributes({
+        uid: user.uid,
+        phone_number: user.phone_number,
+      })
       store.commit('SET_AUTH', user)
     }
   },

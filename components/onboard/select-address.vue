@@ -3,7 +3,7 @@
     <h4 class="text-2xl font-semibold ml-4 mb-3">Salon Location</h4>
 
     <div id="mymap" class="w-full h-full rounded-lg flex-grow"></div>
-    <BottomSheet ref="sheet">
+    <BottomSheet ref="sheet" v-model="sheetState" :minHeight="180">
       <div class="px-6 py-4">
         <input
           type="text"
@@ -29,7 +29,7 @@
           <h4 class="font-semibold mt-4">{{ selectedLocation.name }}</h4>
           <p>{{ selectedLocation.formatted_address }}</p>
           <UButton
-            class="bg-black mt-4 text-black shadow-none"
+            class="bg-accent mt-4 text-black shadow-none"
             @click.native="$emit('next', selectedLocation)"
             :loading="btnLoading"
             >Confirm</UButton
@@ -74,6 +74,7 @@ export default {
       selectedLocation: false,
       marker: false,
       btnLoading: false,
+      sheetState: false,
     }
   },
   async mounted() {

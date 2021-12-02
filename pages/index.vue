@@ -1,7 +1,7 @@
 <template>
   <div id="home">
     <UButton
-      class="bg-black w-10/12 m-auto mt-24"
+      class="bg-accent w-10/12 m-auto mt-24"
       @click.native="$router.push('/onboard/user')"
     >
       Get Started

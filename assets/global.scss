@@ -5,16 +5,17 @@
 body {
   padding: 0;
   margin: 0;
+  -webkit-tap-highlight-color: transparent;
 }
 
 $accent: '#34d399';
 
 .invalid {
-  border-color: red;
+  border-color: red !important;
 }
 
 .passed {
-  border-color: green;
+  border-color: green !important;
 }
 
 .shine {
@@ -46,4 +47,83 @@ $accent: '#34d399';
   100% {
     background-position: 468px 0;
   }
+}
+
+.shimmer {
+  overflow: hidden;
+  position: relative;
+  background: rgb(226, 226, 226);
+  &:after {
+    content: '';
+    position: absolute;
+    z-index: 10;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: center;
+    background: linear-gradient(
+      92deg,
+      rgba(240, 240, 240, 0.075),
+      rgba(29, 29, 29, 0.089)
+    );
+    transition: 0.2s height ease;
+    will-change: width, height, transform;
+    animation: shimmerMove 1.5s ease infinite forwards;
+  }
+}
+
+@keyframes shimmerMove {
+  0% {
+    transform: translateX(0);
+  }
+
+  50% {
+    transform: translateX(100%);
+  }
+}
+
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+input,
+select:focus {
+  outline: none;
+}
+
+.fade1s-enter-active,
+.fade1s-leave-active {
+  transition: opacity 1s;
+}
+.fade1s-enter,
+.fade1s-leave-active {
+  opacity: 0;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: all 0.3s;
+}
+.fade-enter,
+.fade-leave-active {
+  opacity: 0;
+}
+
+.topentry-enter-active,
+.topentry-leave-active {
+  transition: all 0.3s;
+}
+.topentry-enter,
+.topentry-leave-active {
+  transform: translateY(-50px);
+  opacity: 0;
 }

@@ -19,6 +19,7 @@ export default function (ctx) {
       Cookie.set('Authorization', `${idToken}`, {
         expires: idToken ? 0.04166667 : 0,
       })
+      window.localStorage.setItem('jwt', idToken)
     } else {
       Cookie.remove('Authorization')
     }

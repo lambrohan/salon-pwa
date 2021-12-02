@@ -1,12 +1,11 @@
 <template>
-  <form
-    id="salon-info"
-    class="flex flex-col p-6 pt-16"
-    @submit.prevent="onSubmit"
-  >
+  <form id="salon-info" class="flex flex-col p-6 pt-16">
     <h4 class="text-2xl font-semibold mb-6">Lets create a salon first</h4>
     <label for="name" class="mb-1 text-sm text-gray-500">Salon Name</label>
-    <validation-provider v-slot="{ errors, classes }" rules="required|alpha">
+    <validation-provider
+      v-slot="{ errors, classes }"
+      rules="required|alpha_spaces"
+    >
       <input
         name="Salon Name"
         type="text"
@@ -19,9 +18,9 @@
     </validation-provider>
 
     <UButton
-      class="bg-black h-14 mt-8"
-      @click.native="onSubmit"
+      class="bg-accent h-14 mt-8 w-full"
       :loading="loading"
+      @click.native="onSubmit"
       >Save &amp; Continue</UButton
     >
   </form>
@@ -36,11 +35,13 @@ export default {
       loading: false,
     }
   },
+  mounted() {},
   methods: {
     async onSubmit() {
+      console.log(this.$chairRepository)
       try {
         this.loading = true
-        const salon = await this.$axios.$post('/salon', {
+        const salon = await this.$salonRepository.create({
           name: this.salonName,
         })
         this.loading = false

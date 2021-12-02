@@ -1,0 +1,21 @@
+subscription ($salonId: uuid) {
+  salon_service_entity(
+    where: { salonId: { _eq: $salonId } }
+    order_by: [{ updated_at: desc }]
+  ) {
+    id
+    effective_price: service_prices(
+      where: { effective_till: { _is_null: true } }
+      order_by: { created_at: desc }
+      limit: 1
+    ) {
+      price
+      id
+    }
+
+    base_service: base_salon_service {
+      name
+      id
+    }
+  }
+}

@@ -8,6 +8,7 @@
 export default {
   name: 'OnboardLayout',
   methods: {},
+  mounted() {},
 }
 </script>
 

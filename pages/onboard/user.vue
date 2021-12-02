@@ -9,11 +9,13 @@
           Please select a action to continue onboarding
         </h4>
         <UButton
-          class="bg-black mt-8"
+          class="bg-accent m-auto mt-8 w-8/12"
           @click.native="$router.push('/onboard/salon/create')"
           >Register new salon</UButton
         >
-        <UButton class="mt-6" light>Join a salon as stylist</UButton>
+        <UButton class="m-auto mt-6 w-8/12" light
+          >Join a salon as stylist</UButton
+        >
       </UTab>
     </UTabs>
   </div>
