@@ -1,0 +1,13 @@
+subscription allchairslite($salonId: uuid) {
+  chair(where: { salonId: { _eq: $salonId }, stylistId: { _is_null: false } }) {
+    id
+    disabled
+    stylist {
+      id
+      display_name
+      user {
+        id
+      }
+    }
+  }
+}

@@ -1,6 +1,11 @@
 <template>
-  <div id="default-layout" class="w-full h-screen">
-    <Nuxt />
+  <div
+    id="default-layout"
+    class="w-full h-screen relative flex flex-col overflow-hidden"
+  >
+    <div class="flex-grow max-h-full overflow-y-scroll">
+      <Nuxt class="" />
+    </div>
     <UBottomNav />
   </div>
 </template>

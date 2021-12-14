@@ -1,7 +1,15 @@
 <template>
   <client-only>
-    <div id="kyc-page" class="pt-4">
-      <h4 class="text-lg text-center">Salon Kyc</h4>
+    <div id="kyc-page">
+      <div class="flex items-center">
+        <img
+          src="/icons/arrow-back.svg"
+          alt="back"
+          class="w-12 h-12 p-2"
+          @click="$router.go(-1)"
+        />
+        <h4 class="text-lg text-center">Salon Kyc</h4>
+      </div>
       <div class="wrapper p-3 px-4" v-if="salon.profile && !salon.kyc">
         <validation-observer>
           <form @submit.prevent="">

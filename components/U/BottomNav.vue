@@ -1,16 +1,7 @@
 <template>
-  <div id="bottom-nav" class="fixed w-full bottom-0 left-0 p-6">
+  <div id="bottom-nav" class="w-full">
     <div
-      class="
-        w-full
-        h-16
-        bg-primary
-        rounded-full
-        shadow-xl
-        flex flex-row
-        items-center
-        justify-evenly
-      "
+      class="w-full h-16 bg-primary rounded-tl-xl rounded-tr-xl shadow-xl flex flex-row items-center justify-evenly"
     >
       <UNavIcon
         v-for="item in nav"
@@ -36,7 +27,7 @@ export default {
         },
         {
           icon: '/icons/u.svg',
-          route: '/live',
+          route: '/livechairs',
         },
         {
           icon: '/icons/user.svg',

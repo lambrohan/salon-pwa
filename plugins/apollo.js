@@ -8,7 +8,9 @@ import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
 
 const getHeaders = () => {
-  const headers = {}
+  const headers = {
+    role: 'salon_owner',
+  }
   const token = window.localStorage.getItem('jwt')
   if (token) {
     headers.Authorization = `Bearer ${token}`
@@ -26,7 +28,8 @@ const httpLink = createHttpLink({
 const wsLink = new WebSocketLink({
   uri: 'ws://192.168.29.71:8080/v1/graphql',
   options: {
-    reconnect: true,
+    reconnect: false,
+    reconnectionAttempts: 5,
     connectionParams: {
       headers: getHeaders(),
     },
@@ -58,4 +61,5 @@ const apolloProvider = new VueApollo({
 
 export default function apolloPlugin(ctx, inject) {
   ctx.app.apolloProvider = apolloProvider
+  inject('apollo', apolloProvider)
 }

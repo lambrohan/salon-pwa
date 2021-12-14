@@ -127,3 +127,7 @@ select:focus {
   transform: translateY(-50px);
   opacity: 0;
 }
+
+::-webkit-scrollbar {
+  width: 1px;
+}

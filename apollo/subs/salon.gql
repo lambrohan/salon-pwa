@@ -1,0 +1,26 @@
+subscription ($salonId: uuid, $date: date) {
+  salon(where: { id: { _eq: $salonId } }) {
+    id
+    salon_profile {
+      name
+      service_status
+    }
+    disabled
+    is_published
+    kyc
+    chairs {
+      id
+      disabled
+      stylist {
+        display_name
+        id
+      }
+
+      appointments_aggregate(where: { date: { _eq: $date } }) {
+        aggregate {
+          count
+        }
+      }
+    }
+  }
+}

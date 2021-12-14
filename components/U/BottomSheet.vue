@@ -2,7 +2,7 @@
   <client-only>
     <div
       id="bottom-sheet"
-      class="fixed left-0 bg-white w-full h-full rounded-xl transition-all duration-500"
+      class="fixed left-0 bg-white w-full h-full rounded-xl transition-all duration-500 z-10"
       :style="`top:${value ? 0 : screenHeight - minHeight}px`"
     >
       <img
@@ -22,7 +22,7 @@
           @click="onClose"
         />
       </transition>
-      <slot></slot>
+      <slot v-if="screenHeight > 0"></slot>
     </div>
   </client-only>
 </template>

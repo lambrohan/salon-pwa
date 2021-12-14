@@ -6,19 +6,7 @@
       <div class="phone-view" v-if="!otpModal">
         <input
           type="number"
-          class="
-            w-full
-            mt-8
-            text-center
-            shadow-lg
-            h-14
-            rounded-3xl
-            border border-black-50
-            bg-gray-50
-            font-bold
-            tracking-widest
-            text-2xl
-          "
+          class="w-full mt-8 text-center shadow-lg h-14 rounded-3xl border border-black-50 bg-gray-50 font-bold tracking-widest text-2xl"
           v-model="phoneNumber"
           placeholder="mobile"
         />
@@ -43,21 +31,13 @@
         />
         <UButton
           :loading="confirmLoading"
-          class="
-            font-semibold
-            tracking-widest
-            h-14
-            bg-accent
-            f-full
-            mt-8
-            w-full
-          "
+          class="font-semibold tracking-widest h-14 bg-accent f-full mt-8 w-full"
           @click.native="confirmOtp"
           >Confirm
         </UButton>
       </div>
     </div>
-    <nuxt-link to="/onboard/salon">Salon Page</nuxt-link>
+    <nuxt-link to="/settings">Settings Page</nuxt-link>
   </div>
 </template>
 <script>

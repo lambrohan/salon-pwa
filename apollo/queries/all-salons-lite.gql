@@ -1,0 +1,12 @@
+query lite_salons($ownerId: uuid) {
+  lite_salons: salon(where: { ownerId: { _eq: $ownerId } }) {
+    id
+    salon_profile {
+      name
+      service_status
+    }
+    disabled
+    is_published
+    kyc
+  }
+}

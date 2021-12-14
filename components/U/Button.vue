@@ -1,20 +1,7 @@
 <template>
   <button
     id="u-button"
-    class="
-      text-center
-      shadow-lg
-      h-12
-      rounded-3xl
-      border border-black-50
-      flex
-      items-center
-      justify-center
-      flex-row
-      cursor-pointer
-      duration-300
-      m-auto
-    "
+    class="text-center shadow-lg h-12 rounded-3xl border border-black-50 flex items-center justify-center flex-row cursor-pointer duration-300 m-auto"
     :disabled="loading"
     :class="[
       loading ? 'bg-gray-900' : '',
@@ -63,11 +50,16 @@ button {
 #u-button {
   .up-enter-active,
   .up-leave-active {
-    transition: all 0.5s;
+    transition: all 0.3s;
   }
   .up-enter, .up-leave-to /* .fade-leave-active below version 2.1.8 */ {
     opacity: 0;
     transform: translateY(-100%);
+  }
+
+  &:active {
+    transform: translateY(3px);
+    box-shadow: none;
   }
 }
 </style>

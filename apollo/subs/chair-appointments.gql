@@ -1,0 +1,48 @@
+subscription liveAppointments($chairId: uuid, $date: date) {
+  appointment(
+    where: {
+      date: { _eq: $date }
+      chairId: { _eq: $chairId }
+      status: { _in: ["created", "ongoing"] }
+    }
+    order_by: { created_at: asc }
+  ) {
+    date
+    id
+    status
+    approx_duration
+    started_at
+    finished_at
+    type
+
+    order {
+      order_items {
+        salon_service_entity {
+          base_salon_service {
+            name
+          }
+        }
+      }
+    }
+
+    user {
+      id
+      phone_number
+      user_profile {
+        full_name
+      }
+    }
+
+    salon {
+      id
+    }
+
+    addon_services {
+      salon_service_entity {
+        base_salon_service {
+          name
+        }
+      }
+    }
+  }
+}

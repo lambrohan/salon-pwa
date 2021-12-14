@@ -2,12 +2,15 @@
   <transition name="fade">
     <div
       id="modal"
-      class="fixed w-screen h-screen top-0 left-0 p-3"
+      class="fixed w-screen h-screen top-0 left-0 p-3 z-10"
       v-if="value"
       @click.self="autodismiss ? $emit('input', false) : ''"
     >
       <transition name="topentry">
-        <div class="bg-white w-full content rounded" v-if="modal">
+        <div
+          class="bg-white w-full content rounded overflow-hidden"
+          v-if="modal"
+        >
           <slot></slot>
         </div>
       </transition>

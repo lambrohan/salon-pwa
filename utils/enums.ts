@@ -9,3 +9,14 @@ export enum UserGender {
   OTHER = 'OTHER',
   RATHER_NOT_SAY = 'RATHER NOT SAY',
 }
+
+export enum AppointmentStatus {
+  ONGOING = 'ongoing',
+  FINISHED = 'finieshed',
+  CREATED = 'created',
+}
+
+export enum AppointmentTypes {
+  ONLINE = 'online',
+  WALKIN = 'walkin',
+}

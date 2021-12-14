@@ -12,6 +12,8 @@
       <UButton
         class="w-4/12 transform scale-75 bg-accent absolute right-0"
         v-if="isUpdated"
+        @click.native="saveUpdatedPrices"
+        :loading="updateBtnLoading"
         >Save</UButton
       >
     </div>
@@ -49,7 +51,7 @@
 
 <script>
 import ServiceList from '~/components/U/ServiceList.vue'
-import ServiceQuery from '@/apollo/queries/all-services.gql'
+import ServiceQuery from '@/apollo/subs/all-services.gql'
 import Fab from '~/components/U/Fab.vue'
 import BottomSheet from '~/components/U/BottomSheet.vue'
 import AddServices from '~/components/onboard/add-services.vue'
@@ -64,6 +66,7 @@ export default {
       sheetState: false,
       updatedPrices: {},
       isUpdated: false,
+      updateBtnLoading: false,
     }
   },
 
@@ -109,7 +112,7 @@ export default {
       }
     },
 
-    onPriceInput(payload) {
+    async onPriceInput(payload) {
       if (
         payload.price &&
         payload.price != payload.currentPrice &&
@@ -124,8 +127,32 @@ export default {
         Object.keys(this.updatedPrices).length === 0 ? false : true
     },
 
+    async saveUpdatedPrices() {
+      try {
+        this.updateBtnLoading = true
+        const serviceArr = Object.keys(this.updatedPrices).map((s) => ({
+          id: s,
+          price: this.updatedPrices[s],
+        }))
+
+        await Promise.all(
+          serviceArr.map((s) =>
+            this.$salonRepository.updatePrice(s.id, s.price)
+          )
+        )
+        this.updateBtnLoading = false
+
+        this.$Toast.success('Prices Updated')
+        this.clearBottomSheet()
+      } catch (error) {
+        this.$Toast.danger(error.response.data.message)
+      }
+    },
+
     clearBottomSheet() {
       this.sheetState = false
+      this.updatedPrices = {}
+      this.isUpdated = false
     },
   },
   computed: {},
