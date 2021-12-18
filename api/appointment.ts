@@ -33,8 +33,8 @@ export const AppointmentRepository = ($axios: NuxtAxiosInstance) => ({
     return await $axios.$put(resource + '/finish/' + id)
   },
 
-  async notify(id: string, message: string) {
-    return await $axios.$post(resource + '/notify/' + id, { message })
+  async notify(id: string, title: string, message: string) {
+    return await $axios.$post(resource + '/notify/' + id, { title, message })
   },
 
   async cancel(id: string, reason: string) {

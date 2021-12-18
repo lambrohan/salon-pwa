@@ -10,11 +10,18 @@
             Fees(₹)
           </th>
         </tr>
-        <tr v-for="service in services" :key="service.id" class="">
-          <td class="p-2 px-3 bg-gray-100 rounded-tl-lg rounded-bl-lg">
+        <tr
+          v-for="service in services"
+          :key="service.id"
+          :class="service.disabled ? 'bg-red-100' : 'bg-gray-100'"
+        >
+          <td
+            class="p-2 px-3 rounded-tl-lg rounded-bl-lg"
+            @click="$emit('onSelect', service)"
+          >
             {{ service.base_service.name }}
           </td>
-          <td class="bg-gray-100 rounded-tr-lg rounded-br-lg text-right w-3/12">
+          <td class="rounded-tr-lg rounded-br-lg text-right w-3/12">
             <input
               type="number"
               v-model="service.updated_price"

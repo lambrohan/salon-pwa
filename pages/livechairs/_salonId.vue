@@ -3,10 +3,11 @@
     <h4 class="font-semibold text-xl ml-6 mb-4">Current Bookings</h4>
     <div class="flex items-center p-3 m-h-full pl-6">
       <p
-        class="mr-4"
+        class="mr-4 border px-2 rounded-full py-1"
         v-for="chair in chairs"
         :key="chair.stylist.id"
-        :class="chair.id == activeChairId ? 'font-semibold' : ''"
+        @click="activeChairId = chair.id"
+        :class="chair.id == activeChairId ? 'font-semibold bg-primary' : ''"
       >
         {{ chair.stylist.display_name }}
       </p>
@@ -45,7 +46,7 @@
     <Modal v-model="notifyModal" autodismiss>
       <Notify @onConfirm="notifyConfirm" />
     </Modal>
-    <Modal v-model="cancelModal">
+    <Modal v-model="cancelModal" autodismiss>
       <Cancellation @onConfirm="onCancelConfirm" />
     </Modal>
   </div>
@@ -60,6 +61,7 @@ import AppointmentControls from '~/components/AppointmentControls.vue'
 import Modal from '~/components/U/Modal.vue'
 import Notify from '~/components/Notify.vue'
 import Cancellation from '~/components/Cancellation.vue'
+import { AppointmentTypes } from '~/utils/enums'
 export default {
   name: 'LiveChairPage',
   middleware: ['inject-salon-id'],
@@ -73,6 +75,7 @@ export default {
           }
         },
         result({ data }) {
+          this.selectedAppointment = null
           if (data.chair) {
             this.chairs = data.chair
             this.activeChairId = this.chairs[0].id
@@ -131,7 +134,12 @@ export default {
       this.notifyModal = false
       this.$refs.liveChairView.clearSelection()
       try {
-        await this.$appointmentRepo.notify(this.selectedAppointment.id, message)
+        await this.$appointmentRepo.notify(
+          this.selectedAppointment.id,
+          `Message From Stylist`,
+          message
+        )
+        this.$Toast.success('Notified')
       } catch (error) {
         const msg = error?.response?.data?.message
         this.$Toast.danger(msg instanceof Array ? msg[0] : msg)

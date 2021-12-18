@@ -1,0 +1,53 @@
+query appointments($where: appointment_bool_exp!, $start: Int, $limit: Int) {
+  appointment_aggregate(where: $where) {
+    aggregate {
+      totalCount: count
+    }
+  }
+  appointments: appointment(where: $where, limit: $limit, offset: $start) {
+    __typename
+
+    id
+    user {
+      id
+      phone_number
+    }
+
+    status
+
+    payment_receipt {
+      grand_total
+    }
+
+    chair {
+      stylist {
+        display_name
+      }
+    }
+
+    order {
+      order_total
+      order_items {
+        id
+        price
+        salon_service_entity {
+          id
+          base_salon_service {
+            id
+            name
+          }
+        }
+      }
+    }
+
+    addon_services {
+      id
+      salon_service_entity {
+        id
+        base_salon_service {
+          name
+        }
+      }
+    }
+  }
+}

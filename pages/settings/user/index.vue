@@ -1,7 +1,12 @@
-<template></template>
+<template>
+  <div id="user-profile"></div>
+</template>
 
 <script>
-export default {}
+export default {
+  name: 'UserProfile',
+  layout: 'onboard',
+}
 </script>
 
-<style></style>
+<style lang="scss" scoped></style>

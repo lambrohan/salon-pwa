@@ -20,3 +20,8 @@ export enum AppointmentTypes {
   ONLINE = 'online',
   WALKIN = 'walkin',
 }
+
+export enum SalonRoles {
+  STYLIST = 'salon_stylist',
+  OWNER = 'salon_owner',
+}

@@ -12,9 +12,10 @@
 import LiveSalonView from '~/components/LiveSalonView.vue'
 export default {
   name: 'DashHome',
-
   mounted() {
-    this.$store.dispatch('salon/fetchLiteSalons')
+    if (this.user) {
+      this.$store.dispatch('salon/fetchLiteSalons')
+    }
   },
   data() {
     return {
@@ -27,6 +28,11 @@ export default {
     },
     lite_salons() {
       return this.$store.getters['salon/getLiteSalons']
+    },
+  },
+  watch: {
+    user() {
+      this.$store.dispatch('salon/fetchLiteSalons')
     },
   },
   components: { LiveSalonView },

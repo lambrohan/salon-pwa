@@ -129,9 +129,9 @@
           />
         </svg>
       </div>
-      <nuxt-link
-        to="/settings/salon"
+      <div
         class="bg-white flex-row flex py-3 px-4 items-center relative"
+        @click="$router.push(`/settings/salon/orders/${$route.params.salonId}`)"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -162,7 +162,7 @@
             d="M9 5l7 7-7 7"
           />
         </svg>
-      </nuxt-link>
+      </div>
 
       <nuxt-link
         :to="`/settings/salon/kyc/${$route.params.salonId}`"

@@ -1,5 +1,5 @@
 import { getApps, initializeApp } from '@firebase/app'
-import { getAuth } from 'firebase/auth'
+import { browserLocalPersistence, getAuth, setPersistence } from 'firebase/auth'
 const firebaseConfig = {
   apiKey: 'AIzaSyCzjd1ZaYnEngVSTm3Uf6WCz2ORKnJM1GQ',
   authDomain: 'ubu-salon.firebaseapp.com',
@@ -16,6 +16,6 @@ if (!apps.length) {
 } else {
   firebaseApp = apps[0]
 }
-
 const auth = getAuth(firebaseApp)
+setPersistence(auth, browserLocalPersistence)
 export { auth }

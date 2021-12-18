@@ -1,7 +1,7 @@
 <template>
   <button
     id="u-button"
-    class="text-center shadow-lg h-12 rounded-3xl border border-black-50 flex items-center justify-center flex-row cursor-pointer duration-300 m-auto"
+    class="text-center shadow-lg py-5 rounded-3xl border border-black-50 flex items-center justify-center flex-row cursor-pointer duration-300 m-auto"
     :disabled="loading"
     :class="[
       loading ? 'bg-gray-900' : '',

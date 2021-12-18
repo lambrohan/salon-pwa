@@ -37,7 +37,7 @@
         </UButton>
       </div>
     </div>
-    <nuxt-link to="/settings">Settings Page</nuxt-link>
+    <nuxt-link to="/home">Home</nuxt-link>
   </div>
 </template>
 <script>
@@ -129,7 +129,13 @@ export default {
         const { user } = await this.confirmationResult.confirm(this.otp)
         const idToken = await user.getIdToken()
         this.$axios.setToken(idToken, 'bearer')
+        window.localStorage.setItem('jwt', idToken)
         await this.$userRepository.findOrCreate()
+        try {
+          const profile = await this.$store.dispatch('getPartnerProfile')
+          window.localStorage.setItem('salon_role', profile.role)
+        } catch (error) {}
+
         this.$Toast.success('Login Successful')
         location.reload()
       } catch (error) {

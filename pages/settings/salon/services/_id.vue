@@ -21,7 +21,11 @@
       <p class="text-sm text-gray-500 mb-3 text-center">
         You have currently added following services
       </p>
-      <ServiceList :services="services" @priceInput="onPriceInput" />
+      <ServiceList
+        :services="services"
+        @priceInput="onPriceInput"
+        @onSelect="onServiceSelect"
+      />
     </div>
     <Fab @click.native="sheetState = true">
       <svg
@@ -46,6 +50,38 @@
         ref="addservices"
       />
     </BottomSheet>
+    <Modal v-model="serviceSheet" autodismiss>
+      <div class="p-4">
+        <h4 class="text-center">Manage Service</h4>
+        <p class="text-xs text-gray-500 text-center mb-1 mt-4">
+          Approx Duration (mins)
+        </p>
+        <div class="border rounded-full p-2 flex items-center justify-between">
+          <input
+            type="text"
+            v-model="selectedService.avg_duration"
+            placeholder="time in mins"
+            class="flex-grow pl-4"
+          />
+          <UButton
+            class="bg-success py-2"
+            @click.native="updateTime"
+            :loading="updateTimeLoading"
+            >Save</UButton
+          >
+        </div>
+        <p class="text-xs text-gray-500 text-center mt-4">
+          User won't be able to book this service if disabled
+        </p>
+        <UButton
+          class="mt-2 w-2/3"
+          :loading="toggleLoading"
+          @click.native="toggleService"
+          :class="selectedService.disabled ? 'bg-success' : 'bg-red-500'"
+          >{{ selectedService.disabled ? 'Enable' : 'Disable' }}</UButton
+        >
+      </div>
+    </Modal>
   </div>
 </template>
 
@@ -55,10 +91,11 @@ import ServiceQuery from '@/apollo/subs/all-services.gql'
 import Fab from '~/components/U/Fab.vue'
 import BottomSheet from '~/components/U/BottomSheet.vue'
 import AddServices from '~/components/onboard/add-services.vue'
+import Modal from '~/components/U/Modal.vue'
 export default {
   name: 'ManageServices',
   layout: 'onboard',
-  components: { ServiceList, Fab, BottomSheet, AddServices },
+  components: { ServiceList, Fab, BottomSheet, AddServices, Modal },
   data() {
     return {
       services: [],
@@ -67,6 +104,10 @@ export default {
       updatedPrices: {},
       isUpdated: false,
       updateBtnLoading: false,
+      serviceSheet: false,
+      selectedService: false,
+      toggleLoading: false,
+      updateTimeLoading: false,
     }
   },
 
@@ -94,6 +135,22 @@ export default {
     },
   },
   methods: {
+    async toggleService() {
+      try {
+        this.toggleLoading = true
+        await this.$salonRepository.disableService(this.selectedService.id)
+        this.toggleLoading = false
+      } catch (error) {
+        this.toggleLoading = false
+        this.$Toast.danger(error.response.data.message)
+      }
+      this.serviceSheet = false
+    },
+    async updateTime() {},
+    async onServiceSelect(service) {
+      this.serviceSheet = true
+      this.selectedService = service
+    },
     async onConfirm(services) {
       try {
         this.$refs.addservices.$refs.priceTab.loading = true

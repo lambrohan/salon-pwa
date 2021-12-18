@@ -20,6 +20,12 @@ export default function (ctx) {
         expires: idToken ? 0.04166667 : 0,
       })
       window.localStorage.setItem('jwt', idToken)
+      if (ctx.store.getters.getSalonRole) {
+        window.localStorage.setItem(
+          'salon_role',
+          ctx.store.getters.getSalonRole
+        )
+      }
     } else {
       Cookie.remove('Authorization')
     }

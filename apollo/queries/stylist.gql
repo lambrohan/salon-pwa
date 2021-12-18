@@ -1,0 +1,17 @@
+query stylist($userId: uuid) {
+  stylist(where: { userId: { _eq: $userId } }) {
+    id
+    display_name
+    display_picture {
+      url
+    }
+    chair {
+      id
+      salon {
+        salon_profile {
+          name
+        }
+      }
+    }
+  }
+}

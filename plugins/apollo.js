@@ -8,12 +8,14 @@ import { WebSocketLink } from 'apollo-link-ws'
 import { getMainDefinition } from 'apollo-utilities'
 
 const getHeaders = () => {
-  const headers = {
-    role: 'salon_owner',
-  }
+  const headers = {}
   const token = window.localStorage.getItem('jwt')
+  const role = window.localStorage.getItem('salon_role')
   if (token) {
     headers.Authorization = `Bearer ${token}`
+  }
+  if (role) {
+    headers.role = role
   }
   return headers
 }
@@ -52,7 +54,7 @@ const link = split(
 const apolloClient = new ApolloClient({
   link,
   cache: new InMemoryCache(),
-  connectToDevTools: true,
+  connectToDevTools: process.env.NODE_ENV !== 'production',
 })
 
 const apolloProvider = new VueApollo({

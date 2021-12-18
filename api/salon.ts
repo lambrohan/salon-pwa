@@ -55,4 +55,12 @@ export const SalonRepository = ($axios: NuxtAxiosInstance) => ({
   async updatePrice(salon_service: string, price: number) {
     return await $axios.$post(serviceRes + '/price', { price, salon_service })
   },
+
+  async getPartnerProfile() {
+    return await $axios.$get(resource + '/partner-profile')
+  },
+
+  async disableService(id: string) {
+    return await $axios.$get(serviceRes + '/toggle-state/' + id)
+  },
 })

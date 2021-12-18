@@ -1,0 +1,56 @@
+query appointmentById($id: uuid) {
+  appointment(where: { id: { _eq: $id } }) {
+    id
+    date
+    started_at
+    finished_at
+    type
+    user {
+      id
+      phone_number
+      user_profile {
+        full_name
+      }
+    }
+
+    status
+
+    payment_receipt {
+      grand_total
+      discount
+    }
+
+    chair {
+      stylist {
+        display_name
+      }
+    }
+
+    order {
+      sub_total
+      order_total
+      discount
+      order_items {
+        id
+        price
+        salon_service_entity {
+          id
+          base_salon_service {
+            id
+            name
+          }
+        }
+      }
+    }
+
+    addon_services {
+      id
+      salon_service_entity {
+        id
+        base_salon_service {
+          name
+        }
+      }
+    }
+  }
+}

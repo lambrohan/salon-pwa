@@ -12,4 +12,8 @@ export const StylistRepository = ($axios: NuxtAxiosInstance) => ({
   async create(payload: { name: string }) {
     return await $axios.$post(resource, payload)
   },
+
+  async updateProfilePicture(payload: any) {
+    return await $axios.$put(resource + '/dp', payload)
+  },
 })

@@ -4,6 +4,7 @@ subscription ($salonId: uuid) {
     order_by: [{ updated_at: desc }]
   ) {
     id
+
     effective_price: service_prices(
       where: { effective_till: { _is_null: true } }
       order_by: { created_at: desc }
@@ -12,6 +13,8 @@ subscription ($salonId: uuid) {
       price
       id
     }
+    avg_duration
+    disabled
 
     base_service: base_salon_service {
       name

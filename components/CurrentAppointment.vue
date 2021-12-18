@@ -1,7 +1,7 @@
 <template>
   <div
     id="current-appointment"
-    class="rounded-lg mt-2 flex pr-4 relative overflow-hidden z-2"
+    class="rounded-lg mt-2 flex relative overflow-hidden z-2"
     :class="isOngoing ? 'bg-success' : 'bg-black28'"
     v-if="appointment"
   >
@@ -49,6 +49,14 @@
           @click="durationModal = true"
         >
           <img src="/icons/clock.svg" class="w-4" />
+        </span>
+
+        <span
+          class="px-2 py-1 rounded-xl text-xs bg-white ml-2"
+          @click="$emit('onSelect')"
+          v-if="appointment.status == 'created'"
+        >
+          <img src="/icons/settings.svg" class="w-4" />
         </span>
       </div>
     </div>

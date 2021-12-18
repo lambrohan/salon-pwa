@@ -1,8 +1,6 @@
 <template>
   <div id="add-services" class="">
-    <h4 class="text-xl font-semibold bg-primary py-3 pl-4 mt-3">
-      Add Services
-    </h4>
+    <h4 class="text-xl font-semibold bg-primary py-3 pl-4">Add Services</h4>
     <UTabs :activeIndex="activeTabIndex">
       <UTab title="1" class="p-4">
         <BaseServiceSelector
@@ -57,7 +55,11 @@ export default {
     async onPriceConfirm(services) {
       this.$emit(
         'next',
-        services.map((s) => ({ base_service: s.id, price: parseInt(s.price) }))
+        services.map((s) => ({
+          base_service: s.id,
+          price: parseInt(s.price),
+          avg_duration: parseInt(s.avg_duration),
+        }))
       )
     },
   },

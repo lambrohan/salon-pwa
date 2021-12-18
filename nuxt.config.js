@@ -19,7 +19,7 @@ export default {
     // middleware: ['auth'],
   },
 
-  serverMiddleware: ['~/serverMiddleware/validateFirebaseToken'],
+  // serverMiddleware: ['~/serverMiddleware/validateFirebaseToken'],
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],

@@ -2,15 +2,18 @@ import Cookies from 'cookies'
 import jwt_decode from 'jwt-decode'
 
 export default (req, res, next) => {
+  console.log('middleware')
+  const staticRoute = /\/_nuxt\/*/g
+  if (req.url.match(staticRoute)) return next()
+
   getIdTokenFromRequest(req, res).then((idToken) => {
     if (idToken) {
       const decodedToken = jwt_decode(idToken)
       req.user = decodedToken
-      next()
-    } else {
-      next()
+      req.idToken = idToken
     }
   })
+  next()
 }
 function getIdTokenFromRequest(req, res) {
   if (

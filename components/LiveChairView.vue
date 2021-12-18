@@ -6,6 +6,7 @@
       <CurrentAppointment
         :appointment="topAppointment"
         :key="topAppointment.id + 'hell'"
+        @onSelect="toggle(topAppointment)"
         class="shadow-lg"
       />
 
@@ -27,6 +28,8 @@
 import ChairAppointmentsQ from '@/apollo/subs/chair-appointments.gql'
 import Appointment from './U/Appointment.vue'
 import CurrentAppointment from './CurrentAppointment.vue'
+import AppointmentControlsV2 from './AppointmentControlsV2.vue'
+import BottomSheet from './U/BottomSheet.vue'
 export default {
   name: 'ChairLiveView',
   props: {
@@ -73,6 +76,7 @@ export default {
       appointments: [],
       skipSub: false,
       selected: '',
+      optionsSheet: false,
     }
   },
   methods: {
@@ -95,7 +99,12 @@ export default {
   beforeDestroy() {
     this.skipSub = true
   },
-  components: { Appointment, CurrentAppointment },
+  components: {
+    Appointment,
+    CurrentAppointment,
+    AppointmentControlsV2,
+    BottomSheet,
+  },
 }
 </script>
 
