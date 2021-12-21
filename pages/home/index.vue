@@ -12,6 +12,7 @@
 import LiveSalonView from '~/components/LiveSalonView.vue'
 export default {
   name: 'DashHome',
+  layout: 'bottomnav',
   mounted() {
     if (this.user) {
       this.$store.dispatch('salon/fetchLiteSalons')

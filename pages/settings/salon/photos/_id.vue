@@ -43,7 +43,7 @@ import Gallery from '~/components/U/Gallery.vue'
 import ImagePreview from '~/components/U/ImagePreview.vue'
 export default {
   name: 'SalonPhotos',
-  layout: 'onboard',
+  layout: 'default',
   components: { Gallery, ImagePreview },
   data() {
     return {

@@ -158,7 +158,7 @@ import FileInput from '~/components/U/FileInput.vue'
 export default {
   name: 'KYCPage',
   components: { FileInput },
-  layout: 'onboard',
+  layout: 'default',
   data() {
     return {
       salon: {},

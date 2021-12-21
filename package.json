@@ -27,6 +27,7 @@
     "firebase": "^9.2.0",
     "graphql": "^16.0.1",
     "graphql-tag": "^2.12.6",
+    "html5-qrcode": "^2.1.4",
     "js-cookie": "^3.0.1",
     "jwt-decode": "^3.1.2",
     "nuxt": "^2.15.7",

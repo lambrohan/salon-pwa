@@ -100,7 +100,7 @@ import Money from '~/components/U/Money.vue'
 import Modal from '~/components/U/Modal.vue'
 export default {
   name: 'SingleOrderPage',
-  layout: 'onboard',
+  layout: 'default',
   data() {
     return {
       a: false,

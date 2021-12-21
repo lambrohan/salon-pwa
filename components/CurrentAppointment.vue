@@ -45,10 +45,13 @@
           <img src="/icons/plus.svg" class="w-4" />
         </span>
         <span
-          class="px-2 py-1 rounded-xl text-xs bg-white ml-2"
+          class="px-2 py-1 rounded-xl text-xs bg-white ml-2 flex items-center"
           @click="durationModal = true"
         >
           <img src="/icons/clock.svg" class="w-4" />
+          <p class="text-xs font-semibold text-black ml-1">
+            {{ $dayjs.duration(ongoingSecs * 1000).format('mm:ss') }}
+          </p>
         </span>
 
         <span

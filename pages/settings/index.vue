@@ -160,15 +160,19 @@
 <script>
 import { auth } from '~/plugins/firebase'
 import Button from '~/components/U/Button.vue'
+import { SalonRoles } from '~/utils'
 export default {
   name: 'SettingsPage',
+  layout: 'bottomnav',
   data() {
     return {
       salons: [],
     }
   },
   mounted() {
-    this.fetchSalons()
+    if (this.user) {
+      this.fetchSalons()
+    }
   },
   methods: {
     async logout() {
@@ -177,15 +181,26 @@ export default {
     },
 
     async fetchSalons() {
+      if (this.partner.role == SalonRoles.STYLIST) {
+        const s = await this.$salonRepository.getById(this.partner.salon)
+        console.log(s)
+        this.salons = [s]
+        return
+      }
       this.salons = await this.$salonRepository.getOwned()
     },
   },
   computed: {
-    authUser() {
-      return this.$store.getters.authUser
-    },
     user() {
       return this.$store.getters.getUser
+    },
+    partner() {
+      return this.$store.getters.getPartner
+    },
+  },
+  watch: {
+    user() {
+      this.fetchSalons()
     },
   },
   components: { Button },

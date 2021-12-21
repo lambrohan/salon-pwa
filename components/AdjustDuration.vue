@@ -1,6 +1,6 @@
 <template>
   <div id="adjust-duration" class="bg-primary p-4">
-    <h4 class="text-center">Adjust Approx Duration</h4>
+    <h4 class="text-center">{{ heading }}</h4>
     <div class="flex justify-center my-4 font-semibold">
       <input
         type="number"
@@ -33,6 +33,10 @@ export default {
     initialValue: {
       type: Number,
       default: 0,
+    },
+    heading: {
+      type: String,
+      default: 'Adjust Duration',
     },
   },
   data() {

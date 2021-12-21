@@ -5,7 +5,7 @@
 <script>
 export default {
   name: 'UserProfile',
-  layout: 'onboard',
+  layout: 'default',
 }
 </script>
 

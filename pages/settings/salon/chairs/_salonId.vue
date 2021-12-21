@@ -121,14 +121,13 @@
 </template>
 
 <script>
-import SalonChair from '~/components/onboard/salon-chair.vue'
 import BottomSheet from '~/components/U/BottomSheet.vue'
 import Modal from '~/components/U/Modal.vue'
 import ChairQuery from '@/apollo/subs/all-chairs.gql'
 export default {
   name: 'ManageChair',
-  layout: 'onboard',
-  components: { SalonChair, BottomSheet, Modal },
+  layout: 'default',
+  components: { BottomSheet, Modal },
   data() {
     return {
       sheetState: false,

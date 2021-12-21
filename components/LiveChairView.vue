@@ -1,6 +1,12 @@
 <template>
   <div id="chair-live-v" class="px-6">
     <div class="" v-if="appointments.length">
+      <div class="mb-2" v-if="breakData">
+        <p class="text-sm mb-1">Active Break</p>
+
+        <StylistBreak :breakData="breakData" @click.native="stopBreak" />
+      </div>
+
       <p class="text-sm">Current Customer :</p>
 
       <CurrentAppointment
@@ -30,6 +36,7 @@ import Appointment from './U/Appointment.vue'
 import CurrentAppointment from './CurrentAppointment.vue'
 import AppointmentControlsV2 from './AppointmentControlsV2.vue'
 import BottomSheet from './U/BottomSheet.vue'
+import StylistBreak from './StylistBreak.vue'
 export default {
   name: 'ChairLiveView',
   props: {
@@ -39,7 +46,7 @@ export default {
   },
   apollo: {
     $subscribe: {
-      appointments: {
+      chair: {
         query: ChairAppointmentsQ,
         variables() {
           return {
@@ -49,7 +56,9 @@ export default {
         },
         result({ data }) {
           console.log(data)
-          this.appointments = data.appointment.map((a) => {
+          if (!data.chair) return
+          if (!data.chair.length) return
+          this.appointments = data.chair[0].appointments.map((a) => {
             a.services = a.order.order_items
               .map((oi) => oi.salon_service_entity.base_salon_service.name)
               .concat(
@@ -60,6 +69,15 @@ export default {
               )
             return a
           })
+          if (!data.chair[0].stylist_breaks) {
+            this.breakData = null
+            return
+          }
+          if (!data.chair[0].stylist_breaks.length) {
+            this.breakData = null
+            return
+          }
+          this.breakData = data.chair[0].stylist_breaks[0]
         },
         error(err) {
           console.error(err)
@@ -77,9 +95,20 @@ export default {
       skipSub: false,
       selected: '',
       optionsSheet: false,
+      breakData: false,
     }
   },
   methods: {
+    async stopBreak() {
+      const dialog = this.$Dialog.show({
+        message: 'Are you sure want to END break?',
+      })
+
+      dialog.positiveHandler = async () => {
+        await this.$stylistRepository.finishBreak()
+        dialog.dismiss()
+      }
+    },
     toggle(a) {
       this.selected && this.selected.id == a.id
         ? (this.selected = '')
@@ -104,6 +133,7 @@ export default {
     CurrentAppointment,
     AppointmentControlsV2,
     BottomSheet,
+    StylistBreak,
   },
 }
 </script>

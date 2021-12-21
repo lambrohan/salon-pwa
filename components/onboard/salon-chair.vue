@@ -177,6 +177,7 @@ export default {
         this.assignBtnLoading = false
         this.clearBottomsheet()
         await this.fetchChairs()
+        window.location.href = '/settings'
       } catch (error) {
         this.$Toast.danger(error.response.data.message)
         await this.validateChair()

@@ -16,4 +16,19 @@ export const StylistRepository = ($axios: NuxtAxiosInstance) => ({
   async updateProfilePicture(payload: any) {
     return await $axios.$put(resource + '/dp', payload)
   },
+
+  async get() {
+    return await $axios.$get(resource)
+  },
+
+  async createBreak(approx_duration: number) {
+    return await $axios.$post(resource + '/break', {
+      approx_duration,
+      reason: 'Lunch',
+    })
+  },
+
+  async finishBreak() {
+    return await $axios.$post(resource + '/break/finish')
+  },
 })

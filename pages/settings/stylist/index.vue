@@ -55,7 +55,7 @@ import stylistQ from '@/apollo/queries/stylist.gql'
 import ImagePreview from '~/components/U/ImagePreview.vue'
 export default {
   name: 'StylistProfile',
-  layout: 'onboard',
+  layout: 'default',
   data() {
     return {
       stylist: {

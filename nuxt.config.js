@@ -66,7 +66,7 @@ export default {
 
   // Auto import components: https://go.nuxtjs.dev/config-components
   components: true,
-  // loading: '~/components/LoadingGlobal.vue',
+  loading: '~/components/LoadingGlobal.vue',
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -95,12 +95,15 @@ export default {
   dayjs: {
     defaultLocale: 'en',
     defaultTimeZone: 'Asia/Calcutta',
-    plugins: ['timezone'],
+    plugins: ['timezone', 'duration'],
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL: process.env.BACKEND_URL,
+    baseURL:
+      process.env.NODE_ENV == 'production'
+        ? 'https://api.ubuapp.in'
+        : 'http://localhost:4000',
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

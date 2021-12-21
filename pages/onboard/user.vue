@@ -13,7 +13,7 @@
           @click.native="$router.push('/onboard/salon/create')"
           >Register new salon</UButton
         >
-        <UButton class="m-auto mt-6 w-8/12" light
+        <UButton class="m-auto mt-6 w-8/12" light @click.native="onboardStylist"
           >Join a salon as stylist</UButton
         >
       </UTab>
@@ -28,14 +28,24 @@ export default {
   components: {},
   data() {
     return {
-      activeTabIndex: 1,
+      activeTabIndex: 0,
+      loading: false,
     }
   },
   methods: {
-    goNext() {
+    goNext(count) {
+      if (count) {
+        this.activeTabIndex = this.activeTabIndex + count
+        return
+      }
       this.activeTabIndex++
     },
+    onboardStylist() {
+      console.log('stylist')
+      this.$router.push('/onboard/stylist')
+    },
   },
+  computed() {},
 }
 </script>
 

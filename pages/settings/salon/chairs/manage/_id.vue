@@ -41,7 +41,7 @@
 
 <script>
 export default {
-  layout: 'onboard',
+  layout: 'default',
   data() {
     return {
       chair: {},

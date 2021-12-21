@@ -127,6 +127,7 @@ export default {
       this.confirmLoading = true
       try {
         const { user } = await this.confirmationResult.confirm(this.otp)
+        this.$nuxt.$loading.start()
         const idToken = await user.getIdToken()
         this.$axios.setToken(idToken, 'bearer')
         window.localStorage.setItem('jwt', idToken)
@@ -141,6 +142,7 @@ export default {
       } catch (error) {
         this.clearAll()
         this.$Toast.danger(error.message)
+        this.$nuxt.$loading.stop()
       }
     },
   },

@@ -1,6 +1,28 @@
 <template>
   <div id="live-page" class="pt-10 relative flex flex-col h-full">
-    <h4 class="font-semibold text-xl ml-6 mb-4">Current Bookings</h4>
+    <div class="flex items-center justify-between px-6 mb-4">
+      <h4 class="font-semibold text-xl">Current Bookings</h4>
+      <OptionsMenu class="flex-grow">
+        <div class="p-1 px-3 flex items-center" @click="breakModal = true">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="h-4 w-4 mr-2"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
+            />
+          </svg>
+          Take a break
+        </div>
+      </OptionsMenu>
+    </div>
+    <div class="br"></div>
     <div class="flex items-center p-3 m-h-full pl-6">
       <p
         class="mr-4 border px-2 rounded-full py-1"
@@ -49,6 +71,12 @@
     <Modal v-model="cancelModal" autodismiss>
       <Cancellation @onConfirm="onCancelConfirm" />
     </Modal>
+    <Modal v-model="breakModal" autodismiss>
+      <AdjustDuration
+        heading="Set Break Duration"
+        @onDurationConfirm="startBreak"
+      />
+    </Modal>
   </div>
 </template>
 
@@ -62,9 +90,12 @@ import Modal from '~/components/U/Modal.vue'
 import Notify from '~/components/Notify.vue'
 import Cancellation from '~/components/Cancellation.vue'
 import { AppointmentTypes } from '~/utils/enums'
+import OptionsMenu from '~/components/U/OptionsMenu.vue'
+import AdjustDuration from '~/components/AdjustDuration.vue'
 export default {
   name: 'LiveChairPage',
   middleware: ['inject-salon-id'],
+  layout: 'bottomnav',
   apollo: {
     $subscribe: {
       litechairs: {
@@ -102,10 +133,21 @@ export default {
       selectedAppointment: '',
       notifyModal: false,
       cancelModal: false,
+      breakModal: false,
     }
   },
   mounted() {},
   methods: {
+    async startBreak(duration) {
+      if (duration <= 0) return
+      this.breakModal = false
+      try {
+        await this.$stylistRepository.createBreak(duration)
+        this.$Toast.success('Break Started')
+      } catch (error) {
+        this.$Toast.danger(error.response.data.message)
+      }
+    },
     async createWalkin({ services, mobile }) {
       try {
         await this.$appointmentRepo.createWalkin(
@@ -169,6 +211,8 @@ export default {
     Modal,
     Notify,
     Cancellation,
+    OptionsMenu,
+    AdjustDuration,
   },
 }
 </script>

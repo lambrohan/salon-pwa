@@ -4,7 +4,7 @@
       class="wrapper p-2 mx-4 inline-flex items-center"
       id="live-wrp"
       style="width: 77px"
-      @click="$emit('input', value == 'ON' ? 'OFF' : 'ON')"
+      @click="emitToggle"
     >
       <transition name="fade">
         <h4
@@ -64,9 +64,18 @@ export default {
       )
     this.buttonDiameter = document.getElementById('crkl').clientWidth
   },
+  methods: {
+    emitToggle() {
+      if (this.isStylist) return
+      this.$emit('input', this.value == 'ON' ? 'OFF' : 'ON')
+    },
+  },
   computed: {
     open() {
       return this.value === 'ON'
+    },
+    isStylist() {
+      return this.$store.getters.userIsStylist
     },
   },
 }

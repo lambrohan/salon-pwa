@@ -19,7 +19,7 @@
 import Button from '~/components/U/Button.vue'
 export default {
   name: 'HomePage',
-  layout: 'onboard',
+  layout: 'default',
   middleware: ['ownerOrStylist'],
   mounted() {},
   components: { Button },

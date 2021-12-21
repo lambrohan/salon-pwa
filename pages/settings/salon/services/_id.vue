@@ -94,7 +94,7 @@ import AddServices from '~/components/onboard/add-services.vue'
 import Modal from '~/components/U/Modal.vue'
 export default {
   name: 'ManageServices',
-  layout: 'onboard',
+  layout: 'default',
   components: { ServiceList, Fab, BottomSheet, AddServices, Modal },
   data() {
     return {

@@ -252,6 +252,7 @@ import Tag from '~/components/U/Tag.vue'
 export default {
   name: 'SettingsPage',
   components: { Button, Tag },
+  middleware: 'owneronly',
 
   data() {
     return {
