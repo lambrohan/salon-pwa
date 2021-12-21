@@ -253,6 +253,7 @@ export default {
   name: 'SettingsPage',
   components: { Button, Tag },
   middleware: 'owneronly',
+  layout: 'bottomnav',
 
   data() {
     return {
