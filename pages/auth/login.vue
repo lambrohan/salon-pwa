@@ -37,7 +37,6 @@
         </UButton>
       </div>
     </div>
-    <nuxt-link to="/home">Home</nuxt-link>
   </div>
 </template>
 <script>
