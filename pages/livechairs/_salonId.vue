@@ -158,6 +158,10 @@ export default {
         )
         this.walkinSheet = false
       } catch (error) {
+        if (error.response.data.message instanceof Array) {
+          this.$Toast.danger(error.response.data.message[0])
+          return
+        }
         this.$Toast.danger(error.response.data.message)
       }
     },
