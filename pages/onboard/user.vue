@@ -45,7 +45,6 @@ export default {
       this.$router.push('/onboard/stylist')
     },
   },
-  computed() {},
 }
 </script>
 

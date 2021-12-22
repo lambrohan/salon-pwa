@@ -27,9 +27,6 @@ export default {
     user() {
       return this.$store.getters.getUser
     },
-    partner() {
-      return this.$store.getters.getPartner
-    },
   },
 }
 </script>
