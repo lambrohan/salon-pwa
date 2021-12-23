@@ -1,5 +1,5 @@
 <template>
-  <div id="chair-live-v" class="px-6">
+  <div id="chair-live-v">
     <div class="" v-if="appointments.length">
       <div class="mb-2" v-if="breakData">
         <p class="text-sm mb-1">Active Break</p>

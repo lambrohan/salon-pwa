@@ -38,6 +38,7 @@
       <LiveChairView
         :chairId="activeChairId"
         v-if="activeChairId"
+        class="px-2"
         @onSelect="onAppointmentSelect"
         ref="liveChairView"
       />
@@ -49,6 +50,7 @@
         v-if="selectedAppointment"
         class="m-auto"
         @notify="showNotifyModal"
+        @click.native="selectedAppointment = false"
         @cancel="
           () => {
             cancelModal = true
@@ -109,8 +111,11 @@ export default {
           this.selectedAppointment = null
           if (data.chair) {
             this.chairs = data.chair
-            this.activeChairId = this.chairs[0].id
+
             this.skipLiteSub = true
+          }
+          if (!this.$route.query.chairId) {
+            this.activeChairId = this.chairs[0].id
           }
         },
         error(e) {
@@ -136,7 +141,11 @@ export default {
       breakModal: false,
     }
   },
-  mounted() {},
+  mounted() {
+    if (this.$route.query.chairId) {
+      this.activeChairId = this.$route.query.chairId
+    }
+  },
   methods: {
     async startBreak(duration) {
       if (duration <= 0) return

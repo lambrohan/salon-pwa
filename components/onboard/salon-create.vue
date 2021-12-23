@@ -27,6 +27,7 @@
 </template>
 
 <script>
+import { SalonRoles } from '~/utils'
 export default {
   name: 'SalonInfoBoarding',
   data() {
@@ -44,6 +45,7 @@ export default {
         const salon = await this.$salonRepository.create({
           name: this.salonName,
         })
+        window.localStorage.setItem('salon_role', SalonRoles.OWNER)
         this.loading = false
         this.$emit('next', salon)
       } catch (error) {

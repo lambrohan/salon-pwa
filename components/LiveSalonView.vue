@@ -24,7 +24,7 @@
           v-for="chair in salon.chairs"
           :key="chair.id"
           class=""
-          @click="$router.push(`/livechairs/${salon.id}`)"
+          @click="$router.push(`/livechairs/${salon.id}/?chairId=${chair.id}`)"
         >
           <td
             class="p-3 px-4 bg-gray-50 rounded-tl-lg rounded-bl-lg border-b flex items-center"

@@ -31,7 +31,7 @@
       </h4>
       <div class="services flex items-center flex-wrap">
         <span
-          class="text-xs px-2 py-1 rounded-xl mr-2 mb-1"
+          class="text-xs px-2 py-1 rounded-xl mr-2 mb-2"
           :style="`background: ${isOngoing ? '#3FA480' : '#4b4b4b'}`"
           v-for="s in appointment.services"
           :key="s"
@@ -39,27 +39,26 @@
           {{ s }}
         </span>
         <span
-          class="px-2 py-1 rounded-xl text-xs bg-white"
+          class="px-2 py-1 rounded-xl text-xs bg-white mb-2 mr-2"
           @click="addonServiceModal = true"
         >
           <img src="/icons/plus.svg" class="w-4" />
         </span>
         <span
-          class="px-2 py-1 rounded-xl text-xs bg-white ml-2 flex items-center"
-          @click="durationModal = true"
-        >
-          <img src="/icons/clock.svg" class="w-4" />
-          <p class="text-xs font-semibold text-black ml-1">
-            {{ $dayjs.duration(ongoingSecs * 1000).format('mm:ss') }}
-          </p>
-        </span>
-
-        <span
-          class="px-2 py-1 rounded-xl text-xs bg-white ml-2"
+          class="px-2 py-1 rounded-xl text-xs bg-white mb-2 mr-2"
           @click="$emit('onSelect')"
           v-if="appointment.status == 'created'"
         >
           <img src="/icons/settings.svg" class="w-4" />
+        </span>
+        <span
+          class="px-2 py-1 rounded-xl text-xs bg-white flex items-center mb-2"
+          @click="durationModal = true"
+        >
+          <img src="/icons/clock.svg" class="w-4" />
+          <p class="text-xs font-semibold text-black">
+            {{ $dayjs.duration(ongoingSecs * 1000).format('mm:ss') }}
+          </p>
         </span>
       </div>
     </div>
