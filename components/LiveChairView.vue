@@ -4,14 +4,18 @@
       <div class="mb-2" v-if="breakData">
         <p class="text-sm mb-1">Active Break</p>
 
-        <StylistBreak :breakData="breakData" @click.native="stopBreak" />
+        <StylistBreak
+          :breakData="breakData"
+          @click.native="stopBreak"
+          :key="`break${isAppOpen}`"
+        />
       </div>
 
       <p class="text-sm">Current Customer :</p>
 
       <CurrentAppointment
         :appointment="topAppointment"
-        :key="topAppointment.id + 'hell'"
+        :key="topAppointment.id + `${isAppOpen ? 'yes' : 'no'}`"
         @onSelect="toggle(topAppointment)"
         class="shadow-lg"
       />
