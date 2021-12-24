@@ -123,8 +123,19 @@ export default {
     topAppointment() {
       return this.appointments[0]
     },
+    isAppOpen() {
+      return this.$store.getters.isOpen
+    },
   },
-  watch: {},
+  watch: {
+    isAppOpen(data) {
+      if (data) {
+        this.$apollo.subscriptions.chair.start()
+      } else {
+        this.$apollo.subscriptions.chair.stop()
+      }
+    },
+  },
   beforeDestroy() {
     this.skipSub = true
   },

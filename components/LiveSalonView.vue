@@ -99,6 +99,20 @@ export default {
       }
     },
   },
+  computed: {
+    isAppOpen() {
+      return this.$store.getters.isOpen
+    },
+  },
+  watch: {
+    isAppOpen(data) {
+      if (data) {
+        this.$apollo.subscriptions.salon.start()
+      } else {
+        this.$apollo.subscriptions.salon.stop()
+      }
+    },
+  },
   beforeDestroy() {
     console.log('closing sub')
     this.skipSub = true

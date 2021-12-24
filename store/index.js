@@ -6,6 +6,7 @@ export const state = () => ({
   fireUser: false,
   user: false,
   partnerProfile: false,
+  isOpen: true,
 })
 
 export const actions = {
@@ -72,6 +73,10 @@ export const mutations = {
   SET_PARTNER_PROFILE(state, profile) {
     state.partnerProfile = profile
   },
+
+  SET_VISIBILITY(state, payload) {
+    state.isOpen = payload
+  },
 }
 
 export const getters = {
@@ -97,5 +102,9 @@ export const getters = {
 
   getPartner(state) {
     return state.partnerProfile
+  },
+
+  isOpen(state) {
+    return state.isOpen
   },
 }
