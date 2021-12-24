@@ -56,6 +56,8 @@ export default {
         },
         result({ data }) {
           console.log(data)
+          this.appointments = []
+          this.breakData = false
           if (!data.chair) return
           if (!data.chair.length) return
           this.appointments = data.chair[0].appointments.map((a) => {
@@ -130,7 +132,7 @@ export default {
   watch: {
     isAppOpen(data) {
       if (data) {
-        this.$apollo.subscriptions.chair.start()
+        this.$apollo.subscriptions.chair.refresh()
       } else {
         this.$apollo.subscriptions.chair.stop()
       }

@@ -50,7 +50,6 @@
         v-if="selectedAppointment"
         class="m-auto"
         @notify="showNotifyModal"
-        @click.native="selectedAppointment = false"
         @cancel="
           () => {
             cancelModal = true
@@ -187,13 +186,13 @@ export default {
     },
     async notifyConfirm(message) {
       this.notifyModal = false
-      this.$refs.liveChairView.clearSelection()
       try {
         await this.$appointmentRepo.notify(
           this.selectedAppointment.id,
           `Message From Stylist`,
           message
         )
+        this.selectedAppointment = false
         this.$Toast.success('Notified')
       } catch (error) {
         const msg = error?.response?.data?.message
@@ -204,8 +203,8 @@ export default {
       this.cancelModal = false
       try {
         await this.$appointmentRepo.cancel(this.selectedAppointment.id, reason)
+        this.selectedAppointment = false
       } catch (error) {}
-      this.$refs.liveChairView.clearSelection()
     },
   },
   computed: {
