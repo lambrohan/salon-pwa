@@ -201,11 +201,11 @@ export default {
       }
     },
     async onCancelConfirm(reason) {
-      this.$refs.liveChairView.clearSelection()
       this.cancelModal = false
       try {
         await this.$appointmentRepo.cancel(this.selectedAppointment.id, reason)
       } catch (error) {}
+      this.$refs.liveChairView.clearSelection()
     },
   },
   computed: {
