@@ -16,7 +16,9 @@
       <CurrentAppointment
         :appointment="topAppointment"
         :key="
-          appointment.id + topAppointment.status + `${isAppOpen ? 'yes' : 'no'}`
+          topAppointment.id +
+          topAppointment.status +
+          `${isAppOpen ? 'yes' : 'no'}`
         "
         @onSelect="toggle(topAppointment)"
         class="shadow-lg"
