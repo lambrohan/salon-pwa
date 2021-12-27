@@ -1,6 +1,6 @@
 <template>
   <div id="chair-live-v">
-    <div class="" v-if="appointments.length">
+    <div class="">
       <div class="mb-2" v-if="breakData">
         <p class="text-sm mb-1">Active Break</p>
 
@@ -14,6 +14,7 @@
       <p class="text-sm">Current Customer :</p>
 
       <CurrentAppointment
+        v-if="appointments.length"
         :appointment="topAppointment"
         :key="
           topAppointment.id +
@@ -34,7 +35,9 @@
         v-show="i > 0"
       />
     </div>
-    <div class="empty w-full" v-else>No Appointments Found</div>
+    <div class="empty w-full text-gray-500 text-lg" v-if="!appointments.length">
+      No Bookings Found
+    </div>
   </div>
 </template>
 
@@ -131,7 +134,7 @@ export default {
   },
   computed: {
     topAppointment() {
-      return this.appointments[0]
+      return this.appointments.length ? this.appointments[0] : false
     },
     isAppOpen() {
       return this.$store.getters.isOpen

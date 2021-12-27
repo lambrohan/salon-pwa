@@ -56,7 +56,7 @@
           @click="durationModal = true"
         >
           <img src="/icons/clock.svg" class="w-4" />
-          <p class="text-xs font-semibold text-black">
+          <p class="text-xs font-semibold text-black ml-1">
             {{ $dayjs.duration(ongoingSecs * 1000).format('mm:ss') }}
           </p>
         </span>
@@ -179,7 +179,11 @@ export default {
           this.appointment.id,
           parseInt(duration)
         )
-      } catch (error) {}
+      } catch (error) {
+        if (error.response.data) {
+          this.$Toast.danger(error.response.data.message)
+        }
+      }
     },
 
     calcElapsedTime() {
