@@ -146,7 +146,21 @@ export default {
       }
       this.serviceSheet = false
     },
-    async updateTime() {},
+    async updateTime() {
+      try {
+        this.updateTimeLoading = true
+        await this.$salonRepository.updateServiceDuration(
+          this.selectedService.id,
+          parseInt(this.selectedService.avg_duration)
+        )
+        this.serviceSheet = false
+        this.$Toast.success('Duration updated')
+        this.updateTimeLoading = false
+      } catch (error) {
+        this.$Toast.danger(error.response.data.message)
+        this.updateTimeLoading = true
+      }
+    },
     async onServiceSelect(service) {
       this.serviceSheet = true
       this.selectedService = service

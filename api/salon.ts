@@ -63,4 +63,8 @@ export const SalonRepository = ($axios: NuxtAxiosInstance) => ({
   async disableService(id: string) {
     return await $axios.$get(serviceRes + '/toggle-state/' + id)
   },
+
+  async updateServiceDuration(id: string, approx_duration: number) {
+    return await $axios.$put(serviceRes + '/' + id, { approx_duration })
+  },
 })
