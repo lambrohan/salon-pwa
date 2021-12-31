@@ -131,3 +131,14 @@ select:focus {
 ::-webkit-scrollbar {
   width: 1px;
 }
+
+.page-enter-active,
+.page-leave-active {
+  transition: all 0.3s ease;
+}
+.page-enter /* .page-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+.page-leave-to {
+  opacity: 0;
+}
