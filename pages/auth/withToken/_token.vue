@@ -32,7 +32,7 @@ export default {
         this.loading = true
         await signInWithCustomToken(getAuth(), this.$route.params.token)
         setTimeout(() => {
-          window.location.href = '/' + this.$route.query.redirect
+          window.location.href = '/' + this.$route.query.redirect || ''
         }, 3000)
       } catch (error) {
         this.$Toast.danger('Auto Login Failed')
