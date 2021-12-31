@@ -271,6 +271,7 @@ export default {
     },
 
     async fetchSalon() {
+      if (!this.user) return
       this.salon = await this.$salonRepository.getById(
         this.$route.params.salonId
       )
@@ -289,6 +290,11 @@ export default {
     },
     user() {
       return this.$store.getters.getUser
+    },
+  },
+  watch: {
+    user() {
+      this.fetchSalon()
     },
   },
 }
