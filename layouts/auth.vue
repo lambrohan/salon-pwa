@@ -4,7 +4,7 @@
   </div>
 </template>
 
-<script lang="ts">
+<script>
 import Vue from 'vue'
 import UbuLogo from '~/components/UbuLogo.vue'
 export default Vue.extend({

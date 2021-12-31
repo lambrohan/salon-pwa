@@ -1,0 +1,48 @@
+<template>
+  <div
+    id="token-auth"
+    class="flex items-center justify-center h-screen flex-col"
+  >
+    <img src="/icon.png" alt="logo" class="w-1/2" />
+    <div class="flex flex-col items-center" v-if="loading">
+      <Spinner class="w-12" />
+      <p class="m-4">Logging In</p>
+    </div>
+  </div>
+</template>
+
+<script>
+import { getAuth, signInWithCustomToken } from '@firebase/auth'
+import Spinner from '~/components/U/Spinner.vue'
+export default {
+  name: 'TokenAuth',
+  layout: 'auth',
+  data() {
+    return {
+      loading: false,
+    }
+  },
+  async mounted() {
+    this.doAuth()
+  },
+
+  methods: {
+    async doAuth() {
+      try {
+        this.loading = true
+        await signInWithCustomToken(getAuth(), this.$route.params.token)
+        setTimeout(() => {
+          window.location.href = '/' + this.$route.query.redirect
+        }, 3000)
+      } catch (error) {
+        this.$Toast.danger('Auto Login Failed')
+        this.$router.push('/auth/login')
+        this.loading = false
+      }
+    },
+  },
+  components: { Spinner },
+}
+</script>
+
+<style></style>
