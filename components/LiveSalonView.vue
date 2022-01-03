@@ -114,7 +114,6 @@ export default {
     },
   },
   beforeDestroy() {
-    console.log('closing sub')
     this.skipSub = true
   },
   components: { SalonToggle },

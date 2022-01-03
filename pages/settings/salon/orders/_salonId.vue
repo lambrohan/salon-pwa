@@ -90,7 +90,6 @@ export default {
         fetchPolicy: 'no-cache',
       })
 
-      console.log(data)
       if (data?.appointment_aggregate?.aggregate?.totalCount) {
         this.totalCount = data.appointment_aggregate.aggregate.totalCount
       }

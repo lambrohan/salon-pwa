@@ -39,7 +39,6 @@ export default {
   mounted() {},
   methods: {
     async onSubmit() {
-      console.log(this.$chairRepository)
       try {
         this.loading = true
         const salon = await this.$salonRepository.create({

@@ -67,7 +67,6 @@ export default {
           {
             size: 'invisible',
             callback: (res) => {
-              console.log('done')
               this.signInWithPhone()
             },
             'expired-callback': () => {

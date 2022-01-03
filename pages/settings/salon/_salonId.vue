@@ -277,7 +277,6 @@ export default {
       )
 
       if (!this.salon.published) {
-        console.log('getkyc')
         this.kycRemarks = await this.$salonRepository.getKyc(
           this.$route.params.salonId
         )

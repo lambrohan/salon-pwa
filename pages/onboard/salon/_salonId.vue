@@ -79,7 +79,6 @@ export default {
           `/salon-profile/images/${this.$route.params.salonId}`,
           data
         )
-        console.log(profile.images[0])
 
         await this.$axios.$post('/salon-profile/default_picture', {
           fileId: profile.images[0].id,

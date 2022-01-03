@@ -55,10 +55,6 @@ export default {
     this.screenHeight = window.innerHeight
   },
   methods: {
-    onSwipe(e) {
-      console.log('swipe', e)
-    },
-
     onClose() {
       this.$emit('collapse')
       this.$emit('input', false)

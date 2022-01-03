@@ -13,7 +13,6 @@ export const actions = {
   async nuxtServerInit(store, { req, res }) {
     const token = getAuthTokenFromReq(req, res)
     if (token) {
-      console.log('login exists')
       const user = jwtDecode(token)
       store.commit('SET_AUTH', user)
       const profile = await this.$axios.$get('/salon/partner-profile', {

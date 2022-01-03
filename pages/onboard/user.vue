@@ -41,7 +41,6 @@ export default {
       this.activeTabIndex++
     },
     onboardStylist() {
-      console.log('stylist')
       this.$router.push('/onboard/stylist')
     },
   },

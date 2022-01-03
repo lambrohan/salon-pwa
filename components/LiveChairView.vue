@@ -66,7 +66,6 @@ export default {
           }
         },
         result({ data }) {
-          console.log(data)
           this.appointments = []
           this.breakData = false
           if (!data.chair) return

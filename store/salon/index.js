@@ -28,7 +28,6 @@ export const actions = {
       },
       fetchPolicy: 'no-cache',
     })
-    console.log(data)
     if (data.lite_salons) {
       store.commit('SET_LITE_SALONS', data.lite_salons)
     }

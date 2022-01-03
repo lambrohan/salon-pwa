@@ -183,7 +183,6 @@ export default {
     async fetchSalons() {
       if (this.partner.role == SalonRoles.STYLIST) {
         const s = await this.$salonRepository.getById(this.partner.salon)
-        console.log(s)
         this.salons = [s]
         return
       }
