@@ -11,6 +11,7 @@
           class="bg-gray-100 w-full text-center p-3 rounded"
           id="searchinput"
           :value="query"
+          @focus="sheetState = true"
           @input="(e) => (query = e.target.value)"
         />
 

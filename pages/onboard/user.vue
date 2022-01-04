@@ -25,6 +25,7 @@
 export default {
   name: 'OwnerOnboard',
   layout: 'onboard',
+  middleware: ['norole'],
   components: {},
   data() {
     return {

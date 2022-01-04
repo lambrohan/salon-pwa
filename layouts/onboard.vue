@@ -7,7 +7,7 @@
 <script>
 export default {
   name: 'OnboardLayout',
-  middleware: ['auth', 'norole'],
+  middleware: ['auth'],
   methods: {},
   mounted() {},
 }

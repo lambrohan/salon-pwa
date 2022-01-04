@@ -159,8 +159,6 @@ export default {
       this.qrToken = await this.$chairRepository.getQRToken(this.tempChair.id)
       this.qrURL = `https://chart.googleapis.com/chart?cht=qr&choe=UTF-8&chs=350x350&chl=${this.qrToken}`
 
-      // TODO: assign someone or assign self
-
       // TODO: close sheet after assign
     },
 
@@ -177,7 +175,7 @@ export default {
         this.assignBtnLoading = false
         this.clearBottomsheet()
         await this.fetchChairs()
-        window.location.href = '/settings'
+        window.location.href = `/settings/salon/kyc/${this.$route.params.salonId}`
       } catch (error) {
         this.$Toast.danger(error.response.data.message)
         await this.validateChair()

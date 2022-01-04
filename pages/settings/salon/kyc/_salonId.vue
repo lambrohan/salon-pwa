@@ -205,7 +205,7 @@ export default {
 
         this.uploadLoading = false
         this.$Toast.success('Kyc Updated')
-        this.$router.go(-1)
+        this.$router.push(`/settings/salon/kyc/success`)
       } catch (error) {
         this.uploadLoading = false
       }

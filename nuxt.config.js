@@ -4,7 +4,7 @@ export default {
     host: '0.0.0.0',
   },
   head: {
-    title: 'My Salon - UBU',
+    title: 'UBU - My Salon',
 
     meta: [
       { charset: 'utf-8' },
