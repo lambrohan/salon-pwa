@@ -11,7 +11,7 @@
         <h4 class="text-lg text-center">Salon Kyc</h4>
       </div>
       <div class="wrapper p-3 px-4" v-if="salon.profile && !salon.kyc">
-        <validation-observer>
+        <validation-observer ref="kycForm">
           <form @submit.prevent="">
             <h4 class="font-semibold text-xl">{{ salon.profile.name }}</h4>
 
@@ -81,6 +81,7 @@
             <FileInput
               labelName="Salon Document"
               class="mt-1"
+              rules="required|size:2000"
               accept="image/jpg,image/jpeg,image/png,application/pdf"
               v-model="files.salon_proof"
             />
@@ -95,14 +96,21 @@
             <FileInput
               labelName="Bank Document"
               class="mt-1"
+              rules="required|size:2000"
               v-model="files.bank_proof"
             />
 
             <label for="PAN Card" class="text-sm mt-4">PAN Document</label>
             <p class="text-xs my-1 text-gray-500">Upload PAN card photo</p>
-            <FileInput name="PAN Card" class="mt-1" v-model="files.owner_pan" />
+            <FileInput
+              name="PAN Card"
+              class="mt-1"
+              v-model="files.owner_pan"
+              rules="required|size:2000"
+            />
           </form>
         </validation-observer>
+
         <UButton
           class="bg-accent rounded mt-8"
           @click.native="upload"
@@ -179,6 +187,7 @@ export default {
     },
 
     async upload() {
+      if (!(await this.$refs.kycForm.validate())) return
       try {
         this.uploadLoading = true
         const formData = new FormData()

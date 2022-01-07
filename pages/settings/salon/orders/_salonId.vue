@@ -10,7 +10,8 @@
       <h4>Orders</h4>
     </div>
     <div class="contaner px-4 pt-1">
-      <DateRanePicker v-model="range" />
+      <!-- <DateRanePicker v-model="range" /> -->
+
       <button
         class="w-6/12 text-white bg-success mt-2 py-2 rounded"
         @click="fetchOrders(true)"
@@ -61,6 +62,9 @@ export default {
       appointments: [],
       totalCount: 0,
     }
+  },
+  mounted() {
+    this.fetchOrders()
   },
   methods: {
     async fetchOrders(reset) {

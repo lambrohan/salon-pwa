@@ -1,2 +1,5 @@
 export * from './chair'
-export * from './chair'
+export * from './appointment'
+export * from './salon'
+export * from './stylist'
+export * from './user'

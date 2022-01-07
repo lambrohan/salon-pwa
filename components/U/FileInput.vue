@@ -1,7 +1,7 @@
 <template>
   <validation-provider
     ref="provider"
-    rules="size:2000"
+    :rules="rules"
     v-slot="{ errors, classes }"
     :name="labelName"
   >
@@ -57,6 +57,10 @@ export default {
     accept: {
       type: String,
       default: 'image/png, image/jpeg',
+    },
+    rules: {
+      type: String,
+      default: 'size:2000',
     },
 
     value: {},

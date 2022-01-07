@@ -98,7 +98,7 @@
     <Modal v-model="durationModal" autodismiss>
       <AdjustDuration
         @onDurationConfirm="onDurationConfirm"
-        :initialValue="isOngoing ? appointment.approx_duration : 0"
+        :initialValue="appointment.approx_duration"
       />
     </Modal>
     <BottomSheet v-model="addonServiceModal" :minHeight="0">
@@ -162,7 +162,9 @@ export default {
       try {
         this.addonServiceModal = false
         await this.$appointmentRepo.addServices(this.appointment.id, services)
-      } catch (error) {}
+      } catch (error) {
+        this.$Toast.danger(error.response.data.message)
+      }
     },
     async onDurationConfirm(duration) {
       this.durationModal = false

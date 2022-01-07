@@ -1,9 +1,11 @@
 import { Plugin } from '@nuxt/types'
-import { ChairRepository } from '~/api'
-import { AppointmentRepository } from '~/api/appointment'
-import { SalonRepository } from '~/api/salon'
-import { StylistRepository } from '~/api/stylist'
-import { UserRepository } from '~/api/user'
+import {
+  ChairRepository,
+  SalonRepository,
+  UserRepository,
+  StylistRepository,
+  AppointmentRepository,
+} from '~/api'
 
 const repoPlugin: Plugin = (ctx: any, inject: any) => {
   // dependency injection
