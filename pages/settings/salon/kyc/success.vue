@@ -20,10 +20,14 @@
       Our team will review the information and verify within next 48 hours. We
       will be notify you when status updated.
     </p>
-    <div class="mt-4 text-sm">
-      You can close the window or
-      <span class="text-success" @click="$router.push('/settings')"
-        >go back to salon profile</span
+    <div class="mt-4 text-md text-gray-500">
+      You can
+      <span class="text-success underline">
+        <a href="https://ubuapk.page.link/salon">go back to app</a>
+      </span>
+      or
+      <span class="text-black underline" @click="$router.push('/settings')"
+        >browse here</span
       >
     </div>
   </div>
