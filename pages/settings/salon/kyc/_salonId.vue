@@ -15,6 +15,10 @@
           <form @submit.prevent="">
             <h4 class="font-semibold text-xl">{{ salon.profile.name }}</h4>
 
+            <p v-if="kyc" class="text-sm text-gray-500 mt-1">
+              Status: <span class="text-black">{{ kyc.remarks }}</span>
+            </p>
+
             <!-- INFO -->
 
             <validation-provider
@@ -174,6 +178,7 @@ export default {
       files: {},
       owner: {},
       uploadLoading: false,
+      kyc: false,
     }
   },
   mounted() {
@@ -181,9 +186,37 @@ export default {
   },
   methods: {
     async fetchSalon() {
+      if (!this.user) return
       this.salon = await this.$salonRepository.getById(
         this.$route.params.salonId
       )
+
+      this.kyc = await this.$salonRepository.getKyc(this.$route.params.salonId)
+
+      if (this.kyc) {
+        const {
+          bank_ac_no,
+          bank_ifsc,
+          owner_pan_no,
+          salon_id_proof,
+          bank_proof_cert,
+          owner_pan_cert,
+        } = this.kyc
+
+        this.bank = {
+          ac_no: bank_ac_no,
+          ifsc: bank_ifsc,
+        }
+        this.owner = {
+          pan_no: owner_pan_no,
+        }
+
+        this.files = {
+          salon_proof: salon_id_proof,
+          bank_proof: bank_proof_cert,
+          owner_pan: owner_pan_cert,
+        }
+      }
     },
 
     async upload() {
@@ -208,7 +241,7 @@ export default {
         )
         formData.append('owner_pan_no', this.owner.pan_no)
         formData.append('bank_ac_no', this.bank.ac_no)
-        formData.append('ifsc_code', this.bank.ifsc)
+        formData.append('bank_ifsc', this.bank.ifsc)
 
         await this.$axios.$post(`/salon/kyc/${this.salon.id}`, formData)
 
@@ -218,6 +251,18 @@ export default {
       } catch (error) {
         this.uploadLoading = false
       }
+    },
+  },
+
+  computed: {
+    user() {
+      return this.$store.getters.getUser
+    },
+  },
+
+  watch: {
+    user() {
+      this.fetchSalon()
     },
   },
 }

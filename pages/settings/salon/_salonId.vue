@@ -277,9 +277,11 @@ export default {
       )
 
       if (!this.salon.published) {
-        this.kycRemarks = await this.$salonRepository.getKyc(
+        const kyc = await this.$salonRepository.getKyc(
           this.$route.params.salonId
         )
+
+        this.kycRemarks = kyc ? kyc.remarks : 'Incomplete'
       }
     },
   },

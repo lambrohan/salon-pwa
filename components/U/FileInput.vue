@@ -5,6 +5,12 @@
     v-slot="{ errors, classes }"
     :name="labelName"
   >
+    <p v-if="value && value.filename" class="text-xs text text-gray-500 mb-1">
+      Current File :
+      <a class="text-success" :href="value.url" target="_blank">{{
+        value.filename
+      }}</a>
+    </p>
     <input
       type="file"
       class="hidden"
