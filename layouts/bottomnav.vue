@@ -24,7 +24,7 @@ export default {
     }
   },
   mounted() {
-    window.addEventListener('resize', this.onWindowResize)
+    window.addEventListener('resize', this.onWindowResize, true)
     if (typeof document.hidden !== 'undefined') {
       // Opera 12.10 and Firefox 18 and later support
       this.hidden = 'hidden'
