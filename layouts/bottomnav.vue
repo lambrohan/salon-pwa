@@ -24,10 +24,7 @@ export default {
     }
   },
   mounted() {
-    document.documentElement.style.setProperty(
-      '--vh',
-      `${window.innerHeight * 0.01}px`
-    )
+    window.addEventListener('resize', this.onWindowResize)
     if (typeof document.hidden !== 'undefined') {
       // Opera 12.10 and Firefox 18 and later support
       this.hidden = 'hidden'
@@ -55,6 +52,16 @@ export default {
         this.$store.commit('SET_VISIBILITY', true)
       }
     },
+    onWindowResize() {
+      document.documentElement.style.setProperty(
+        '--vh',
+        `${window.innerHeight * 0.01}px`
+      )
+    },
+  },
+  beforeDestroy() {
+    removeEventListener('resize', this.onWindowResize)
+    removeEventListener(visibilityChange, this.handleVisibilityChange)
   },
 }
 </script>

@@ -11,7 +11,13 @@
     </div>
     <div class="contaner px-4 pt-1">
       <!-- <DateRanePicker v-model="range" /> -->
-
+      <date-range-picker
+        v-model="dateRange"
+        :timePicker="false"
+        :localeData="localeData"
+        autoApply
+      >
+      </date-range-picker>
       <button
         class="w-6/12 text-white bg-success mt-2 py-2 rounded"
         @click="fetchOrders(true)"
@@ -46,14 +52,27 @@ import DateRanePicker from '~/components/DateRanePicker.vue'
 import pgQ from '@/apollo/queries/order-paginate.gql'
 import Appointment from '~/components/U/Appointment.vue'
 import OrderListItem from '~/components/OrderListItem.vue'
+import DateRangePicker from 'vue2-daterange-picker'
+import 'vue2-daterange-picker/dist/vue2-daterange-picker.css'
+
 export default {
   name: 'SalonOrders',
-  components: { DateRanePicker, Appointment, OrderListItem },
+  components: {
+    DateRanePicker,
+    Appointment,
+    OrderListItem,
+    DateRangePicker,
+    DateRangePicker,
+  },
   data() {
     return {
       range: {
         from: new Date(),
         to: new Date(),
+      },
+      dateRange: {
+        startDate: '2020-12-26',
+        endDate: '2049-12-28',
       },
       paginating: false,
       perPage: 10,
@@ -61,6 +80,30 @@ export default {
       hideShowMore: false,
       appointments: [],
       totalCount: 0,
+      localeData: {
+        direction: 'ltr',
+        format: 'dd/mm/yyyy',
+        separator: ' - ',
+        applyLabel: 'Apply',
+        cancelLabel: 'Cancel',
+        weekLabel: 'W',
+        customRangeLabel: 'Custom Range',
+        daysOfWeek: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        monthNames: [
+          'Jan',
+          'Feb',
+          'Mar',
+          'Apr',
+          'May',
+          'Jun',
+          'Jul',
+          'Aug',
+          'Sep',
+          'Oct',
+          'Nov',
+          'Dec',
+        ],
+      },
     }
   },
   mounted() {
