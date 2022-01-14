@@ -12,7 +12,7 @@
           <AddServices @next="saveServices" ref="serviceTab" />
         </UTab>
         <UTab>
-          <SalonChair @next="$router.push('/settings')" />
+          <SalonChair @next="goToSettings" />
         </UTab>
       </UTabs>
     </client-only>
@@ -42,6 +42,9 @@ export default {
     }
   },
   methods: {
+    goToSettings() {
+      window.location.href = '/settings'
+    },
     afterCreate(salon) {
       this.salon = salon
       this.activeTabIndex++

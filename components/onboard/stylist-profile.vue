@@ -85,8 +85,7 @@ export default {
         await this.$stylistRepository.updateProfilePicture(payload)
         this.$Toast.success('Profile Created')
         this.loading = false
-        this.$nuxt.$loading.start()
-        window.location.href = '/settings'
+        this.$emit('next')
       } catch (error) {
         this.loading = false
 

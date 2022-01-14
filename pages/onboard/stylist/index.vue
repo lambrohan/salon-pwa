@@ -5,7 +5,7 @@
       v-if="loading"
     />
     <UTabs :activeIndex="activeIndex" v-else>
-      <UTab> <StylistProfile /> </UTab>
+      <UTab> <StylistProfile @next="activeIndex++" /> </UTab>
       <UTab>
         <div class="">
           <QrScanner @onScan="verifyToken" />
