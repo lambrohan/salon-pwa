@@ -19,7 +19,7 @@
       </svg>
       <p class="text-gray-500 mt-2">Scan Completed</p>
     </div>
-    <div class="w-full" id="reader" v-else></div>
+    <div class="w-full" id="reader" v-show="!completed"></div>
   </div>
 </template>
 

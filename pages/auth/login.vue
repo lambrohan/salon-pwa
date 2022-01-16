@@ -8,6 +8,11 @@
           type="number"
           class="w-full mt-8 text-center shadow-lg h-14 rounded-3xl border border-black-50 bg-gray-50 font-bold tracking-widest text-2xl"
           v-model="phoneNumber"
+          @input="
+            phoneNumber.length > 10
+              ? (phoneNumber = phoneNumber.substring(0, 10))
+              : ''
+          "
           placeholder="mobile"
         />
 
