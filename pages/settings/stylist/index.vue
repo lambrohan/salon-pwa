@@ -67,9 +67,7 @@ export default {
     }
   },
   mounted() {
-    if (this.user) {
-      this.fetchStylist()
-    }
+    this.fetchStylist()
   },
   methods: {
     async handleSelect() {
@@ -77,6 +75,7 @@ export default {
       this.preview = URL.createObjectURL(this.file)
     },
     async fetchStylist() {
+      if (!this.user) return
       const { data } = await this.$apollo.query({
         query: stylistQ,
         variables: {
@@ -110,6 +109,11 @@ export default {
     },
   },
   components: { ImagePreview },
+  watch: {
+    user() {
+      this.fetchStylist()
+    },
+  },
 }
 </script>
 
