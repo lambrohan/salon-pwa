@@ -63,10 +63,10 @@
             </tr>
           </table>
         </div>
-        <h4 class="text-center mt-4">Appointment Details</h4>
+        <h4 class="text-center mt-4">Booking Details</h4>
         <div class="p-4">
           <p class="text-sm text-gray-500">Type</p>
-          <p class="text-sm font-semibold uppercase">
+          <p class="text-sm font-semibold uppercase text-success">
             {{ a.type }}
           </p>
           <p class="text-sm text-gray-500 mt-4">Date</p>
@@ -74,7 +74,7 @@
             {{ $dayjs(a.date).format('MMM DD, YYYY') }}
           </p>
 
-          <div class="flex">
+          <div class="flex" v-if="a.status !== 'canceled'">
             <div class="">
               <p class="text-sm text-gray-500 mt-4">Started At</p>
               <p class="text-sm font-semibold">
@@ -89,7 +89,41 @@
             </div>
           </div>
         </div>
+        <div class="refund p-4" v-if="a.appointment_cancellation">
+          <h4 class="text-center mb-4">Refund Details</h4>
+          <p class="text-sm text-gray-500">Order Cancelled By</p>
+          <p class="text-sm font-semibold uppercase">
+            {{
+              a.appointment_cancellation.cancelled_by_user ? 'User' : 'Salon'
+            }}
+          </p>
+
+          <p class="text-sm text-gray-500 mt-4">Reason</p>
+          <p class="text-sm font-semibold uppercase">
+            {{ a.appointment_cancellation.reason }}
+          </p>
+
+          <div class="" v-if="a.appointment_cancellation.order_refund">
+            <p class="text-sm text-gray-500 mt-4">Refund Amount</p>
+            <p class="text-sm font-semibold uppercase">
+              ₹{{ a.appointment_cancellation.order_refund.refund_amt }}
+            </p>
+
+            <p class="text-sm text-gray-500 mt-4">Status</p>
+            <p class="text-sm font-semibold uppercase">
+              {{
+                a.appointment_cancellation.order_refund.processed
+                  ? 'Processed'
+                  : 'Processing'
+              }}
+            </p>
+          </div>
+          <div v-else>Not Eligible For Refund</div>
+        </div>
       </div>
+      <UButton class="w-3/4 bg-success mb-4 mt-4" @click.native="$Tawk.popup">
+        Contact Support
+      </UButton>
     </div>
   </div>
 </template>

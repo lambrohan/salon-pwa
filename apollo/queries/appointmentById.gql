@@ -52,5 +52,15 @@ query appointmentById($id: uuid) {
         }
       }
     }
+
+    appointment_cancellation {
+      cancelled_by_user
+      reason
+      order_refund {
+        refund_amt
+        processed
+        created_at
+      }
+    }
   }
 }

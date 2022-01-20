@@ -7,7 +7,7 @@
       <p class="text-gray-500 text-sm mt-4">Salon Status :</p>
       <SalonToggle
         v-model="salon.salon_profile.service_status"
-        @input="toggleStatus"
+        @update="toggleStatus"
       />
     </div>
     <div class="chairs px-4">
@@ -30,7 +30,7 @@
             class="p-3 px-4 bg-gray-50 rounded-tl-lg rounded-bl-lg border-b flex items-center"
           >
             <div
-              class="icon w-12 h-12 mr-2 p-2 border rounded"
+              class="icon w-12 h-12 mr-4 p-2 border rounded"
               :class="[chair.disabled ? 'border-red-500' : 'border-success']"
               @click.stop="toggleChair(chair)"
             >
@@ -97,12 +97,22 @@ export default {
   },
   methods: {
     async toggleStatus(status) {
-      try {
-        await this.$salonRepository.toggleStatus(this.salon.id)
-      } catch (error) {
-        this.$Toast.danger(error.response.data.message)
-        this.salon.salon_profile.service_status = status
-      }
+      console.log(status)
+      const dialog = this.$Dialog.show({
+        message: `Are you sure want to toggle salon status to ${status}`,
+        positiveHandler: async () => {
+          try {
+            dialog.positiveLoading = true
+
+            await this.$salonRepository.toggleStatus(this.salon.id)
+            dialog.dismiss()
+          } catch (error) {
+            this.$Toast.danger(error.response.data.message)
+            this.salon.salon_profile.service_status = status
+            dialog.positiveLoading = false
+          }
+        },
+      })
     },
     async toggleChair(chair) {
       const dialog = this.$Dialog.show({

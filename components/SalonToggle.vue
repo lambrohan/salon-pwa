@@ -67,7 +67,7 @@ export default {
   methods: {
     emitToggle() {
       if (this.isStylist) return
-      this.$emit('input', this.value == 'ON' ? 'OFF' : 'ON')
+      this.$emit('update', this.value == 'ON' ? 'OFF' : 'ON')
     },
   },
   computed: {
