@@ -29,7 +29,13 @@
           <td
             class="p-3 px-4 bg-gray-50 rounded-tl-lg rounded-bl-lg border-b flex items-center"
           >
-            <img src="/icons/chair.svg" alt="chair" class="w-6 mr-2 p-1" />
+            <div
+              class="icon w-12 h-12 mr-2 p-2 border rounded"
+              :class="[chair.disabled ? 'border-red-500' : 'border-success']"
+              @click.stop="toggleChair(chair)"
+            >
+              <img src="/icons/chair.svg" alt="chair" class="w-full h-full" />
+            </div>
             {{
               chair.stylist
                 ? chair.stylist.display_name
@@ -97,6 +103,23 @@ export default {
         this.$Toast.danger(error.response.data.message)
         this.salon.salon_profile.service_status = status
       }
+    },
+    async toggleChair(chair) {
+      const dialog = this.$Dialog.show({
+        message: `Are you sure want to ${
+          chair.disabled ? 'enable' : 'disable'
+        } the chair?`,
+        positiveHandler: async () => {
+          try {
+            dialog.positiveLoading = true
+            this.chair = await this.$chairRepository.toggle(chair.id)
+            dialog.dismiss()
+          } catch (error) {
+            this.$Toast.danger(error.response.data.message)
+            dialog.positiveLoading = false
+          }
+        },
+      })
     },
   },
   computed: {

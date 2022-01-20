@@ -14,7 +14,7 @@
         :src="
           stylist.display_picture ? stylist.display_picture.url : '/icon.png'
         "
-        class="pic m-auto shadow mt-8 rounded"
+        class="pic m-auto shadow mt-8 rounded-full"
       />
       <validation-provider rules="required|image">
         <input

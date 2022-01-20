@@ -1,13 +1,13 @@
 import { getApps, initializeApp } from '@firebase/app'
 import { browserLocalPersistence, getAuth, setPersistence } from 'firebase/auth'
 const firebaseConfig = {
-  apiKey: 'AIzaSyCzjd1ZaYnEngVSTm3Uf6WCz2ORKnJM1GQ',
-  authDomain: 'ubu-salon.firebaseapp.com',
-  projectId: 'ubu-salon',
-  storageBucket: 'ubu-salon.appspot.com',
-  messagingSenderId: '461522923561',
-  appId: '1:461522923561:web:c694accb0ceba8c91b6c38',
-  measurementId: 'G-96NH3VKWMR',
+  apiKey: process.env.apiKey,
+  authDomain: process.env.authDomain,
+  projectId: process.env.projectId,
+  storageBucket: process.env.storageBucket,
+  messagingSenderId: process.env.messagingSenderId,
+  appId: process.env.appId,
+  measurementId: process.env.measurementId,
 }
 const apps = getApps()
 let firebaseApp

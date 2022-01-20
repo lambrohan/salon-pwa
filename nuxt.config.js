@@ -1,5 +1,16 @@
 export default {
-  // Global page headers: https://go.nuxtjs.dev/config-head
+  env: {
+    apiKey: process.env.apiKey,
+    authDomain: process.env.authDomain,
+    projectId: process.env.projectId,
+    storageBucket: process.env.storageBucket,
+    messagingSenderId: process.env.messagingSenderId,
+    appId: process.env.appId,
+    measurementId: process.env.measurementId,
+    BASE_URL: process.env.BASE_URL,
+    WS_GQL_URL: process.env.WS_GQL_URL,
+    GQL_URL: process.env.GQL_URL,
+  },
   server: {
     host: '0.0.0.0',
   },
@@ -105,10 +116,7 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    baseURL:
-      process.env.NODE_ENV == 'production'
-        ? 'https://api.ubuapp.in'
-        : 'http://localhost:4000',
+    baseURL: process.env.BASE_URL || 'http://localhost:4000',
   },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa

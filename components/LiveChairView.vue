@@ -11,29 +11,31 @@
         />
       </div>
 
-      <p class="text-sm">Current Customer :</p>
+      <div class="relative" :class="[breakData ? 'dis' : '']">
+        <p class="text-sm">Current Customer :</p>
 
-      <CurrentAppointment
-        v-if="appointments.length"
-        :appointment="topAppointment"
-        :key="
-          topAppointment.id +
-          topAppointment.status +
-          `${isAppOpen ? 'yes' : 'no'}`
-        "
-        @onSelect="toggle(topAppointment)"
-        class="shadow-lg"
-      />
+        <CurrentAppointment
+          v-if="appointments.length"
+          :appointment="topAppointment"
+          :key="
+            topAppointment.id +
+            topAppointment.status +
+            `${isAppOpen ? 'yes' : 'no'}`
+          "
+          @onSelect="toggle(topAppointment)"
+          class="shadow-lg"
+        />
 
-      <p class="text-sm mt-5 mb-2">Next Customers :</p>
-      <Appointment
-        v-for="(a, i) in appointments"
-        :key="a.id"
-        :appointment="a"
-        @click.native="toggle(a)"
-        :class="selected.id === a.id ? 'bg-primary' : ''"
-        v-show="i > 0"
-      />
+        <p class="text-sm mt-5 mb-2">Next Customers :</p>
+        <Appointment
+          v-for="(a, i) in appointments"
+          :key="a.id"
+          :appointment="a"
+          @click.native="toggle(a)"
+          :class="selected.id === a.id ? 'bg-primary' : ''"
+          v-show="i > 0"
+        />
+      </div>
     </div>
     <div class="empty w-full text-gray-500 text-lg" v-if="!appointments.length">
       No Bookings Found
@@ -161,4 +163,16 @@ export default {
 }
 </script>
 
-<style></style>
+<style lang="scss" scoped>
+.dis {
+  &:after {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    content: '';
+    top: 0;
+    left: 0;
+    background: rgba(255, 255, 255, 0.534);
+  }
+}
+</style>

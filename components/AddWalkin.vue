@@ -15,9 +15,11 @@
                 type="number"
                 v-model="mobile"
                 placeholder="enter mobile number"
-                maxlength="10"
                 name="mobile"
-                class="p-3 bg-gray-50 w-full text-center rounded mt-4 border text-lg tracking-wider"
+                @input="
+                  mobile.length > 10 ? (mobile = mobile.substring(0, 10)) : ''
+                "
+                class="p-3 bg-gray-50 w-full text-center rounded mt-4 border text-lg tracking-widest"
                 :class="classes"
               />
               <span
@@ -66,6 +68,9 @@ export default {
 
     async addWalkin(services) {
       this.$emit('onConfirm', { services, mobile: '+91' + this.mobile })
+    },
+
+    clear() {
       this.activeIndex = 0
       this.mobile = ''
     },

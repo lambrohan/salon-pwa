@@ -26,6 +26,6 @@ export const ChairRepository = ($axios: NuxtAxiosInstance) => ({
   },
 
   async toggle(chairId: string) {
-    return await $axios.$post(resource + '/toggle/' + chairId)
+    return await $axios.$post(resource + '/toggle-state/' + chairId)
   },
 })

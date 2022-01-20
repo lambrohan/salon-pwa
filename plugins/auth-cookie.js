@@ -3,10 +3,12 @@ import { auth } from '~/plugins/firebase'
 
 export default function (ctx) {
   auth.onAuthStateChanged((user) => {
-    ctx.store.dispatch('onAuthStateChangedAction', {
-      uid: user.uid,
-      phone_number: user.phoneNumber,
-    })
+    if (user) {
+      ctx.store.dispatch('onAuthStateChangedAction', {
+        uid: user.uid,
+        phone_number: user.phoneNumber,
+      })
+    }
   })
 
   auth.onIdTokenChanged(async (user) => {

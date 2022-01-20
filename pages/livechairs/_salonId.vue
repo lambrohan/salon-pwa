@@ -25,11 +25,14 @@
     <div class="br"></div>
     <div class="flex items-center p-3 m-h-full pl-6">
       <p
-        class="mr-4 border px-2 rounded-full py-1"
+        class="mr-4 border px-2 rounded py-1"
         v-for="chair in chairs"
         :key="chair.stylist.id"
         @click="activeChairId = chair.id"
-        :class="chair.id == activeChairId ? 'font-semibold bg-primary' : ''"
+        :class="[
+          chair.id == activeChairId ? 'font-semibold bg-primary' : '',
+          chair.disabled ? 'border-red-500' : '',
+        ]"
       >
         {{ chair.stylist.display_name }}
       </p>
@@ -56,15 +59,16 @@
           }
         "
       />
-      <UButton
-        v-else
-        class="bg-accent w-7/12"
-        @click.native="walkinSheet = true"
+      <UButton v-else class="bg-accent w-7/12" @click.native="openWalkinSheet"
         >Add Walkin</UButton
       >
     </div>
     <BottomSheet :minHeight="0" v-model="walkinSheet">
-      <AddWalkin :salonId="$route.params.salonId" @onConfirm="createWalkin" />
+      <AddWalkin
+        ref="walkinsheet"
+        :salonId="$route.params.salonId"
+        @onConfirm="createWalkin"
+      />
     </BottomSheet>
     <Modal v-model="notifyModal" autodismiss>
       <Notify @onConfirm="notifyConfirm" />
@@ -146,6 +150,10 @@ export default {
     }
   },
   methods: {
+    openWalkinSheet() {
+      this.$refs.walkinsheet.clear()
+      this.walkinSheet = true
+    },
     async startBreak(duration) {
       if (duration <= 0) return
       this.breakModal = false

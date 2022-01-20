@@ -9,24 +9,36 @@
       />
       <h4>Orders</h4>
     </div>
-    <div class="contaner px-4 pt-1">
+    <div class="px-4 pt-1 w-full">
       <!-- <DateRanePicker v-model="range" /> -->
+      <p class="text-sm text-gray-500 mb-1 mt-2">Show Orders:</p>
       <date-range-picker
         v-model="dateRange"
         :timePicker="false"
         :localeData="localeData"
+        class="w-full"
+        @update="fetchOrders"
         autoApply
       >
       </date-range-picker>
-      <button
+      <!-- <button
         class="w-6/12 text-white bg-success mt-2 py-2 rounded"
         @click="fetchOrders(true)"
       >
         Submit
-      </button>
+      </button> -->
       <div class="list mt-4 bg-gray-100 pb-1">
-        <h4 class="py-3 pl-2">
-          Order List <span class="ml-2 text-sm">({{ totalCount }})</span>
+        <h4 class="py-3 pl-2 text-xs">
+          From
+          <span class="font-medium">{{
+            $dayjs(dateRange.startDate).format('MMM DD, YYYY')
+          }}</span>
+          <br />
+          To
+          <span class="font-medium">
+            {{ $dayjs(dateRange.endDate).format('MMM DD, YYYY') }}</span
+          >
+          <span class="ml-2 text-sm">({{ totalCount }})</span>
         </h4>
 
         <OrderListItem
@@ -66,10 +78,6 @@ export default {
   },
   data() {
     return {
-      range: {
-        from: new Date(),
-        to: new Date(),
-      },
       dateRange: {
         startDate: '2020-12-26',
         endDate: '2049-12-28',
@@ -107,6 +115,8 @@ export default {
     }
   },
   mounted() {
+    this.dateRange.startDate = this.$dayjs().format('YYYY-MM-DD')
+    this.dateRange.endDate = this.dateRange.startDate
     this.fetchOrders()
   },
   methods: {
@@ -116,8 +126,14 @@ export default {
         this.totalCount = 0
         this.appointments = []
       }
-      const from = this.$dayjs(this.range.from).hour(0).minute(1).toISOString()
-      const to = this.$dayjs(this.range.to).hour(23).minute(59).toISOString()
+      const from = this.$dayjs(this.dateRange.startDate)
+        .hour(0)
+        .minute(1)
+        .toISOString()
+      const to = this.$dayjs(this.dateRange.endDate)
+        .hour(23)
+        .minute(59)
+        .toISOString()
 
       const { data } = await this.$apollo.query({
         query: pgQ,
