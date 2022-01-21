@@ -1,5 +1,7 @@
 export default {
-  env: {
+  publicRuntimeConfig: {
+    WS_GQL_URL: process.env.WS_GQL_URL,
+    GQL_URL: process.env.GQL_URL,
     apiKey: process.env.apiKey,
     authDomain: process.env.authDomain,
     projectId: process.env.projectId,
@@ -7,10 +9,15 @@ export default {
     messagingSenderId: process.env.messagingSenderId,
     appId: process.env.appId,
     measurementId: process.env.measurementId,
-    BASE_URL: process.env.BASE_URL,
-    WS_GQL_URL: process.env.WS_GQL_URL,
-    GQL_URL: process.env.GQL_URL,
+    axios: {
+      baseURL: process.env.BASE_URL,
+    },
   },
+
+  env: {
+    BASE_URL: process.env.BASE_URL,
+  },
+
   server: {
     host: '0.0.0.0',
   },
@@ -104,7 +111,6 @@ export default {
     '@nuxtjs/axios',
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
-
     '@nuxtjs/dayjs',
   ],
 
@@ -115,9 +121,6 @@ export default {
   },
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {
-    baseURL: process.env.BASE_URL || 'http://localhost:4000',
-  },
 
   // PWA module configuration: https://go.nuxtjs.dev/pwa
   pwa: {

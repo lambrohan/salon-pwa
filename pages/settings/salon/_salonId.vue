@@ -246,7 +246,7 @@
 </template>
 
 <script>
-import { auth } from '~/plugins/firebase'
+import { getAuth } from '@firebase/auth'
 import Button from '~/components/U/Button.vue'
 import Tag from '~/components/U/Tag.vue'
 export default {
@@ -266,7 +266,7 @@ export default {
   },
   methods: {
     async logout() {
-      await auth.signOut()
+      await getAuth().signOut()
       location.reload()
     },
 

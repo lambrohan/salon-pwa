@@ -1,21 +1,20 @@
 import { getApps, initializeApp } from '@firebase/app'
 import { browserLocalPersistence, getAuth, setPersistence } from 'firebase/auth'
-const firebaseConfig = {
-  apiKey: process.env.apiKey,
-  authDomain: process.env.authDomain,
-  projectId: process.env.projectId,
-  storageBucket: process.env.storageBucket,
-  messagingSenderId: process.env.messagingSenderId,
-  appId: process.env.appId,
-  measurementId: process.env.measurementId,
+
+export default (ctx) => {
+  const firebaseConfig = {
+    apiKey: ctx.$config.apiKey,
+    authDomain: ctx.$config.authDomain,
+    projectId: ctx.$config.projectId,
+    storageBucket: ctx.$config.storageBucket,
+    messagingSenderId: ctx.$config.messagingSenderId,
+    appId: ctx.$config.appId,
+    measurementId: ctx.$config.measurementId,
+  }
+
+  const apps = getApps()
+  if (!apps.length) {
+    initializeApp(firebaseConfig)
+  }
+  setPersistence(getAuth(), browserLocalPersistence)
 }
-const apps = getApps()
-let firebaseApp
-if (!apps.length) {
-  firebaseApp = initializeApp(firebaseConfig)
-} else {
-  firebaseApp = apps[0]
-}
-const auth = getAuth(firebaseApp)
-setPersistence(auth, browserLocalPersistence)
-export { auth }

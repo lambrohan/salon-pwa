@@ -158,9 +158,9 @@
 </template>
 
 <script>
-import { auth } from '~/plugins/firebase'
 import Button from '~/components/U/Button.vue'
 import { SalonRoles } from '~/utils'
+import { getAuth } from '@firebase/auth'
 export default {
   name: 'SettingsPage',
   layout: 'bottomnav',
@@ -176,7 +176,7 @@ export default {
   },
   methods: {
     async logout() {
-      await auth.signOut()
+      await getAuth().signOut()
       location.reload()
     },
 

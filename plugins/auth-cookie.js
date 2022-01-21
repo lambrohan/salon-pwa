@@ -1,7 +1,8 @@
+import { getAuth } from 'firebase/auth'
 import Cookie from 'js-cookie'
-import { auth } from '~/plugins/firebase'
 
 export default function (ctx) {
+  const auth = getAuth()
   auth.onAuthStateChanged((user) => {
     if (user) {
       ctx.store.dispatch('onAuthStateChangedAction', {

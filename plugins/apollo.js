@@ -22,47 +22,48 @@ const getHeaders = () => {
 
 Vue.use(VueApollo)
 
-const httpLink = createHttpLink({
-  uri: process.env.GQL_URL,
-  headers: getHeaders(),
-})
-
-const wsLink = new WebSocketLink({
-  uri: process.env.WS_GQL_URL,
-
-  options: {
-    reconnect: false,
-    reconnectionAttempts: 5,
-    connectionParams: {
-      headers: getHeaders(),
-    },
-  },
-})
-
-const link = split(
-  // split based on operation type
-  ({ query }) => {
-    const definition = getMainDefinition(query)
-    return (
-      definition.kind === 'OperationDefinition' &&
-      definition.operation === 'subscription'
-    )
-  },
-  wsLink,
-  httpLink
-)
-
-const apolloClient = new ApolloClient({
-  link,
-  cache: new InMemoryCache(),
-  connectToDevTools: process.env.NODE_ENV !== 'production',
-})
-
-const apolloProvider = new VueApollo({
-  defaultClient: apolloClient,
-})
-
 export default function apolloPlugin(ctx, inject) {
+  const { GQL_URL, WS_GQL_URL } = ctx.$config
+
+  const httpLink = createHttpLink({
+    uri: GQL_URL,
+    headers: getHeaders(),
+  })
+  const wsLink = new WebSocketLink({
+    uri: WS_GQL_URL,
+
+    options: {
+      reconnect: false,
+      reconnectionAttempts: 5,
+      connectionParams: {
+        headers: getHeaders(),
+      },
+    },
+  })
+
+  const link = split(
+    // split based on operation type
+    ({ query }) => {
+      const definition = getMainDefinition(query)
+      return (
+        definition.kind === 'OperationDefinition' &&
+        definition.operation === 'subscription'
+      )
+    },
+    wsLink,
+    httpLink
+  )
+
+  const apolloClient = new ApolloClient({
+    link,
+    cache: new InMemoryCache(),
+    connectToDevTools: process.env.NODE_ENV !== 'production',
+  })
+
+  const apolloProvider = new VueApollo({
+    defaultClient: apolloClient,
+  })
+
   ctx.app.apolloProvider = apolloProvider
   inject('apollo', apolloProvider)
 }

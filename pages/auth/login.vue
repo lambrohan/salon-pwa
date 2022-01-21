@@ -45,8 +45,11 @@
   </div>
 </template>
 <script>
-import { RecaptchaVerifier, signInWithPhoneNumber } from '@firebase/auth'
-import { auth } from '~/plugins/firebase'
+import {
+  getAuth,
+  RecaptchaVerifier,
+  signInWithPhoneNumber,
+} from '@firebase/auth'
 import OtpInput from '~/components/U/OtpInput.vue'
 export default {
   name: 'LoginPage',
@@ -78,7 +81,7 @@ export default {
               console.log('error')
             },
           },
-          auth
+          getAuth()
         )
         await window.reCaptchaVerifier.verify()
       } catch (error) {
@@ -88,7 +91,7 @@ export default {
     async signInWithPhone() {
       try {
         const confirmationResult = await signInWithPhoneNumber(
-          auth,
+          getAuth(),
           `+91${this.phoneNumber}`,
           window.reCaptchaVerifier
         )
