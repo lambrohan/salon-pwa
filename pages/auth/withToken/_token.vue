@@ -16,7 +16,7 @@ import { getAuth, signInWithCustomToken } from '@firebase/auth'
 import Spinner from '~/components/U/Spinner.vue'
 export default {
   name: 'TokenAuth',
-  layout: 'auth',
+  layout: 'public',
   data() {
     return {
       loading: false,
@@ -30,6 +30,9 @@ export default {
     async doAuth() {
       try {
         this.loading = true
+        if (getAuth().currentUser) {
+          await getAuth().signOut()
+        }
         await signInWithCustomToken(getAuth(), this.$route.params.token)
         setTimeout(() => {
           window.location.href = '/' + this.$route.query.redirect || ''
