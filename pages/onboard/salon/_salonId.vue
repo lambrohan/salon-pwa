@@ -94,6 +94,10 @@ export default {
       } catch (error) {
         console.log(error)
         this.$refs.picTab.btnLoading = false
+        if (error.response) {
+          this.$Toast.danger(error.response.data.message)
+          return
+        }
         this.$Toast.danger('Something went wrong')
       }
     },

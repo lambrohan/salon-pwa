@@ -18,18 +18,7 @@
         accept="image/png, image/jpeg"
       />
       <button
-        class="
-          w-3/4
-          flex
-          items-center
-          justify-center
-          bg-green-200
-          px-8
-          py-2
-          rounded
-          m-auto
-          mt-8
-        "
+        class="w-3/4 flex items-center justify-center bg-green-200 px-8 py-2 rounded m-auto mt-8"
         @click="$refs.upload.click()"
       >
         <svg
