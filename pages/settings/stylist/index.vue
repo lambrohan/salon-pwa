@@ -81,6 +81,7 @@ export default {
         variables: {
           userId: this.user.id,
         },
+        fetchPolicy: 'network-only',
       })
       if (data.stylist.length) {
         this.stylist = data.stylist[0]
@@ -93,6 +94,7 @@ export default {
       payload.append('file', this.file, this.file.name)
       try {
         await this.$stylistRepository.updateProfilePicture(payload)
+        this.fetchStylist()
         this.uploadLoading = false
         this.preview = false
       } catch (error) {
