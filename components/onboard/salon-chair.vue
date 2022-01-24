@@ -3,7 +3,25 @@
     <h4 class="text-xl text-center font-semibold py-2 bg-primary">
       Manage Chairs
     </h4>
-    <div class="chairs flex p-3">
+    <div class="flex flex-col items-center pt-12 px-4" v-if="!chairs.length">
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        class="h-12 w-12 text-gray-200"
+        viewBox="0 0 20 20"
+        fill="currentColor"
+      >
+        <path
+          fill-rule="evenodd"
+          d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-8-3a1 1 0 00-.867.5 1 1 0 11-1.731-1A3 3 0 0113 8a3.001 3.001 0 01-2 2.83V11a1 1 0 11-2 0v-1a1 1 0 011-1 1 1 0 100-2zm0 8a1 1 0 100-2 1 1 0 000 2z"
+          clip-rule="evenodd"
+        />
+      </svg>
+
+      <h4 class="text-center text-gray-500 w-3/4 mt-2 text-sm">
+        Nothing Found. Please click on create chair to add a chair.
+      </h4>
+    </div>
+    <div class="chairs flex p-3" v-else>
       <div
         class="w-full p-3 bg-primary rounded relative text-lg"
         v-for="(chair, i) in chairs"
@@ -56,21 +74,21 @@
               :style="`background-image: url(${qrURL})`"
             ></div>
             <UButton
-              class="w-7/12 mt-12"
-              light
+              class="w-7/12 mt-12 bg-accent"
               @click.native="stylistModal = true"
               ref="selfAssignBtn"
               >Assign to myself</UButton
             >
             <UButton
-              class="w-7/12 mt-8 bg-accent"
+              class="w-7/12 mt-8"
+              light
               @click.native="
                 () => {
                   validateChair()
                   sheetState = false
                 }
               "
-              >Done</UButton
+              >Close</UButton
             >
           </div>
         </transition>

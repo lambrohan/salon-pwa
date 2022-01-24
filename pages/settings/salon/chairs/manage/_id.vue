@@ -36,10 +36,17 @@
         </p>
       </div>
     </div>
+    <Button
+      class="bg-red-500 w-3/4 mt-2"
+      @click.native="deleteChair"
+      v-if="!chair.stylist"
+      >Delete</Button
+    >
   </div>
 </template>
 
 <script>
+import Button from '~/components/U/Button.vue'
 export default {
   layout: 'default',
   data() {
@@ -70,7 +77,6 @@ export default {
     },
     async disableChair() {
       const chair = this.chair
-      const fetchChair = this.fetchChair
       const dialog = this.$Dialog.show({
         message: 'Are you sure want to disable the chair?',
         positiveHandler: async () => {
@@ -85,7 +91,26 @@ export default {
         },
       })
     },
+    async deleteChair() {
+      const chair = this.chair
+      const dialog = this.$Dialog.show({
+        message: 'Are you sure want to delete this chair?',
+        positiveHandler: async () => {
+          try {
+            dialog.positiveLoading = true
+            this.chair = await this.$chairRepository.validateChair(chair.id)
+            this.$Toast.success('Chair Removed')
+            this.$router.go(-1)
+            dialog.dismiss()
+          } catch (error) {
+            this.$Toast.danger(error.response.data.message)
+            dialog.positiveLoading = false
+          }
+        },
+      })
+    },
   },
+  components: { Button },
 }
 </script>
 
