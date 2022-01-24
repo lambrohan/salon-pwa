@@ -155,6 +155,14 @@ export default {
         result({ data }) {
           if (data.chair) {
             this.chairs = data.chair
+            if (
+              this.sheetState &&
+              this.tempChair &&
+              this.chairs.find((c) => c.id == this.tempChair.id).stylist
+            ) {
+              this.sheetState = false
+              this.$Toast.success('Stylist Assigned')
+            }
           }
         },
 
@@ -165,14 +173,7 @@ export default {
     },
   },
 
-  mounted() {
-    // this.$apollo.$subscribe({
-    //   query: ChairQuery,
-    //   variables:{
-    //     salonId: this.$route.params.salonId,
-    //   },
-    // })
-  },
+  mounted() {},
   methods: {
     async initChair() {
       if (this.sheetState) {
@@ -188,8 +189,6 @@ export default {
 
       this.qrToken = await this.$chairRepository.getQRToken(this.tempChair.id)
       this.qrURL = `https://chart.googleapis.com/chart?cht=qr&choe=UTF-8&chs=350x350&chl=${this.qrToken}`
-
-      // TODO: assign someone or assign self
 
       // TODO: close sheet after assign
     },

@@ -48,6 +48,7 @@
 <script>
 import Button from '~/components/U/Button.vue'
 export default {
+  name: 'ManageSalonChair',
   layout: 'default',
   data() {
     return {

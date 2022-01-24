@@ -21,9 +21,9 @@
         Nothing Found. Please click on create chair to add a chair.
       </h4>
     </div>
-    <div class="chairs flex p-3" v-else>
+    <div class="chairs flex p-3 flex-col" v-else>
       <div
-        class="w-full p-3 bg-primary rounded relative text-lg"
+        class="w-full p-3 bg-primary rounded relative text-lg mb-2"
         v-for="(chair, i) in chairs"
         :key="chair.id"
       >
@@ -134,6 +134,8 @@
 <script>
 import BottomSheet from '../U/BottomSheet.vue'
 import Modal from '../U/Modal.vue'
+import ChairQuery from '@/apollo/subs/all-chairs.gql'
+
 export default {
   name: 'OnboardChair',
   components: { BottomSheet },
@@ -155,13 +157,43 @@ export default {
       chairs: [],
       stylistModal: false,
       stylistName: '',
+      obs: false,
     }
   },
   mounted() {
-    this.fetchChairs()
+    // this.fetchChairs()
+    this.initSub()
   },
   components: { BottomSheet, Modal },
   methods: {
+    async initSub() {
+      this.obs = this.$apollo.subscribe({
+        query: ChairQuery,
+        variables: {
+          salonId: this.$route.params.salonId,
+        },
+      })
+
+      this.obs.subscribe({
+        next: ({ data }) => {
+          if (data.chair) {
+            console.log(data.chair)
+            this.chairs = data.chair
+            if (
+              this.sheetState &&
+              this.tempChair &&
+              this.chairs.find((c) => c.id == this.tempChair.id).stylist
+            ) {
+              this.sheetState = false
+              this.$Toast.success('Stylist Assigned')
+            }
+          }
+        },
+        error: (err) => {
+          console.log(err)
+        },
+      })
+    },
     async initChair() {
       if (this.sheetState) {
         this.sheetState = false
@@ -204,14 +236,6 @@ export default {
     async validateChair() {
       if (!this.tempChair) return
       return await this.$chairRepository.validateChair(this.tempChair.id)
-    },
-
-    async fetchChairs() {
-      try {
-        this.chairs = await this.$chairRepository.getWithSalonId(
-          this.$route.params.salonId
-        )
-      } catch (error) {}
     },
 
     clearBottomsheet() {
