@@ -104,6 +104,9 @@ export default {
 
   googleFonts: {
     Poppins: true,
+    display: 'swap',
+    prefetch: true,
+    preconnect: true,
   },
 
   styleResources: {
