@@ -149,7 +149,7 @@ export default {
 
     async finishAppointment() {
       const dialog = this.$Dialog.show({
-        message: this.$t('finish_appointment'),
+        message: this.$t('alerts.finish_appointment'),
         positiveText: this.$t('confirm'),
         negativeText: this.$t('cancel'),
       })
