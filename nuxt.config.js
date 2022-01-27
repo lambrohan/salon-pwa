@@ -99,7 +99,12 @@ export default {
     '@nuxtjs/tailwindcss',
 
     '@nuxtjs/style-resources',
+    '@nuxtjs/google-fonts',
   ],
+
+  googleFonts: {
+    Poppins: true,
+  },
 
   styleResources: {
     scss: ['~/assets/global.scss'],
@@ -112,7 +117,32 @@ export default {
     // https://go.nuxtjs.dev/pwa
     '@nuxtjs/pwa',
     '@nuxtjs/dayjs',
+    '@nuxtjs/i18n',
   ],
+
+  i18n: {
+    langDir: 'locales',
+    locales: [
+      {
+        code: 'en',
+        iso: 'en-IN',
+        file: 'en.js',
+        name: 'English',
+      },
+      {
+        code: 'mr',
+        iso: 'mr-IN',
+        file: 'mr.js',
+        name: 'मराठी',
+      },
+    ],
+    fallbackLocale: 'en',
+    detectBrowserLanguage: {
+      useCookie: true,
+      cookieKey: 'i18n_redirected',
+      redirectOn: 'root', // recommended
+    },
+  },
 
   dayjs: {
     defaultLocale: 'en',

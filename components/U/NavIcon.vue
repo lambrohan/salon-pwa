@@ -1,5 +1,5 @@
 <template>
-  <nuxt-link id="n-icon" :to="route">
+  <nuxt-link id="n-icon" :to="localePath(route)">
     <img :src="path" class="w-8" />
   </nuxt-link>
 </template>

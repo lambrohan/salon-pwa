@@ -4,9 +4,9 @@
       <form @submit.prevent="">
         <table class="w-full table-fixed">
           <tr class="bg-primary">
-            <th class="py-2">Service</th>
-            <th class="py-2">Price</th>
-            <th class="py-2">Duration</th>
+            <th class="py-2">{{ $t('service') }}</th>
+            <th class="py-2">{{ $t('price') }}</th>
+            <th class="py-2">{{ $t('duration') }}</th>
           </tr>
           <tr v-for="bs in services" :key="bs.id">
             <td class="py-2 pl-3 pr-2 border-b">{{ bs.name }}</td>
@@ -56,7 +56,7 @@
           class="bg-accent mt-6"
           @click.native="onConfirm"
           :loading="loading"
-          >Save & Continue</UButton
+          >{{ $t('save_n_continue') }}</UButton
         >
       </form>
     </validation-observer>
@@ -90,7 +90,7 @@ export default {
   methods: {
     async onConfirm() {
       if (!this.services.length) {
-        this.$Toast.danger('service not selected')
+        this.$Toast.danger(this.$t('alerts.select_service_first'))
         return
       }
       if ((await this.$refs.priceForm.validate()) == false) return

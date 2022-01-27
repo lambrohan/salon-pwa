@@ -6,18 +6,21 @@
         class="w-12 p-2"
         @click="$router.go(-1)"
       />
-      <h4>Manage Chairs</h4>
+      <h4>{{ $t('manage_chairs') }}</h4>
     </div>
     <div class="chairs flex p-3 flex-col">
       <div
         class="w-full p-3 bg-primary rounded relative text-lg mb-3"
         v-for="(chair, i) in chairs"
         :key="chair.id"
-        @click="$router.push(`/settings/salon/chairs/manage/${chair.id}`)"
+        @click="
+          $router.push(localePath(`/settings/salon/chairs/manage/${chair.id}`))
+        "
       >
-        <p>Chair {{ i + 1 }}</p>
+        <p>{{ $t('chair') }} {{ i + 1 }}</p>
         <p class="text-sm mt-2">
-          Stylist - {{ chair.stylist ? chair.stylist.display_name : '' }}
+          {{ $t('stylist') }} -
+          {{ chair.stylist ? chair.stylist.display_name : '' }}
         </p>
         <p
           class="text-xs mt-1"
@@ -27,11 +30,13 @@
             chair.stylist.user.id == user.id
           "
         >
-          Self Assigned
+          {{ $t('self_assigned') }}
         </p>
         <p class="absolute text-sm right-3 top-3">
-          <span v-if="chair.disabled" class="text-red-500">DISABLED</span>
-          <span v-else class="text-green-500">ACTIVE</span>
+          <span v-if="chair.disabled" class="text-red-500">{{
+            $t('disabled')
+          }}</span>
+          <span v-else class="text-green-500">{{ $t('active') }}</span>
         </p>
       </div>
     </div>
@@ -48,15 +53,15 @@
               class="bg-accent m-auto mt-4 w-7/12"
               @click.native="initChair"
               :loading="createLoading"
-              >Create Chair</UButton
+              >{{ $t('create_chair') }}</UButton
             >
           </div>
           <div class="content" v-else>
             <h4 class="text-center my-5 font-semibold text-lg">
-              Assign Stylist
+              {{ $t('assign_stylist') }}
             </h4>
             <p class="text-center text-sm mt-8">
-              Scan this QR Code from stylist's phone to assign.
+              {{ $t('scan_from_stylist') }}
             </p>
             <div
               class="qr border w-80 h-80 m-auto mt-4 bg-contain bg-center flex items-center justify-center"
@@ -67,7 +72,7 @@
               light
               @click.native="stylistModal = true"
               ref="selfAssignBtn"
-              >Assign to myself</UButton
+              >{{ $t('assign_myself') }}</UButton
             >
             <UButton
               class="w-7/12 mt-8 bg-accent"
@@ -77,17 +82,19 @@
                   sheetState = false
                 }
               "
-              >Done</UButton
+              >{{ $t('done') }}</UButton
             >
           </div>
         </transition>
       </BottomSheet>
     </div>
     <Modal v-model="stylistModal">
-      <h4 class="text-center py-2 text-lg font-semibold">Stylist Profile</h4>
+      <h4 class="text-center py-2 text-lg font-semibold">
+        {{ $t('stylist_profile') }}
+      </h4>
       <div class="p-4">
         <validation-observer ref="stylistForm">
-          <p class="text-sm mb-1 text-gray-500">Display Name</p>
+          <p class="text-sm mb-1 text-gray-500">{{ $t('stylist_profile') }}</p>
           <form>
             <validation-provider
               v-slot="{ errors, classes }"
@@ -105,15 +112,14 @@
           </form>
         </validation-observer>
         <p class="text-xs text-center mt-4 text-gray-500">
-          This is information will be public and shown to users when they book
-          an appointment.
+          {{ $t('alert.info_public_disc') }}
         </p>
 
         <UButton
           class="mt-12 w-9/12 bg-accent"
           @click.native="selfAssign"
           :loading="assignBtnLoading"
-          >Save</UButton
+          >{{ $t('save') }}</UButton
         >
       </div>
     </Modal>

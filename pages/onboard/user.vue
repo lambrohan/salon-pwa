@@ -6,15 +6,18 @@
       </UTab>
       <UTab title="2">
         <h4 class="text-xl font-semibold text-center mt-8">
-          Please select a action to continue onboarding
+          {{ $t('alerts.onboarding_action') }}
         </h4>
         <UButton
           class="bg-accent m-auto mt-8 w-8/12"
-          @click.native="$router.push('/onboard/salon/create')"
-          >Register new salon</UButton
+          @click.native="$router.push(localePath('/onboard/salon/create'))"
+          >{{ $t('register_new_salon') }}</UButton
         >
-        <UButton class="m-auto mt-6 w-8/12" light @click.native="onboardStylist"
-          >Join a salon as stylist</UButton
+        <UButton
+          class="m-auto mt-6 w-8/12"
+          light
+          @click.native="onboardStylist"
+          >{{ $t('join_as_stylist') }}</UButton
         >
       </UTab>
     </UTabs>
@@ -42,7 +45,7 @@ export default {
       this.activeTabIndex++
     },
     onboardStylist() {
-      this.$router.push('/onboard/stylist')
+      this.$router.push(this.localePath('/onboard/stylist'))
     },
   },
 }

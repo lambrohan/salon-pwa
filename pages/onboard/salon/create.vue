@@ -17,7 +17,7 @@ export default {
   },
   methods: {
     afterCreate(salon) {
-      this.$router.push(`/onboard/salon/${salon.id}`)
+      this.$router.push(this.localePath(`/onboard/salon/${salon.id}`))
     },
   },
 }

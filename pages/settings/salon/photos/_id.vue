@@ -6,7 +6,7 @@
         class="w-12 p-2"
         @click="$router.go(-1)"
       />
-      <h4>Manage Photos</h4>
+      <h4>{{ $t('manage_photos') }}</h4>
     </div>
     <Gallery
       :images="salon.profile.images"
@@ -25,12 +25,12 @@
             class="w-7/12 text-sm max-h-11"
             :loading="uploadLoading"
             @click.native="uploadImg"
-            >Upload</UButton
+            >{{ $t('upload') }}</UButton
           >
           <UButton
             class="w-4/12 bg-red-500 text-sm max-h-11 border-none"
             @click.native="dismissPrev"
-            >Cancel</UButton
+            >{{ $t('cancel') }}</UButton
           >
         </div>
       </ImagePreview>

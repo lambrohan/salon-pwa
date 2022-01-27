@@ -1,7 +1,11 @@
 <template>
   <form id="salon-info" class="flex flex-col p-6 pt-16">
-    <h4 class="text-2xl font-semibold mb-6">Lets create a salon first</h4>
-    <label for="name" class="mb-1 text-sm text-gray-500">Salon Name</label>
+    <h4 class="text-2xl font-semibold mb-6">
+      {{ $t('alerts.lets_create_salon') }}
+    </h4>
+    <label for="name" class="mb-1 text-sm text-gray-500">{{
+      $t('salon_name')
+    }}</label>
     <validation-provider
       v-slot="{ errors, classes }"
       rules="required|alpha_spaces"
@@ -21,7 +25,7 @@
       class="bg-accent h-14 mt-8 w-full"
       :loading="loading"
       @click.native="onSubmit"
-      >Save &amp; Continue</UButton
+      >{{ $t('save_n_continue') }}</UButton
     >
   </form>
 </template>

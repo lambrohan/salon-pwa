@@ -6,7 +6,7 @@
     :name="labelName"
   >
     <p v-if="value && value.filename" class="text-xs text text-gray-500 mb-1">
-      Current File :
+      {{ $t('current_file') }} :
       <a class="text-success" :href="value.url" target="_blank">{{
         value.filename
       }}</a>
@@ -80,7 +80,7 @@ export default {
   methods: {
     handleSelect(e) {
       this.$refs.provider.validate(e)
-      this.filename = this.$refs.upload.files[0].name || 'Choose File'
+      this.filename = this.$refs.upload.files[0].name || this.$t('choose_file')
       this.$emit('input', this.$refs.upload.files)
     },
   },

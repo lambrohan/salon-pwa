@@ -11,11 +11,11 @@
     <div class="main p-4 pb-32">
       <div class="empty" v-if="!services.length">
         <h2 class="mt-2">
-          NO results found for
+          {{ $t('no_results_for') }}
           <span class="font-bold underline">{{ query }}</span>
         </h2>
         <p class="mt-2 font0-semibold">
-          Please contact support if service you are looking for doesn't exist
+          {{ $t('support_service_not_found') }}
         </p>
       </div>
       <div class="flex flex-wrap mt-4">
@@ -34,9 +34,11 @@
       </div>
     </div>
     <div class="w-full px-4 py-2 absolute bottom-0 left-0">
-      <UButton class="bg-accent" @click.native="goNext">Confirm</UButton>
+      <UButton class="bg-accent" @click.native="goNext">{{
+        $t('confirm')
+      }}</UButton>
       <p class="text-center text-sm mt-2">
-        with {{ selected.length }} services
+        with {{ selected.length + ' ' + $t('services') }}
       </p>
     </div>
   </div>
@@ -91,7 +93,7 @@ export default {
 
     goNext() {
       if (!this.selected.length) {
-        this.$Toast.danger('select services first')
+        this.$Toast.danger(this.$t('select_servie_first'))
         return
       }
       this.$emit('next', this.selected)

@@ -1,6 +1,8 @@
 <template>
   <div id="add-services" class="">
-    <h4 class="text-xl font-semibold bg-primary py-3 pl-4">Add Services</h4>
+    <h4 class="text-xl font-semibold bg-primary py-3 pl-4">
+      {{ $t('add_services') }}
+    </h4>
     <UTabs :activeIndex="activeTabIndex">
       <UTab title="1" class="p-4">
         <BaseServiceSelector
@@ -16,8 +18,8 @@
           class="flex items-center mb-3 text-gray-500"
           @click="activeTabIndex--"
         >
-          <img src="/icons/arrow-back.svg" class="w-6 mr-2" alt="" /> Back to
-          select services
+          <img src="/icons/arrow-back.svg" class="w-6 mr-2" alt="" />
+          {{ $t('back_to_select_services') }}
         </button>
         <SetServicePrice
           :bss="selectedServices"

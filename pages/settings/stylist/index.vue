@@ -7,7 +7,7 @@
         class="w-12 h-12 p-2"
         @click="$router.go(-1)"
       />
-      <h4>Stylist Profile</h4>
+      <h4>{{ $t('stylist_profile') }}</h4>
     </div>
     <div class="" v-if="stylist.id">
       <img
@@ -26,12 +26,12 @@
         />
       </validation-provider>
       <p class="text-blue-500 text-center mt-4" @click="$refs.upload.click()">
-        Change Photo
+        {{ $t('change_photo') }}
       </p>
       <div class="p-4 mt-6">
-        <p class="text-xs text-gray-500">Display Name</p>
+        <p class="text-xs text-gray-500">{{ $t('display_name') }}</p>
         <p class="font-semibold text-lg">{{ stylist.display_name }}</p>
-        <p class="text-xs text-gray-500 mt-4">Salon</p>
+        <p class="text-xs text-gray-500 mt-4">{{ $t('salon') }}</p>
         <p class="font-semibold text-lg">
           {{ stylist.chair.salon.salon_profile.name }}
         </p>
@@ -43,9 +43,11 @@
         light
         @click.native="updateProfilePic"
         :loading="uploadLoading"
-        >Submit</UButton
+        >{{ $t('submit') }}</UButton
       >
-      <UButton class="mt-4" @click.native="preview = false">Cancel</UButton>
+      <UButton class="mt-4" @click.native="preview = false">{{
+        $t('cancel')
+      }}</UButton>
     </ImagePreview>
   </div>
 </template>

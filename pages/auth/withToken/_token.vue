@@ -6,7 +6,7 @@
     <img src="/icon.png" alt="logo" class="w-1/2" />
     <div class="flex flex-col items-center" v-if="loading">
       <Spinner class="w-12" />
-      <p class="m-4">Logging In</p>
+      <p class="m-4">{{ $t('logging_in') }}</p>
     </div>
   </div>
 </template>
@@ -39,7 +39,7 @@ export default {
         }, 3000)
       } catch (error) {
         this.$Toast.danger('Auto Login Failed')
-        this.$router.push('/auth/login')
+        this.$router.push(this.localePath('/auth/login'))
         this.loading = false
       }
     },

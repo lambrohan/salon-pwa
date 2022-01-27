@@ -4,7 +4,7 @@
       <h4 class="font-semibold text-2xl text-primarydarkx">
         {{ salon.salon_profile.name }}
       </h4>
-      <p class="text-gray-500 text-sm mt-4">Salon Status :</p>
+      <p class="text-gray-500 text-sm mt-4">{{ $t('salon_status') }} :</p>
       <SalonToggle
         v-model="salon.salon_profile.service_status"
         @update="toggleStatus"
@@ -14,17 +14,29 @@
       <table class="w-full">
         <tr class="">
           <th class="font-normal text-sm text-left text-gray-500 px-4">
-            Stylist
+            {{ $t('stylist') }}
           </th>
           <th class="text-gray-500 font-normal text-sm text-right px-4">
-            Todays Bookings
+            {{ $t('todays_bookings') }}
           </th>
         </tr>
         <tr
           v-for="chair in salon.chairs"
           :key="chair.id"
           class=""
-          @click="$router.push(`/livechairs/${salon.id}/?chairId=${chair.id}`)"
+          @click="
+            $router.push(
+              localePath({
+                name: 'livechairs-salonId',
+                params: {
+                  salonId: salon.id,
+                },
+                query: {
+                  chairId: chair.id,
+                },
+              })
+            )
+          "
         >
           <td
             class="p-3 px-4 bg-gray-50 rounded-tl-lg rounded-bl-lg border-b flex items-center"
@@ -99,7 +111,9 @@ export default {
     async toggleStatus(status) {
       console.log(status)
       const dialog = this.$Dialog.show({
-        message: `Are you sure want to toggle salon status to ${status}`,
+        message: `${this.$t('are_you_sure_salon')} - ${status}`,
+        positiveText: this.$t('confirm'),
+        negativeText: this.$t('cancel'),
         positiveHandler: async () => {
           try {
             dialog.positiveLoading = true
@@ -116,9 +130,13 @@ export default {
     },
     async toggleChair(chair) {
       const dialog = this.$Dialog.show({
-        message: `Are you sure want to ${
-          chair.disabled ? 'enable' : 'disable'
-        } the chair?`,
+        message: chair.disabled
+          ? this.$t('alerts.chair_enable')
+          : this.$t('alerts.chair_disable'),
+
+        positiveText: this.$t('confirm'),
+        negativeText: this.$t('cancel'),
+
         positiveHandler: async () => {
           try {
             dialog.positiveLoading = true

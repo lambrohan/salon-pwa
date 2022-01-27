@@ -7,11 +7,11 @@
         class="w-12 h-12 p-2"
         @click="$router.go(-1)"
       />
-      <h4>Orders</h4>
+      <h4>{{ $t('orders') }}</h4>
     </div>
     <div class="px-4 pt-1 w-full">
       <!-- <DateRanePicker v-model="range" /> -->
-      <p class="text-sm text-gray-500 mb-1 mt-2">Show Orders:</p>
+      <p class="text-sm text-gray-500 mb-1 mt-2">{{ $t('show_orders') }}:</p>
       <date-range-picker
         v-model="dateRange"
         :timePicker="false"
@@ -21,20 +21,14 @@
         autoApply
       >
       </date-range-picker>
-      <!-- <button
-        class="w-6/12 text-white bg-success mt-2 py-2 rounded"
-        @click="fetchOrders(true)"
-      >
-        Submit
-      </button> -->
       <div class="list mt-4 bg-gray-100 pb-1">
         <h4 class="py-3 pl-2 text-xs">
-          From
+          {{ $t('from') }}
           <span class="font-medium">{{
             $dayjs(dateRange.startDate).format('MMM DD, YYYY')
           }}</span>
           <br />
-          To
+          {{ $t('to') }}
           <span class="font-medium">
             {{ $dayjs(dateRange.endDate).format('MMM DD, YYYY') }}</span
           >
@@ -44,7 +38,9 @@
         <OrderListItem
           class="m-1 bg-white"
           v-for="a in appointments"
-          @click.native="$router.push(`/settings/salon/orders/show/${a.id}`)"
+          @click.native="
+            $router.push(localePath(`/settings/salon/orders/show/${a.id}`))
+          "
           :key="a.id"
           :appointment="a"
         />
@@ -53,7 +49,9 @@
         class="bg-accent w-1/3 mt-4"
         v-if="totalCount - appointments.length"
         @click.native="fetchOrders"
-        >Fetch More ({{ totalCount - appointments.length }})</UButton
+        >{{ $t('fetch_more') }} ({{
+          totalCount - appointments.length
+        }})</UButton
       >
     </div>
   </div>

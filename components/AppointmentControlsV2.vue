@@ -2,7 +2,7 @@
   <div id="a-controlsv2" class="bg-white">
     <div class="flex items-center">
       <img src="/icons/plus.svg" alt="plus" class="w-6 h-6" />
-      <span>Add Services</span>
+      <span>{{ $t('add_services') }}</span>
     </div>
   </div>
 </template>

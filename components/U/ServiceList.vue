@@ -4,10 +4,10 @@
       <table class="w-full">
         <tr class="">
           <th class="font-normal text-sm text-left text-gray-500 px-3">
-            Service
+            {{ $t('service') }}
           </th>
           <th class="text-gray-500 font-normal text-sm text-right px-3">
-            Fees(₹)
+            {{ $t('price') }}(₹)
           </th>
         </tr>
         <tr

@@ -11,7 +11,7 @@
           class="text-green-500 text-sm font-semibold absolute -left-4 transform -translate-x-full"
           v-show="open"
         >
-          Open
+          {{ $t('open') }}
         </h4>
       </transition>
       <div
@@ -30,7 +30,7 @@
           class="text-red-500 text-sm font-semibold absolute -right-4 transform translate-x-full"
           v-show="!open"
         >
-          Closed
+          {{ $t('closed') }}
         </h4>
       </transition>
     </div>

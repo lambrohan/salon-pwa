@@ -20,9 +20,9 @@
         {{ modifier }}
       </button>
     </div>
-    <UButton class="bg-black w-2/4 mt-6" @click.native="onConfirm"
-      >Confirm</UButton
-    >
+    <UButton class="bg-black w-2/4 mt-6" @click.native="onConfirm">{{
+      $t('confirm')
+    }}</UButton>
   </div>
 </template>
 
@@ -36,7 +36,7 @@ export default {
     },
     heading: {
       type: String,
-      default: 'Adjust Duration',
+      default: () => this.$t('adjust_duration'),
     },
   },
   data() {
@@ -55,7 +55,7 @@ export default {
     },
     onConfirm() {
       if (this.duration <= 0) {
-        this.$Toast.danger('Duration is not valid')
+        this.$Toast.danger(this.$t('alerts.duration_not_valid'))
         return
       }
       this.$emit('onDurationConfirm', this.duration)

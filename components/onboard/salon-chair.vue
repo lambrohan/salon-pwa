@@ -1,7 +1,7 @@
 <template>
   <div id="salon-chair" class="relative">
     <h4 class="text-xl text-center font-semibold py-2 bg-primary">
-      Manage Chairs
+      {{ $t('manage_chairs') }}
     </h4>
     <div class="flex flex-col items-center pt-12 px-4" v-if="!chairs.length">
       <svg
@@ -18,7 +18,7 @@
       </svg>
 
       <h4 class="text-center text-gray-500 w-3/4 mt-2 text-sm">
-        Nothing Found. Please click on create chair to add a chair.
+        {{ $t('alerts.nothing_add_chair') }}
       </h4>
     </div>
     <div class="chairs flex p-3 flex-col" v-else>
@@ -27,15 +27,16 @@
         v-for="(chair, i) in chairs"
         :key="chair.id"
       >
-        <p>Chair {{ i + 1 }}</p>
+        <p>{{ $t('chair') }} {{ i + 1 }}</p>
         <p class="text-sm mt-2">
-          Stylist - {{ chair.stylist ? chair.stylist.display_name : '' }}
+          {{ $t('stylist') }} -
+          {{ chair.stylist ? chair.stylist.display_name : '' }}
         </p>
         <p
           class="text-xs mt-1"
           v-if="chair.stylist && chair.stylist.user_id == user.id"
         >
-          Self Assigned
+          {{ $t('self_assigned') }}
         </p>
       </div>
     </div>
@@ -52,22 +53,22 @@
               class="bg-accent m-auto mt-4 w-7/12"
               @click.native="initChair"
               :loading="createLoading"
-              >Create Chair</UButton
+              >{{ $t('create_chair') }}</UButton
             >
 
             <h3
               class="text-center mt-4 text-blue-500 cursor-pointer"
               @click="$emit('next')"
             >
-              Save & Continue
+              {{ $t('save_n_continue') }}
             </h3>
           </div>
           <div class="content" v-else>
             <h4 class="text-center my-5 font-semibold text-lg">
-              Assign Stylist
+              {{ $t('assign_stylist') }}
             </h4>
             <p class="text-center text-sm mt-8">
-              Scan this QR Code from stylist's phone to assign.
+              {{ $t('scan_from_stylist') }}
             </p>
             <div
               class="qr border w-80 h-80 m-auto mt-4 bg-contain bg-center flex items-center justify-center"
@@ -77,7 +78,7 @@
               class="w-7/12 mt-12 bg-accent"
               @click.native="stylistModal = true"
               ref="selfAssignBtn"
-              >Assign to myself</UButton
+              >{{ $t('assign_myself') }}</UButton
             >
             <UButton
               class="w-7/12 mt-8"
@@ -95,10 +96,12 @@
       </BottomSheet>
     </div>
     <Modal v-model="stylistModal">
-      <h4 class="text-center py-2 text-lg font-semibold">Stylist Profile</h4>
+      <h4 class="text-center py-2 text-lg font-semibold">
+        {{ $t('stylist_profile') }}
+      </h4>
       <div class="p-4">
         <validation-observer ref="stylistForm">
-          <p class="text-sm mb-1 text-gray-500">Display Name</p>
+          <p class="text-sm mb-1 text-gray-500">{{ $t('display_name') }}</p>
           <form>
             <validation-provider
               v-slot="{ errors, classes }"
@@ -116,15 +119,14 @@
           </form>
         </validation-observer>
         <p class="text-xs text-center mt-4 text-gray-500">
-          This is information will be public and shown to users when they book
-          an appointment.
+          {{ $t('alerts.info_public_disc') }}
         </p>
 
         <UButton
           class="mt-12 w-9/12 bg-accent"
           @click.native="selfAssign"
           :loading="assignBtnLoading"
-          >Save</UButton
+          >{{ $t('save') }}</UButton
         >
       </div>
     </Modal>
@@ -185,7 +187,7 @@ export default {
               this.chairs.find((c) => c.id == this.tempChair.id).stylist
             ) {
               this.sheetState = false
-              this.$Toast.success('Stylist Assigned')
+              this.$Toast.success(this.$t('stylist_assigned'))
             }
           }
         },
@@ -214,14 +216,14 @@ export default {
 
     async selfAssign() {
       if (!this.qrToken) {
-        this.$Toast.warning('QR not found please try again.')
+        this.$Toast.warning(this.$t('qr_not_found'))
         return
       }
       try {
         this.assignBtnLoading = true
         await this.$stylistRepository.create({ name: this.stylistName })
         await this.$stylistRepository.verifyQR({ token: this.qrToken })
-        this.$Toast.success('Chair Assigned')
+        this.$Toast.success(this.$t('stylist_assigned'))
         this.assignBtnLoading = false
         this.clearBottomsheet()
         await this.fetchChairs()

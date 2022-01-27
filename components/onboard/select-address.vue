@@ -1,13 +1,13 @@
 <template>
   <div id="select-address" class="flex flex-col h-screen pt-3 p-2">
-    <h4 class="text-2xl font-semibold ml-4 mb-3">Salon Location</h4>
+    <h4 class="text-2xl font-semibold ml-4 mb-3">{{ $t('set_location') }}</h4>
 
     <div id="mymap" class="w-full h-full rounded-lg flex-grow"></div>
     <BottomSheet ref="sheet" v-model="sheetState" :minHeight="180">
       <div class="px-6 py-4">
         <input
           type="text"
-          placeholder="search location"
+          :placeholder="$t('search_location')"
           class="bg-gray-100 w-full text-center p-3 rounded"
           id="searchinput"
           :value="query"
@@ -26,20 +26,20 @@
           class="selected bg-primary rounded p-4 flex-grow"
           v-if="selectedLocation"
         >
-          <p class="text-xs text-center">Confirm Selection</p>
+          <p class="text-xs text-center">{{ $t('confirm_location') }}</p>
           <h4 class="font-semibold mt-4">{{ selectedLocation.name }}</h4>
           <p>{{ selectedLocation.formatted_address }}</p>
           <UButton
             class="bg-accent mt-4 text-black shadow-none"
             @click.native="$emit('next', selectedLocation)"
             :loading="btnLoading"
-            >Confirm</UButton
+            >{{ $t('confirm') }}</UButton
           >
           <button
             class="w-full text-sm mt-4 text-center p-3 rounded-full"
             @click="selectedLocation = false"
           >
-            Cancel
+            {{ $t('cancel') }}
           </button>
         </div>
 

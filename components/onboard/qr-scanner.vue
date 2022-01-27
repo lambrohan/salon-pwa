@@ -1,6 +1,6 @@
 <template>
   <div id="scanqr" class="p-4">
-    <h4 class="text-center mb-2">Scan the QR Code</h4>
+    <h4 class="text-center mb-2">{{ $t('scan_qr') }}</h4>
     <div
       class="complete w-full flex flex-col items-center justify-center mt-12"
       v-if="completed"
@@ -17,7 +17,7 @@
           clip-rule="evenodd"
         />
       </svg>
-      <p class="text-gray-500 mt-2">Scan Completed</p>
+      <p class="text-gray-500 mt-2">{{ $t('scan_complete') }}</p>
     </div>
     <div class="w-full" id="reader" v-show="!completed"></div>
   </div>

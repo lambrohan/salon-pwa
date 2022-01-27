@@ -6,7 +6,7 @@
         class="w-12 p-2"
         @click="$router.go(-1)"
       />
-      <h4>Manage Chair</h4>
+      <h4>{{ $t('manage_chair') }}</h4>
     </div>
     <div
       class="chairbtn w-28 h-28 m-auto mt-12 p-6 rounded-xl shadow-xl border-2"
@@ -15,16 +15,16 @@
     >
       <img src="/icons/chair.svg" class="w-full h-full" />
     </div>
-    <p class="text-xs text-center mt-4 text-gray-500">Created At</p>
+    <p class="text-xs text-center mt-4 text-gray-500">{{ $t('created_at') }}</p>
     <p class="text-center text-xs">
       {{ $dayjs(chair.created_at).format('DD MMM, YYYY hh:mm A') }}
     </p>
     <div class="w-full p-4">
       <div class="dash bg-gray-100 text-sm p-4 rounded-lg">
         <p>
-          Status -
+          {{ $t('status') }} -
           <span :class="chair.disabled ? 'text-red-500' : 'text-green-500'">{{
-            chair.disabled ? 'Disabled' : 'Active'
+            chair.disabled ? $t('disabled') : $t('enabled')
           }}</span>
         </p>
 
@@ -40,7 +40,7 @@
       class="bg-red-500 w-3/4 mt-2"
       @click.native="deleteChair"
       v-if="!chair.stylist"
-      >Delete</Button
+      >{{ $t('delete') }}</Button
     >
   </div>
 </template>
@@ -79,7 +79,9 @@ export default {
     async disableChair() {
       const chair = this.chair
       const dialog = this.$Dialog.show({
-        message: 'Are you sure want to disable the chair?',
+        message: this.$t('alerts.disable_chair'),
+        positiveText: this.$t('confirm'),
+        negativeText: this.$t('cancel'),
         positiveHandler: async () => {
           try {
             dialog.positiveLoading = true
@@ -95,7 +97,9 @@ export default {
     async deleteChair() {
       const chair = this.chair
       const dialog = this.$Dialog.show({
-        message: 'Are you sure want to delete this chair?',
+        message: this.$t('alerts.delete_chair'),
+        positiveText: this.$t('confirm'),
+        negativeText: this.$t('cancel'),
         positiveHandler: async () => {
           try {
             dialog.positiveLoading = true

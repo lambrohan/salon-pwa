@@ -14,19 +14,7 @@
       <div
         v-if="addbutton"
         @click="launchSelect"
-        class="
-          addme
-          h-52
-          mt-2
-          border
-          bg-gray-100
-          rounded
-          overflow-hidden
-          flex flex-col
-          items-center
-          justify-center
-          text-gray-400
-        "
+        class="addme h-52 mt-2 border bg-gray-100 rounded overflow-hidden flex flex-col items-center justify-center text-gray-400"
         style="width: 49%"
       >
         <svg
@@ -41,7 +29,7 @@
             clip-rule="evenodd"
           />
         </svg>
-        <span class="text-sm mt-2"> Add image </span>
+        <span class="text-sm mt-2"> {{ $t('add_image') }} </span>
         <input
           type="file"
           class="hidden"
@@ -67,13 +55,13 @@
             class="w-7/12 text-sm max-h-11"
             @click.native="$emit('previewPrimaryClick', preview)"
             :loading="previewPriLoading"
-            >Set as profile picture</UButton
+            >{{ $t('set_profile_pic') }}</UButton
           >
           <UButton
             @click.native="$emit('previewSecondaryClick', preview)"
             :loading="previewSecLoading"
             class="w-4/12 bg-red-500 text-sm max-h-11 border-none"
-            >Delete</UButton
+            >{{ $t('delete') }}</UButton
           >
         </div>
       </ImagePreview>

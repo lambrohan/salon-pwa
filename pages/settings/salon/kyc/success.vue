@@ -15,19 +15,20 @@
         clip-rule="evenodd"
       />
     </svg>
-    <h4 class="text-lg font-medium mt-4">KYC Submited</h4>
+    <h4 class="text-lg font-medium mt-4">{{ $t('kyc_submited') }}</h4>
     <p class="text-sm text-gray-500 text-center mt-8">
-      Our team will review the information and verify within next 48 hours. We
-      will be notify you when status updated.
+      {{ $t('kyc_disc') }}
     </p>
     <div class="mt-4 text-md text-gray-500">
       You can
       <span class="text-success underline">
-        <a href="https://ubuapk.page.link/salon">go back to app</a>
+        <a href="https://ubuapk.page.link/salon">{{ $t('go_back_app') }}</a>
       </span>
       or
-      <span class="text-black underline" @click="$router.push('/settings')"
-        >browse here</span
+      <span
+        class="text-black underline"
+        @click="$router.push(localePath('/settings'))"
+        >{{ $t('browse_here') }}</span
       >
     </div>
   </div>

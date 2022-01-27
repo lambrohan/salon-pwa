@@ -1,6 +1,6 @@
 <template>
   <div id="notify-user" class="p-4">
-    <h4 class="text-center">Notify User</h4>
+    <h4 class="text-center">{{ $t('notify_user') }}</h4>
     <textarea
       placeholder="enter message"
       class="w-full bg-gray-100 p-3 rounded mt-4"
@@ -11,7 +11,7 @@
     <UButton
       class="bg-accent mt-4 w-3/4 mb-1"
       @click.native="$emit('onConfirm', message)"
-      >Submit</UButton
+      >{{ $t('submit') }}</UButton
     >
   </div>
 </template>

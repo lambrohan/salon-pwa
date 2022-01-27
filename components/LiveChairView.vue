@@ -2,8 +2,7 @@
   <div id="chair-live-v">
     <div class="">
       <div class="mb-2" v-if="breakData">
-        <p class="text-sm mb-1">Active Break</p>
-
+        <p class="text-sm mb-1">{{ $t('active_break') }}</p>
         <StylistBreak
           :breakData="breakData"
           @click.native="stopBreak"
@@ -12,7 +11,7 @@
       </div>
 
       <div class="relative" :class="[breakData ? 'dis' : '']">
-        <p class="text-sm">Current Customer :</p>
+        <p class="text-sm">{{ $t('current_customer') }} :</p>
 
         <CurrentAppointment
           v-if="appointments.length"
@@ -26,7 +25,7 @@
           class="shadow-lg"
         />
 
-        <p class="text-sm mt-5 mb-2">Next Customers :</p>
+        <p class="text-sm mt-5 mb-2">{{ $t('next_customers') }} :</p>
         <Appointment
           v-for="(a, i) in appointments"
           :key="a.id"
@@ -38,7 +37,7 @@
       </div>
     </div>
     <div class="empty w-full text-gray-500 text-lg" v-if="!appointments.length">
-      No Bookings Found
+      {{ $t('no_bookings_found') }}
     </div>
   </div>
 </template>
@@ -115,7 +114,9 @@ export default {
   methods: {
     async stopBreak() {
       const dialog = this.$Dialog.show({
-        message: 'Are you sure want to END break?',
+        message: this.$t('alerts.end_break'),
+        positiveText: this.$t('confirm'),
+        negativeText: this.$t('cancel'),
       })
 
       dialog.positiveHandler = async () => {

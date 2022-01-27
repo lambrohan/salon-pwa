@@ -10,7 +10,7 @@
       }%)`"
     ></div>
     <div class="z-2 relative">
-      <p class="text-xs text-gray-500">Reason</p>
+      <p class="text-xs text-gray-500">{{ $t('reason') }}</p>
       <h4 class="font-semibold text-xl">{{ breakData.reason }}</h4>
       <p class="text-right font-semibold absolute bottom-0 right-0">
         {{ $dayjs.duration(secs, 's').format('mm:ss') }}

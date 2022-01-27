@@ -1,6 +1,6 @@
 <template>
   <div id="salon-pic" class="p-4">
-    <h2 class="text-xl font-semibold">Lets pick a nice photo of the salon.</h2>
+    <h2 class="text-xl font-semibold">{{ $t('lets_pick_photo') }}</h2>
     <p>It's important for search!</p>
     <img
       :src="url"
@@ -35,7 +35,7 @@
             d="M15.172 7l-6.586 6.586a2 2 0 102.828 2.828l6.414-6.586a4 4 0 00-5.656-5.656l-6.415 6.585a6 6 0 108.486 8.486L20.5 13"
           />
         </svg>
-        <p class="ml-2">Choose File</p>
+        <p class="ml-2">{{ $t('choose_file') }}</p>
       </button>
     </validation-provider>
     <UButton
@@ -43,7 +43,7 @@
       v-if="url"
       :loading="btnLoading"
       @click.native="$emit('next', file)"
-      >Upload</UButton
+      >{{ $t('upload') }}</UButton
     >
   </div>
 </template>

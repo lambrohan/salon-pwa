@@ -2,7 +2,9 @@
   <div id="login-page">
     <div class="flex flex-col items-center w-full px-8 py-8">
       <UbuLogo class="w-32" />
-      <h1 class="text-2xl font-medium text-gray-600">Login to continue</h1>
+      <h1 class="text-2xl font-medium text-gray-600">
+        {{ $t('login.title') }}
+      </h1>
       <div class="phone-view" v-if="!otpModal">
         <input
           type="number"
@@ -20,7 +22,7 @@
           :loading="otpLoading"
           class="font-semibold tracking-widest h-14 bg-accent mt-8 w-full"
           @click.native="getOTP"
-          >Send OTP
+          >{{ $t('login.send_otp') }}
         </UButton>
         <div id="placeholder"></div>
       </div>
@@ -38,7 +40,7 @@
           :loading="confirmLoading"
           class="font-semibold tracking-widest h-14 bg-accent f-full mt-8 w-full"
           @click.native="confirmOtp"
-          >Confirm
+          >{{ $t('confirm') }}
         </UButton>
       </div>
     </div>

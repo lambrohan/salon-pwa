@@ -5,8 +5,10 @@
       class="flex flex-col p-6 pt-16"
       @submit.prevent="onSubmit"
     >
-      <h4 class="text-2xl font-semibold mb-6">Personal Information</h4>
-      <label for="name" class="mb-1 text-sm text-gray-500">Full Name</label>
+      <h4 class="text-2xl font-semibold mb-6">{{ $t('personal_info') }}</h4>
+      <label for="name" class="mb-1 text-sm text-gray-500">{{
+        $t('full_name')
+      }}</label>
       <validation-provider v-slot="{ errors, classes }" rules="required">
         <input
           name="name"
@@ -19,7 +21,9 @@
         <span class="text-sm text-red-500">{{ errors[0] }}</span>
       </validation-provider>
 
-      <label for="name" class="mb-1 text-sm text-gray-500 mt-6">Email</label>
+      <label for="name" class="mb-1 text-sm text-gray-500 mt-6">{{
+        $t('email')
+      }}</label>
       <validation-provider v-slot="{ errors, classes }" rules="required|email">
         <input
           name="email"
@@ -33,9 +37,9 @@
         <span class="text-sm text-red-500">{{ errors[0] }}</span>
       </validation-provider>
 
-      <label for="date" class="mt-6 text-sm mb-1 text-gray-500"
-        >Birthdate</label
-      >
+      <label for="date" class="mt-6 text-sm mb-1 text-gray-500">{{
+        $t('birthday')
+      }}</label>
       <validation-provider v-slot="{ errors, classes }" rules="required">
         <input
           name="Birthdate"
@@ -49,7 +53,9 @@
         <span class="text-sm text-red-500">{{ errors[0] }}</span>
       </validation-provider>
 
-      <label for="gender" class="mt-6 text-sm mb-1 text-gray-500">Gender</label>
+      <label for="gender" class="mt-6 text-sm mb-1 text-gray-500">{{
+        $t('gender')
+      }}</label>
       <validation-provider v-slot="{ errors, classes }" rules="required">
         <select
           name="gender"
@@ -57,7 +63,7 @@
           v-model="gender"
           :class="classes"
         >
-          <option value="" disabled>Select</option>
+          <option value="" disabled>{{ $t('select') }}</option>
           <option value="MALE">Male</option>
           <option value="FEMALE">Female</option>
           <option value="Rather Not Say">Rather Not Say</option>
@@ -68,7 +74,7 @@
         class="bg-accent h-14 mt-8"
         @click.native="onSubmit"
         :loading="loading"
-        >Save &amp; Continue</UButton
+        >{{ $t('save_n_continue') }}</UButton
       >
     </form>
   </client-only>

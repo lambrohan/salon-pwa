@@ -7,7 +7,7 @@
         v-for="item in nav"
         :key="item.icon"
         :path="item.icon"
-        :route="item.route"
+        :route="localePath(item.route)"
       />
     </div>
   </div>

@@ -55,6 +55,8 @@ export default {
     init(options) {
       options.title ? (this.title = options.title) : ''
       options.positiveText ? (this.positiveText = options.positiveText) : ''
+      options.negativeText ? (this.negativeText = options.negativeText) : ''
+
       options.message ? (this.message = options.message) : ''
       options.positiveHandler
         ? (this.positiveHandler = options.positiveHandler)

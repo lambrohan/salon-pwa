@@ -3,7 +3,7 @@
     <UTabs :activeIndex="activeIndex">
       <UTab>
         <h4 class="font-semibold text-xl text-center mb-4 text-gray-500">
-          Add Walk-In Customer
+          {{ $t('add_walkin_customer') }}
         </h4>
         <validation-observer ref="observer">
           <form @submit.prevent="">
@@ -29,9 +29,9 @@
             </validation-provider>
           </form>
         </validation-observer>
-        <UButton class="bg-accent mt-6 w-3/4" @click.native="onMobileConfirm"
-          >Continue</UButton
-        >
+        <UButton class="bg-accent mt-6 w-3/4" @click.native="onMobileConfirm">{{
+          $t('continue')
+        }}</UButton>
       </UTab>
       <UTab>
         <QuickServiceSelector :salonId="salonId" @next="addWalkin" />
@@ -60,7 +60,7 @@ export default {
   methods: {
     async onMobileConfirm() {
       if (!(await this.$refs.observer.validate())) {
-        this.$Toast.danger('Mobile number is not valid')
+        this.$Toast.danger(this.$t('alerts.invalid_mobile'))
         return
       }
       this.activeIndex++

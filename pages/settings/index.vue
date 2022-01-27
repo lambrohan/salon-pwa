@@ -2,16 +2,18 @@
   <div id="profile-page" class="pt-2 px-2 pb-32">
     <div class="avatar-box flex flex-col items-center">
       <img src="/icon.png" class="w-24 h-24 border rounded-full mt-4" />
-      <h4 class="text-xl font-medium mt-3">Account Info</h4>
+      <h4 class="text-xl font-medium mt-3">{{ $t('account_info') }}</h4>
       <p class="mt-1">{{ user.phone_number }}</p>
     </div>
 
     <div class="mt-6 p-4">
-      <p class="py-1 px-4 text-gray-500 bg-primary text-sm">My Salons</p>
+      <p class="py-1 px-4 text-gray-500 bg-primary text-sm">
+        {{ $t('my_salons') }}
+      </p>
       <nuxt-link
         v-for="salon in salons"
         :key="salon.id"
-        :to="`/settings/salon/${salon.id}`"
+        :to="localePath(`/settings/salon/${salon.id}`)"
         class="bg-white flex-row flex py-3 px-4 items-center relative"
       >
         <svg
@@ -35,7 +37,7 @@
           {{ salon.profile.name }}
         </p>
         <p class="text-xs text-yellow-500 ml-3" v-if="!salon.kyc">
-          KYC incomplete
+          {{ $t('kyc_incomplete') }}
         </p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -52,10 +54,12 @@
           />
         </svg>
       </nuxt-link>
-      <p class="py-1 px-4 text-gray-500 bg-primary text-sm">Account</p>
+      <p class="py-1 px-4 text-gray-500 bg-primary text-sm">
+        {{ $t('account') }}
+      </p>
       <div
         class="bg-white flex-row flex py-3 px-4 items-center relative"
-        @click="$router.push('/settings/stylist')"
+        @click="$router.push(localePath('/settings/stylist'))"
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -71,7 +75,7 @@
             d="M10 6H5a2 2 0 00-2 2v9a2 2 0 002 2h14a2 2 0 002-2V8a2 2 0 00-2-2h-5m-4 0V5a2 2 0 114 0v1m-4 0a2 2 0 104 0m-5 8a2 2 0 100-4 2 2 0 000 4zm0 0c1.306 0 2.417.835 2.83 2M9 14a3.001 3.001 0 00-2.83 2M15 11h3m-3 4h2"
           />
         </svg>
-        <p class="font-semibold text-lg">Stylist Profile</p>
+        <p class="font-semibold text-lg">{{ $t('stylist_profile') }}</p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6 absolute right-1"
@@ -105,7 +109,7 @@
             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
-        <p class="font-semibold text-lg">Support</p>
+        <p class="font-semibold text-lg">{{ $t('contact_support') }}</p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6 absolute right-1"
@@ -137,7 +141,7 @@
             clip-rule="evenodd"
           />
         </svg>
-        <p class="font-semibold text-lg text-red-600">Logout</p>
+        <p class="font-semibold text-lg text-red-600">{{ $t('logout') }}</p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6 absolute right-1"

@@ -1,9 +1,9 @@
 <template>
   <client-only>
     <div id="stylist-profile" class="p-4">
-      <h4 class="font-semibold text-lg">Lets create your profile first</h4>
+      <h4 class="font-semibold text-lg">{{ $t('lets_create_profile') }}</h4>
       <p class="text-xs text-gray-500 mt-4">
-        Please fill carefully as the information will be visible to users
+        {{ $t('alerts.info_public_disc') }}
       </p>
       <div class="flex items-center mb-4 mt-2">
         <svg
@@ -21,11 +21,11 @@
           />
         </svg>
         <p class="text-xs text-red-500 ml-1">
-          Verification required to change it later
+          {{ $t('verification_required') }}
         </p>
       </div>
       <validation-observer ref="stylistForm">
-        <p class="text-sm mb-1 text-gray-500">Display Name</p>
+        <p class="text-sm mb-1 text-gray-500">{{ $t('display_name') }}</p>
         <form @submit.prevent="">
           <validation-provider
             v-slot="{ errors, classes }"
@@ -42,14 +42,17 @@
           </validation-provider>
           <div class="mt-4">
             <p for="profilepic" class="text-sm text-gray-500 mb-1">
-              Display Picture
+              {{ $t('display_pic') }}
             </p>
             <FileInput labelName="profilepic" v-model="files" />
           </div>
         </form>
       </validation-observer>
-      <UButton class="bg-accent mt-8" @click.native="submit" :loading="loading"
-        >Submit</UButton
+      <UButton
+        class="bg-accent mt-8"
+        @click.native="submit"
+        :loading="loading"
+        >{{ $t('submit') }}</UButton
       >
     </div>
   </client-only>

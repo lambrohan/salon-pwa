@@ -1,5 +1,4 @@
 <template>
-  <!-- By Sam Herbert (@sherb), for everyone. More @ http://goo.gl/7AJzbL -->
   <svg
     width="120"
     height="30"

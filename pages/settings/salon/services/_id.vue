@@ -7,19 +7,19 @@
         class="w-12 h-12 p-2"
         @click="$router.go(-1)"
       />
-      <h4>Manage Services</h4>
+      <h4>{{ $t('manage_services') }}</h4>
 
       <UButton
         class="w-4/12 transform scale-75 bg-accent absolute right-0"
         v-if="isUpdated"
         @click.native="saveUpdatedPrices"
         :loading="updateBtnLoading"
-        >Save</UButton
+        >{{ $t('save') }}</UButton
       >
     </div>
     <div class="p-4">
       <p class="text-sm text-gray-500 mb-3 text-center">
-        You have currently added following services
+        {{ $t('added_following_services') }}
       </p>
       <ServiceList
         :services="services"
@@ -52,9 +52,9 @@
     </BottomSheet>
     <Modal v-model="serviceSheet" autodismiss>
       <div class="p-4">
-        <h4 class="text-center">Manage Service</h4>
+        <h4 class="text-center">{{ $t('manage_services') }}</h4>
         <p class="text-xs text-gray-500 text-center mb-1 mt-4">
-          Approx Duration (mins)
+          {{ $t('approx_duration') }} (mins)
         </p>
         <div class="border rounded-full p-2 flex items-center justify-between">
           <input
@@ -67,11 +67,11 @@
             class="bg-success py-2"
             @click.native="updateTime"
             :loading="updateTimeLoading"
-            >Save</UButton
+            >{{ $t('save') }}</UButton
           >
         </div>
         <p class="text-xs text-gray-500 text-center mt-4">
-          User won't be able to book this service if disabled
+          {{ $t('user_wont_if_disabled') }}
         </p>
         <UButton
           class="mt-2 w-2/3"

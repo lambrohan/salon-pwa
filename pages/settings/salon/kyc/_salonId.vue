@@ -8,7 +8,7 @@
           class="w-12 h-12 p-2"
           @click="$router.go(-1)"
         />
-        <h4 class="text-lg text-center">Salon Kyc</h4>
+        <h4 class="text-lg text-center">{{ $t('salon_kyc') }}</h4>
       </div>
       <div class="wrapper p-3 px-4" v-if="salon.profile && !salon.kyc">
         <validation-observer ref="kycForm">
@@ -16,7 +16,8 @@
             <h4 class="font-semibold text-xl">{{ salon.profile.name }}</h4>
 
             <p v-if="kyc" class="text-sm text-gray-500 mt-1">
-              Status: <span class="text-black">{{ kyc.remarks }}</span>
+              {{ $t('status') }}:
+              <span class="text-black">{{ kyc.remarks }}</span>
             </p>
 
             <!-- INFO -->
@@ -25,7 +26,9 @@
               v-slot="{ errors, classes }"
               rules="required|numeric"
             >
-              <label for="Account No" class="mt-4">Bank Account Number</label>
+              <label for="Account No" class="mt-4">{{
+                $t('bank_ac_no')
+              }}</label>
               <input
                 type="number"
                 name="account number"
@@ -42,7 +45,7 @@
               v-slot="{ errors, classes }"
               rules="required|alpha_num"
             >
-              <label for="IFSC" class="mt-4">IFSC Code</label>
+              <label for="IFSC" class="mt-4">{{ $t('ifsc_code') }}</label>
               <input
                 type="text"
                 name="ifsc code"
@@ -59,7 +62,7 @@
               v-slot="{ errors, classes }"
               rules="required|alpha_num"
             >
-              <label for="Pan No" class="mt-4">Owner's PAN Number</label>
+              <label for="Pan No" class="mt-4">{{ $t('owner_pan') }}</label>
               <input
                 type="text"
                 v-model="owner.pan_no"
@@ -75,12 +78,11 @@
             <hr class="mt-6" />
             <!-- DOCS -->
 
-            <label for="Salon Proof" class="text-sm mt-4"
-              >Registration Certificate</label
-            >
+            <label for="Salon Proof" class="text-sm mt-4">{{
+              $t('reg_cert')
+            }}</label>
             <p class="text-xs my-1 text-gray-500">
-              Upload registration or incorporation certificate having salon name
-              clearly visible
+              {{ $t('reg_cert_info') }}
             </p>
             <FileInput
               labelName="Salon Document"
@@ -90,12 +92,11 @@
               v-model="files.salon_proof"
             />
 
-            <label for="Bank Proof" class="text-sm mt-4"
-              >Bank Account Document</label
-            >
+            <label for="Bank Proof" class="text-sm mt-4">{{
+              $t('bank_ac_doc')
+            }}</label>
             <p class="text-xs my-1 text-gray-500">
-              Upload cancelled cheque or bank statement where account number &
-              IFSC code are clearly visible
+              {{ $t('bank_doc_info') }}
             </p>
             <FileInput
               labelName="Bank Document"
@@ -104,8 +105,10 @@
               v-model="files.bank_proof"
             />
 
-            <label for="PAN Card" class="text-sm mt-4">PAN Document</label>
-            <p class="text-xs my-1 text-gray-500">Upload PAN card photo</p>
+            <label for="PAN Card" class="text-sm mt-4">{{
+              $t('pan_doc')
+            }}</label>
+            <p class="text-xs my-1 text-gray-500">{{ $t('pan_doc_info') }}</p>
             <FileInput
               name="PAN Card"
               class="mt-1"
@@ -119,7 +122,7 @@
           class="bg-accent rounded mt-8"
           @click.native="upload"
           :loading="uploadLoading"
-          >Upload & Save</UButton
+          >{{ $t('save_n_continue') }}</UButton
         >
       </div>
       <div class="kyc-done flex flex-col items-center mt-12" v-if="salon.kyc">
@@ -135,9 +138,11 @@
             clip-rule="evenodd"
           />
         </svg>
-        <h4 class="text-green-600 font-semibold text-lg">Salon is verified</h4>
+        <h4 class="text-green-600 font-semibold text-lg">
+          {{ $t('salon_verified') }}
+        </h4>
         <p class="text-sm text-gray-500">
-          You have already completed the kyc verification
+          {{ $t('already_kyc') }}
         </p>
 
         <div
@@ -158,7 +163,7 @@
               d="M10 19l-7-7m0 0l7-7m-7 7h18"
             />
           </svg>
-          <span class="text-blue-500 ml-1"> Back to settings </span>
+          <span class="text-blue-500 ml-1"> {{ $t('back_to_settings') }} </span>
         </div>
       </div>
     </div>
@@ -247,7 +252,7 @@ export default {
 
         this.uploadLoading = false
         this.$Toast.success('Kyc Updated')
-        this.$router.push(`/settings/salon/kyc/success`)
+        this.$router.push(localePath(`/settings/salon/kyc/success`))
       } catch (error) {
         this.uploadLoading = false
       }

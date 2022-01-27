@@ -1,7 +1,7 @@
 <template>
   <div id="live-page" class="pt-10 relative flex flex-col h-full">
     <div class="flex items-center justify-between px-6 mb-4">
-      <h4 class="font-semibold text-xl">Current Bookings</h4>
+      <h4 class="font-semibold text-xl">{{ $t('current_bookings') }}</h4>
       <OptionsMenu class="flex-grow">
         <div class="p-1 px-3 flex items-center" @click="breakModal = true">
           <svg
@@ -18,7 +18,7 @@
               d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"
             />
           </svg>
-          Take a break
+          {{ $t('take_a_break') }}
         </div>
       </OptionsMenu>
     </div>
@@ -59,8 +59,11 @@
           }
         "
       />
-      <UButton v-else class="bg-accent w-7/12" @click.native="openWalkinSheet"
-        >Add Walkin</UButton
+      <UButton
+        v-else
+        class="bg-accent w-7/12"
+        @click.native="openWalkinSheet"
+        >{{ $t('add_walkin') }}</UButton
       >
     </div>
     <BottomSheet :minHeight="0" v-model="walkinSheet">
@@ -78,7 +81,7 @@
     </Modal>
     <Modal v-model="breakModal" autodismiss>
       <AdjustDuration
-        heading="Set Break Duration"
+        :heading="$t('alerts.set_break_duration')"
         @onDurationConfirm="startBreak"
       />
     </Modal>
@@ -159,7 +162,7 @@ export default {
       this.breakModal = false
       try {
         await this.$stylistRepository.createBreak(duration)
-        this.$Toast.success('Break Started')
+        this.$Toast.success(this.$t('break_started'))
       } catch (error) {
         this.$Toast.danger(error.response.data.message)
       }
@@ -187,7 +190,7 @@ export default {
     },
     showNotifyModal() {
       if (this.selectedAppointment.type === AppointmentTypes.WALKIN) {
-        this.$Toast.danger('cannot notfiy walkin user')
+        this.$Toast.danger(this.$t('alerts.cannot_notify_walkin_user'))
         return
       }
       this.notifyModal = true

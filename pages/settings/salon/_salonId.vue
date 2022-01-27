@@ -16,15 +16,25 @@
       <p class="mt-1">{{ user.phone_number }}</p>
 
       <div class="flex flex-wrap items-center mt-4">
-        <Tag v-if="!salon.is_published" type="error">NOT PUBLISHED</Tag>
-        <Tag v-if="salon.disabled" type="error">DISABLED</Tag>
+        <Tag v-if="!salon.is_published" type="error"
+          ><span class="uppercase">{{ $t('not_published') }}</span></Tag
+        >
+        <Tag v-if="salon.disabled" type="error"
+          ><span class="uppercase">{{ $t('disabled') }}</span></Tag
+        >
       </div>
     </div>
 
     <div class="mt-3 p-4">
-      <p class="py-1 px-4 text-gray-500 bg-primary text-sm">Salon Management</p>
+      <p class="py-1 px-4 text-gray-500 bg-primary text-sm">
+        {{ $t('salon_management') }}
+      </p>
       <div
-        @click="$router.push(`/settings/salon/photos/${$route.params.salonId}`)"
+        @click="
+          $router.push(
+            localePath(`/settings/salon/photos/${$route.params.salonId}`)
+          )
+        "
         class="bg-white flex-row flex py-3 px-4 items-center relative"
       >
         <svg
@@ -41,7 +51,7 @@
             d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
           />
         </svg>
-        <p class="font-semibold text-lg">Manage Photos</p>
+        <p class="font-semibold text-lg">{{ $t('manage_photos') }}</p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6 absolute right-1"
@@ -60,7 +70,9 @@
 
       <div
         @click="
-          $router.push(`/settings/salon/services/${$route.params.salonId}`)
+          $router.push(
+            localePath(`/settings/salon/services/${$route.params.salonId}`)
+          )
         "
         class="bg-white flex-row flex py-3 px-4 items-center relative"
       >
@@ -78,7 +90,7 @@
             d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
           />
         </svg>
-        <p class="font-semibold text-lg">Manage Services</p>
+        <p class="font-semibold text-lg">{{ $t('manage_services') }}</p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6 absolute right-1"
@@ -96,7 +108,11 @@
       </div>
 
       <div
-        @click="$router.push(`/settings/salon/chairs/${$route.params.salonId}`)"
+        @click="
+          $router.push(
+            localePath(`/settings/salon/chairs/${$route.params.salonId}`)
+          )
+        "
         class="bg-white flex-row flex py-3 px-4 items-center relative"
       >
         <svg
@@ -113,7 +129,7 @@
             d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
           />
         </svg>
-        <p class="font-semibold text-lg">Manage Chairs</p>
+        <p class="font-semibold text-lg">{{ $t('manage_chairs') }}</p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6 absolute right-1"
@@ -131,7 +147,11 @@
       </div>
       <div
         class="bg-white flex-row flex py-3 px-4 items-center relative"
-        @click="$router.push(`/settings/salon/orders/${$route.params.salonId}`)"
+        @click="
+          $router.push(
+            localePath(`/settings/salon/orders/${$route.params.salonId}`)
+          )
+        "
       >
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -147,7 +167,7 @@
             d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01"
           />
         </svg>
-        <p class="font-semibold text-lg">Orders</p>
+        <p class="font-semibold text-lg">{{ $t('orders') }}</p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6 absolute right-1"
@@ -165,7 +185,7 @@
       </div>
 
       <nuxt-link
-        :to="`/settings/salon/kyc/${$route.params.salonId}`"
+        :to="localePath(`/settings/salon/kyc/${$route.params.salonId}`)"
         class="bg-white flex-row flex py-3 px-4 pr-1 items-center relative"
       >
         <svg
@@ -206,7 +226,9 @@
         </div>
       </nuxt-link>
 
-      <p class="py-1 px-4 text-gray-500 bg-primary text-sm">Account</p>
+      <p class="py-1 px-4 text-gray-500 bg-primary text-sm">
+        {{ $t('account') }}
+      </p>
       <div
         class="bg-white flex-row flex py-3 px-4 items-center relative"
         @click="$Tawk.popup"
@@ -225,7 +247,7 @@
             d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
           />
         </svg>
-        <p class="font-semibold text-lg">Support</p>
+        <p class="font-semibold text-lg">{{ $t('contact_support') }}</p>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           class="h-6 w-6 absolute right-1"

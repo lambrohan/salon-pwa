@@ -149,7 +149,9 @@ export default {
 
     async finishAppointment() {
       const dialog = this.$Dialog.show({
-        message: 'Are you sure want to FINISH the current appointment?',
+        message: this.$t('finish_appointment'),
+        positiveText: this.$t('confirm'),
+        negativeText: this.$t('cancel'),
       })
 
       dialog.positiveHandler = () => {
