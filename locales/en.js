@@ -74,6 +74,7 @@ export default {
   support_service_not_found:
     "Please contact support if service you are looking for doesn't exist",
   services: 'services',
+  service: 'Service',
   reason: 'reason',
   add_walkin: 'Add Walkin',
   add_services: 'Add Services',

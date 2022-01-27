@@ -36,7 +36,9 @@ export default {
     },
     heading: {
       type: String,
-      default: () => this.$t('adjust_duration'),
+      default: function () {
+        return this.$t('adjust_duration')
+      },
     },
   },
   data() {

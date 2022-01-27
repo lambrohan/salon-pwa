@@ -71,7 +71,7 @@
           >
         </div>
         <p class="text-xs text-gray-500 text-center mt-4">
-          {{ $t('user_wont_if_disabled') }}
+          {{ $t('alerts.user_wont_if_disabled') }}
         </p>
         <UButton
           class="mt-2 w-2/3"

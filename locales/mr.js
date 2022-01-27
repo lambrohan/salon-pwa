@@ -72,6 +72,7 @@ export default {
   support_service_not_found:
     'तुम्ही शोधत असलेली सेवा अस्तित्वात नसल्यास कृपया सपोर्ट ला संपर्क करा',
   services: 'सेवा',
+  service: 'सेवा',
   reason: 'कारण',
   add_walkin: 'वॉक इन बुकिंग करा',
   add_services: 'सलून सेवा जोडा',
