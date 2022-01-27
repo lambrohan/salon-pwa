@@ -19,7 +19,7 @@
     </div>
     <div class="p-4">
       <p class="text-sm text-gray-500 mb-3 text-center">
-        {{ $t('added_following_services') }}
+        {{ $t('alerts.added_following_services') }}
       </p>
       <ServiceList
         :services="services"
