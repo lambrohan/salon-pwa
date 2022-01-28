@@ -43,6 +43,34 @@
           >{{ $t('confirm') }}
         </UButton>
       </div>
+      <div class="hidden">
+        <nuxt-link
+          v-for="locale in $i18n.locales"
+          :ref="locale.code"
+          :key="locale.code"
+          :to="switchLocalePath(locale.code)"
+        ></nuxt-link>
+      </div>
+      <div class="w-full flex flex-col items-center mt-12">
+        <h4 class="text-sm text-gray-500 mb-1">{{ $t('select_lang') }}</h4>
+        <select
+          @input="
+            (e) => {
+              $refs[e.target.value][0].$el.click()
+            }
+          "
+          class="bg-white w-6/12 py-2 border rounded-full langselect text-center"
+        >
+          <option
+            :value="locale.code"
+            v-for="locale in $i18n.locales"
+            :key="locale.code"
+            :selected="$i18n.locale == locale.code"
+          >
+            {{ locale.name }}
+          </option>
+        </select>
+      </div>
     </div>
   </div>
 </template>

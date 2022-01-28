@@ -143,3 +143,9 @@ select:focus {
 .page-leave-to {
   opacity: 0;
 }
+
+.langselect {
+  -moz-appearance: none; /* Firefox */
+  -webkit-appearance: none; /* Safari and Chrome */
+  appearance: none;
+}
