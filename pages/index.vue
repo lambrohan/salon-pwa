@@ -77,10 +77,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.langselect {
-  -moz-appearance: none; /* Firefox */
-  -webkit-appearance: none; /* Safari and Chrome */
-  appearance: none;
-}
-</style>
+<style lang="scss" scoped></style>
