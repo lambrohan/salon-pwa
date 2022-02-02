@@ -37,7 +37,7 @@ export default {
   },
   data() {
     return {
-      activeTabIndex: 3,
+      activeTabIndex: 0,
       salon: false,
     }
   },
