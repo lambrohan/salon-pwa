@@ -1,6 +1,6 @@
 <template>
   <div id="salon-pic" class="p-4">
-    <h2 class="text-xl font-semibold">{{ $t('lets_pick_photo') }}</h2>
+    <h2 class="text-xl font-semibold">{{ $t('alerts.lets_pick_photo') }}</h2>
     <p>It's important for search!</p>
     <img
       :src="url"
