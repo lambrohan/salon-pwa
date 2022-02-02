@@ -197,6 +197,7 @@ export default {
       )
 
       this.kyc = await this.$salonRepository.getKyc(this.$route.params.salonId)
+      console.log(this.kyc)
 
       if (this.kyc) {
         const {
@@ -252,7 +253,7 @@ export default {
 
         this.uploadLoading = false
         this.$Toast.success('Kyc Updated')
-        this.$router.push(localePath(`/settings/salon/kyc/success`))
+        this.$router.push(this.localePath(`/settings/salon/kyc/success`))
       } catch (error) {
         this.uploadLoading = false
       }

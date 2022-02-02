@@ -15,7 +15,7 @@
         clip-rule="evenodd"
       />
     </svg>
-    <h4 class="text-lg font-medium mt-4">{{ $t('kyc_submited') }}</h4>
+    <h4 class="text-lg font-medium mt-4">{{ $t('kyc_submitted') }}</h4>
     <p class="text-sm text-gray-500 text-center mt-8">
       {{ $t('kyc_disc') }}
     </p>
